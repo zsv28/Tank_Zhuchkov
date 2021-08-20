@@ -1,1 +1,1 @@
-Initial commit
+Training project
