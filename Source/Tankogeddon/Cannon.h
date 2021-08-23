@@ -23,26 +23,40 @@ protected:
     UArrowComponent* ProjectileSpawnPoint;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
-    float FireRate = 1;
+    float FireRate = 1.f;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
-    float FireRange = 1000;
+    float FireRange = 1000.f;
     
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
-    float FireDamage = 1;
+    float FireDamage = 1.f;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
+	int MaxAmmo = 30;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
+	float ShotDelay= 1.f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
+	int NumberShotFired = 3;
+    
+ 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
     ECannonType Type = ECannonType::FireProjectile;
 
     FTimerHandle ReloadTimerHandle;
 
     bool bReadyToFire = false;
+	int CurrentShot = 0;
+	int CurrentAmmo = MaxAmmo;
 
 public:
     ACannon();
 
-    void Fire();
+    bool Fire();
 
+    bool FireSpecial();
+	
     bool IsReadyToFire();
 
 protected:
@@ -50,5 +64,11 @@ protected:
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
     void Reload();
+
+private:
+
+	void SingleShot();
+
+	void Reset();
 
 };

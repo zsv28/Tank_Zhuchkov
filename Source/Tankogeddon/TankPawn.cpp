@@ -49,6 +49,7 @@ void ATankPawn::RotateRight(float AxisValue)
     TargetRightAxisValue = AxisValue;
 }
 
+
 // Called when the game starts or when spawned
 void ATankPawn::BeginPlay()
 {
@@ -118,5 +119,12 @@ void ATankPawn::Fire()
     {
         Cannon->Fire();
     }
+}
+void ATankPawn::FireSpecial() 
+{
+	if (Cannon)
+	{
+		Cannon->FireSpecial();
+	}
 }
 

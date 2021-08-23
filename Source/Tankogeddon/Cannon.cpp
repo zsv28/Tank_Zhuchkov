@@ -25,17 +25,38 @@ ACannon::ACannon()
     ProjectileSpawnPoint->SetupAttachment(Mesh);
 }
 
-void ACannon::Fire()
+bool ACannon::Fire()
 {
     if (!bReadyToFire)
     {
-        return;
+        GEngine->AddOnScreenDebugMessage(10, 2, FColor::Red, "The cannon not ready to fire!");
+        return false;
     }
-
+    --CurrentAmmo;
+    if (CurrentAmmo < 1)
+    {
+        GEngine->AddOnScreenDebugMessage(10, 2, FColor::Red, "No ammo!");
+        bReadyToFire = true;
+        return false;
+    }
     bReadyToFire = false;
+    SingleShot();
+    return true;
+}
 
+bool ACannon::FireSpecial()
+{
+	
+	return true;
+}
+
+void ACannon::SingleShot()
+{
+    auto Delay{ CurrentShot < NumberShotFired ? ShotDelay : 1.f / FireRate };
     if (Type == ECannonType::FireProjectile)
     {
+        float AmmoRes = float(CurrentShot) / NumberShotFired * 100;
+
         GEngine->AddOnScreenDebugMessage(10, 1, FColor::Green, "Fire - projectile");
     }
     else
@@ -44,6 +65,7 @@ void ACannon::Fire()
     }
 
     GetWorld()->GetTimerManager().SetTimer(ReloadTimerHandle, this, &ACannon::Reload, 1.f / FireRate, false);
+    ++CurrentShot;
 }
 
 bool ACannon::IsReadyToFire()
@@ -68,5 +90,22 @@ void ACannon::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 void ACannon::Reload()
 {
-    bReadyToFire = true;
+	if (CurrentShot >= NumberShotFired)
+	{
+		Reset();
+	}
+	else
+	{
+		SingleShot();
+	}
+	return;
+    //bReadyToFire = true;
+}
+
+
+void ACannon::Reset()
+{
+	bReadyToFire = true;
+	CurrentShot = 0;
+	return;
 }
