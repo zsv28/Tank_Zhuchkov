@@ -49,17 +49,16 @@ void ATankPawn::RotateRight(float AxisValue)
     TargetRightAxisValue = AxisValue;
 }
 
-
 // Called when the game starts or when spawned
 void ATankPawn::BeginPlay()
 {
 	Super::BeginPlay();
 	
     TankController = Cast<ATankPlayerController>(GetController());
-    SetupCannon();
+    SetupCannon(CannonClass);
 }
 
-void ATankPawn::SetupCannon()
+void ATankPawn::SetupCannon(TSubclassOf<ACannon> InCannonClass)
 {
     if (Cannon)
     {
@@ -70,7 +69,7 @@ void ATankPawn::SetupCannon()
     FActorSpawnParameters Params;
     Params.Instigator = this;
     Params.Owner = this;
-    Cannon = GetWorld()->SpawnActor<ACannon>(CannonClass, Params);
+    Cannon = GetWorld()->SpawnActor<ACannon>(InCannonClass, Params);
     Cannon->AttachToComponent(CannonSetupPoint, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 }
 
@@ -80,15 +79,16 @@ void ATankPawn::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
     // Tank movement
+    CurrentForwardAxisValue = FMath::FInterpTo(CurrentForwardAxisValue, TargetForwardAxisValue, DeltaTime, MovementSmootheness);
+    
     FVector CurrentLocation = GetActorLocation();
     FVector ForwardVector = GetActorForwardVector();
-    FVector RightVector = GetActorRightVector();
-    FVector MovePosition = CurrentLocation + ForwardVector * TargetForwardAxisValue * MoveSpeed * DeltaTime;
+    FVector MovePosition = CurrentLocation + ForwardVector * CurrentForwardAxisValue * MoveSpeed * DeltaTime;
 
     SetActorLocation(MovePosition, true);
 
     // Tank rotation
-    CurrentRightAxisValue = FMath::Lerp(CurrentRightAxisValue, TargetRightAxisValue, RotationSmootheness);
+    CurrentRightAxisValue = FMath::FInterpTo(CurrentRightAxisValue, TargetRightAxisValue, DeltaTime, RotationSmootheness);
 
     UE_LOG(LogTankogeddon, Verbose, TEXT("CurrentRightAxisValue = %f TargetRightAxisValue = %f"), CurrentRightAxisValue, TargetRightAxisValue);
 
@@ -107,9 +107,7 @@ void ATankPawn::Tick(float DeltaTime)
         FRotator CurrRotation = TurretMesh->GetComponentRotation();
         TargetRotation.Pitch = CurrRotation.Pitch;
         TargetRotation.Roll = CurrRotation.Roll;
-        //TurretMesh->SetWorldRotation(FMath::Lerp(CurrRotation, TargetRotation, TurretRotationSmootheness));
-        TurretMesh->SetWorldRotation( FMath::RInterpTo(CurrRotation, TargetRotation, DeltaTime, TurretRotationSmootheness));
-		
+        TurretMesh->SetWorldRotation(FMath::RInterpConstantTo(CurrRotation, TargetRotation, DeltaTime, TurretRotationSpeed));
     }
 }
 
@@ -120,11 +118,12 @@ void ATankPawn::Fire()
         Cannon->Fire();
     }
 }
-void ATankPawn::FireSpecial() 
+
+void ATankPawn::FireSpecial()
 {
-	if (Cannon)
-	{
-		Cannon->FireSpecial();
-	}
+    if (Cannon)
+    {
+        Cannon->FireSpecial();
+    }
 }
 
