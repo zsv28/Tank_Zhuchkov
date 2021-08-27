@@ -32,15 +32,16 @@ void AAmmoBox::OnMeshOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* O
     ATankPawn* PlayerPawn = Cast<ATankPawn>(GetWorld()->GetFirstPlayerController()->GetPawn());
     if (OtherActor == PlayerPawn)
     {
-		ACannon* Cannon = PlayerPawn->GetActiveCannon();
-		if (Cannon && Cannon->GetClass() == CannonClass)
-		{
-			Cannon->AddAmmo(NumAmmo);
-		}
-		else
-		{
-			PlayerPawn->SetupCannon(CannonClass);
-		}
+        ACannon* Cannon = PlayerPawn->GetActiveCannon();
+        if (Cannon && Cannon->GetClass() == CannonClass)
+        {
+            Cannon->AddAmmo(NumAmmo);
+        }
+        else
+        {
+            PlayerPawn->SetupCannon(CannonClass);
+        }
+        
         Destroy();
     }
 

@@ -81,13 +81,13 @@ bool ACannon::HasSpecialFire() const
 
 void ACannon::SetVisibility(bool bIsVisible)
 {
-	Mesh->SetHiddenInGame(!bIsVisible);
+    Mesh->SetHiddenInGame(!bIsVisible);
 }
 
 void ACannon::AddAmmo(int32 InNumAmmo)
 {
-	NumAmmo = FMath::Clamp(NumAmmo + InNumAmmo, 0, MaxAmmo);
-	UE_LOG(LogTankogeddon, Log, TEXT("AddAmmo(%d)! NumAmmo: %d"), InNumAmmo, NumAmmo);
+    NumAmmo = FMath::Clamp(NumAmmo + InNumAmmo, 0, MaxAmmo);
+    UE_LOG(LogTankogeddon, Log, TEXT("AddAmmo(%d)! NumAmmo: %d"), InNumAmmo, NumAmmo);
 }
 
 // Called when the game starts or when spawned
@@ -120,11 +120,12 @@ void ACannon::Shot()
     {
         GEngine->AddOnScreenDebugMessage(INDEX_NONE, 1, FColor::Green, TEXT("Fire - projectile"));
 
-		UActorPoolSubsystem* Pool = GetWorld()->GetSubsystem<UActorPoolSubsystem>();
-		FTransform SpawnTransform(ProjectileSpawnPoint->GetComponentRotation(), ProjectileSpawnPoint->GetComponentLocation(), FVector::OneVector);
-		AProjectile* Projectile = Cast<AProjectile>(Pool->RetreiveActor(ProjectileClass, SpawnTransform));
+        UActorPoolSubsystem* Pool = GetWorld()->GetSubsystem<UActorPoolSubsystem>();
+        FTransform SpawnTransform(ProjectileSpawnPoint->GetComponentRotation(), ProjectileSpawnPoint->GetComponentLocation(), FVector::OneVector);
+        AProjectile* Projectile = Cast<AProjectile>(Pool->RetreiveActor(ProjectileClass, SpawnTransform));
         if (Projectile)
         {
+            Projectile->SetInstigator(GetInstigator());
             Projectile->Start();
         }
     }

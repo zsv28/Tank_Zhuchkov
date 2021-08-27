@@ -60,36 +60,36 @@ void ATankPawn::BeginPlay()
 
 void ATankPawn::SetupCannon(TSubclassOf<ACannon> InCannonClass)
 {
-	if (ActiveCannon)
-	{
-		ActiveCannon->Destroy();
-		ActiveCannon = nullptr;
-	}
+    if (ActiveCannon)
+    {
+        ActiveCannon->Destroy();
+        ActiveCannon = nullptr;
+    }
 
-	FActorSpawnParameters Params;
-	Params.Instigator = this;
-	Params.Owner = this;
-	ActiveCannon = GetWorld()->SpawnActor<ACannon>(InCannonClass, Params);
-	ActiveCannon->AttachToComponent(CannonSetupPoint, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+    FActorSpawnParameters Params;
+    Params.Instigator = this;
+    Params.Owner = this;
+    ActiveCannon = GetWorld()->SpawnActor<ACannon>(InCannonClass, Params);
+    ActiveCannon->AttachToComponent(CannonSetupPoint, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 }
 
 void ATankPawn::CycleCannon()
 {
-	Swap(ActiveCannon, InactiveCannon);
-	if (ActiveCannon)
-	{
-		ActiveCannon->SetVisibility(true);
-	}
+    Swap(ActiveCannon, InactiveCannon);
+    if (ActiveCannon)
+    {
+        ActiveCannon->SetVisibility(true);
+    }
 
-	if (InactiveCannon)
-	{
-		InactiveCannon->SetVisibility(false);
-	}
+    if (InactiveCannon)
+    {
+        InactiveCannon->SetVisibility(false);
+    }
 }
 
 ACannon* ATankPawn::GetActiveCannon() const
 {
-	return ActiveCannon;
+    return ActiveCannon;
 }
 
 // Called every frame
@@ -104,12 +104,12 @@ void ATankPawn::Tick(float DeltaTime)
     FVector ForwardVector = GetActorForwardVector();
     FVector MovePosition = CurrentLocation + ForwardVector * CurrentForwardAxisValue * MoveSpeed * DeltaTime;
 
-	FHitResult* SweepHitResult = nullptr;
-	SetActorLocation(MovePosition, true, SweepHitResult);
-	if (SweepHitResult)
-	{
-		CurrentForwardAxisValue = 0.f;
-	}
+    FHitResult* SweepHitResult = nullptr;
+    SetActorLocation(MovePosition, true, SweepHitResult);
+    if (SweepHitResult)
+    {
+        CurrentForwardAxisValue = 0.f;
+    }
 
     // Tank rotation
     CurrentRightAxisValue = FMath::FInterpTo(CurrentRightAxisValue, TargetRightAxisValue, DeltaTime, RotationSmootheness);
@@ -137,17 +137,17 @@ void ATankPawn::Tick(float DeltaTime)
 
 void ATankPawn::Fire()
 {
-	if (ActiveCannon)
-	{
-		ActiveCannon->Fire();
-	}
+    if (ActiveCannon)
+    {
+        ActiveCannon->Fire();
+    }
 }
 
 void ATankPawn::FireSpecial()
 {
-	if (ActiveCannon)
-	{
-		ActiveCannon->FireSpecial();
-	}
+    if (ActiveCannon)
+    {
+        ActiveCannon->FireSpecial();
+    }
 }
 

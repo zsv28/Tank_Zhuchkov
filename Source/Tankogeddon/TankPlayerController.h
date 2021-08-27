@@ -37,6 +37,6 @@ protected:
     void FireSpecial();
     void CycleCannon();
 
-	UFUNCTION(exec)
-	void DumpActorPoolSubsystemStats();
+    UFUNCTION(exec)
+    void DumpActorPoolSubsystemStats();
 };

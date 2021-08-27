@@ -81,11 +81,11 @@ public:
     UFUNCTION()
     void SetupCannon(TSubclassOf<ACannon> InCannonClass);
 
-	UFUNCTION()
-	void CycleCannon();
+    UFUNCTION()
+    void CycleCannon();
 
-	UFUNCTION()
-	ACannon* GetActiveCannon() const;
+    UFUNCTION()
+    ACannon* GetActiveCannon() const;
 
 private:
     float TargetForwardAxisValue = 0.f;
@@ -99,6 +99,6 @@ private:
     UPROPERTY()
     ACannon* ActiveCannon;
 
-	UPROPERTY()
-	ACannon* InactiveCannon;
+    UPROPERTY()
+    ACannon* InactiveCannon;
 };
