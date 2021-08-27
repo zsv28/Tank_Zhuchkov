@@ -51,7 +51,10 @@ void AProjectile::OnMeshOverlapBegin(class UPrimitiveComponent* OverlappedComp, 
 {
     UE_LOG(LogTankogeddon, Warning, TEXT("Projectile %s collided with %s. "), *GetName(), *OtherActor->GetName());
     OtherActor->Destroy();
-    Destroy();
+	if (OtherComp && OtherComp->GetCollisionObjectType() == ECollisionChannel::ECC_Destructible)
+	{
+		OtherActor->Destroy();
+	}
     Stop();
 }
 
