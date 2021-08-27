@@ -12,6 +12,7 @@
 #include "Tankogeddon.h"
 #include "TankPlayerController.h"
 #include "Cannon.h"
+#include "HealthComponent.h"
 
 // Sets default values
 ATankPawn::ATankPawn()
@@ -37,6 +38,10 @@ ATankPawn::ATankPawn()
 
     Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
     Camera->SetupAttachment(SpringArm);
+
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
+	HealthComponent->OnDie.AddDynamic(this, &ATankPawn::Die);
+	HealthComponent->OnDamaged.AddDynamic(this, &ATankPawn::DamageTaken);
 }
 
 void ATankPawn::MoveForward(float AxisValue)
@@ -56,6 +61,16 @@ void ATankPawn::BeginPlay()
 	
     TankController = Cast<ATankPlayerController>(GetController());
     SetupCannon(CannonClass);
+}
+
+void ATankPawn::Die()
+{
+    Destroy();
+}
+
+void ATankPawn::DamageTaken(float InDamage)
+{
+    UE_LOG(LogTankogeddon, Warning, TEXT("Tank %s taked damage:%f Health:%f"), *GetName(), InDamage, HealthComponent->GetHealth());
 }
 
 void ATankPawn::SetupCannon(TSubclassOf<ACannon> InCannonClass)
@@ -90,6 +105,12 @@ void ATankPawn::CycleCannon()
 ACannon* ATankPawn::GetActiveCannon() const
 {
     return ActiveCannon;
+}
+
+
+void ATankPawn::TakeDamage(FDamageData DamageData)
+{
+	HealthComponent->TakeDamage(DamageData);
 }
 
 // Called every frame

@@ -128,6 +128,8 @@ void ATurret::Die()
 
 void ATurret::DamageTaken(float InDamage)
 {
-    UE_LOG(LogTankogeddon, Warning, TEXT("Turret %s taken damage:%f "), *GetName(), InDamage);
+    UE_LOG(LogTankogeddon, Warning, TEXT("Turret %s taked damage:%f Health:%f"), *GetName(), InDamage, HealthComponent->GetHealth());
+	
+
 }
 
