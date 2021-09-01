@@ -12,7 +12,9 @@
 #include "Tankogeddon.h"
 #include "Projectile.h"
 #include <DrawDebugHelpers.h>
+#include "DamageTaker.h"
 #include "ActorPoolSubsystem.h"
+
 
 // Sets default values
 ACannon::ACannon()
@@ -116,52 +118,64 @@ void ACannon::Reload()
 void ACannon::Shot()
 {
     check(ShotsLeft > 0)
-    if (Type == ECannonType::FireProjectile)
-    {
-        GEngine->AddOnScreenDebugMessage(INDEX_NONE, 1, FColor::Green, TEXT("Fire - projectile"));
-
-        UActorPoolSubsystem* Pool = GetWorld()->GetSubsystem<UActorPoolSubsystem>();
-        FTransform SpawnTransform(ProjectileSpawnPoint->GetComponentRotation(), ProjectileSpawnPoint->GetComponentLocation(), FVector::OneVector);
-        AProjectile* Projectile = Cast<AProjectile>(Pool->RetreiveActor(ProjectileClass, SpawnTransform));
-        if (Projectile)
+        if (Type == ECannonType::FireProjectile)
         {
-            Projectile->SetInstigator(GetInstigator());
-            Projectile->Start();
-        }
-    }
-    else
-    {
-        GEngine->AddOnScreenDebugMessage(INDEX_NONE, 1, FColor::Green, TEXT("Fire - trace"));
+            GEngine->AddOnScreenDebugMessage(INDEX_NONE, 1, FColor::Green, TEXT("Fire - projectile"));
 
-        FHitResult HitResult;
-        FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("FireTrace")), true, this);
-        TraceParams.bTraceComplex = true;
-        TraceParams.bReturnPhysicalMaterial = false;
-
-        FVector Start = ProjectileSpawnPoint->GetComponentLocation();
-        FVector End = ProjectileSpawnPoint->GetForwardVector() * FireRange + Start;
-        if (GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_Visibility, TraceParams))
-        {
-            DrawDebugLine(GetWorld(), Start, HitResult.Location, FColor::Red, false, 0.5f, 0, 5);
-            if (HitResult.Component.IsValid() && HitResult.Component->GetCollisionObjectType() == ECollisionChannel::ECC_Destructible)
+            UActorPoolSubsystem* Pool = GetWorld()->GetSubsystem<UActorPoolSubsystem>();
+            FTransform SpawnTransform(ProjectileSpawnPoint->GetComponentRotation(), ProjectileSpawnPoint->GetComponentLocation(), FVector::OneVector);
+            AProjectile* Projectile = Cast<AProjectile>(Pool->RetreiveActor(ProjectileClass, SpawnTransform));
+            if (Projectile)
             {
-                HitResult.Actor.Get()->Destroy();
+                Projectile->SetInstigator(GetInstigator());
+                Projectile->Start();
             }
         }
         else
         {
-            DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 0.5f, 0, 5);
+            GEngine->AddOnScreenDebugMessage(INDEX_NONE, 1, FColor::Green, TEXT("Fire - trace"));
+
+            FHitResult HitResult;
+            FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("FireTrace")), true, this);
+            TraceParams.bTraceComplex = true;
+            TraceParams.bReturnPhysicalMaterial = false;
+
+            FVector Start = ProjectileSpawnPoint->GetComponentLocation();
+            FVector End = ProjectileSpawnPoint->GetForwardVector() * FireRange + Start;
+            if (GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_Visibility, TraceParams))
+            {
+                DrawDebugLine(GetWorld(), Start, HitResult.Location, FColor::Red, false, 0.5f, 0, 5);
+                if (HitResult.Component.IsValid() && HitResult.Component->GetCollisionObjectType() == ECollisionChannel::ECC_Destructible)
+                {
+                    HitResult.Actor.Get()->Destroy();
+                }
+				else if (IDamageTaker* DamageTaker = Cast<IDamageTaker>(HitResult.Actor))
+				{
+					AActor* MyInstigator = GetInstigator();
+					if (HitResult.Actor != MyInstigator)
+					{
+						FDamageData DamageData;
+						DamageData.DamageValue = FireDamage;
+						DamageData.DamageMaker = this;
+						DamageData.Instigator = MyInstigator;
+						DamageTaker->TakeDamage(DamageData);
+					}
+				}
+                else
+                {
+                    DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 0.5f, 0, 5);
+                }
+
+            }
+
+            if (--ShotsLeft > 0)
+            {
+                const float NextShotTime = SeriesLength / (NumShotsInSeries - 1);
+                GetWorld()->GetTimerManager().SetTimer(SeriesTimerHandle, this, &ACannon::Shot, NextShotTime, false);
+            }
+            else
+            {
+                GetWorld()->GetTimerManager().SetTimer(ReloadTimerHandle, this, &ACannon::Reload, 1.f / FireRate, false);
+            }
         }
-
-    }
-
-    if (--ShotsLeft > 0)
-    {
-        const float NextShotTime = SeriesLength / (NumShotsInSeries - 1);
-        GetWorld()->GetTimerManager().SetTimer(SeriesTimerHandle, this, &ACannon::Shot, NextShotTime, false);
-    }
-    else
-    {
-        GetWorld()->GetTimerManager().SetTimer(ReloadTimerHandle, this, &ACannon::Reload, 1.f / FireRate, false);
-    }
 }

@@ -8,11 +8,14 @@
 #include <Math/UnrealMathUtility.h>
 #include <Kismet/KismetMathLibrary.h>
 #include <Components/ArrowComponent.h>
+#include <Components/BoxComponent.h>
+
 
 #include "Tankogeddon.h"
 #include "TankPlayerController.h"
 #include "Cannon.h"
 #include "HealthComponent.h"
+
 
 // Sets default values
 ATankPawn::ATankPawn()
@@ -38,6 +41,9 @@ ATankPawn::ATankPawn()
 
     Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
     Camera->SetupAttachment(SpringArm);
+
+	HitCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("Hit collider"));
+	HitCollider->SetupAttachment(BodyMesh);
 
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
 	HealthComponent->OnDie.AddDynamic(this, &ATankPawn::Die);

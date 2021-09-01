@@ -27,15 +27,6 @@ public:
 	// Sets default values for this pawn's properties
 	ATankPawn();
 
-    UFUNCTION()
-    void MoveForward(float AxisValue);
-
-    UFUNCTION()
-    void RotateRight(float AxisValue);
-
-	UFUNCTION()
-	virtual void TakeDamage(FDamageData DamageData) override;
-
 protected:
     UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UStaticMeshComponent* BodyMesh;
@@ -89,6 +80,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
+	void MoveForward(float AxisValue);
+
+	UFUNCTION()
+	void RotateRight(float AxisValue);
+
     UFUNCTION()
     void Fire();
 
@@ -103,6 +100,9 @@ public:
 
     UFUNCTION()
     ACannon* GetActiveCannon() const;
+
+	UFUNCTION()
+	virtual void TakeDamage(FDamageData DamageData) override;
 
 
 private:
