@@ -31,13 +31,14 @@ void AProjectile::Start()
     GetWorld()->GetTimerManager().SetTimer(MovementTimerHandle, this, &AProjectile::Move, MoveRate, true, MoveRate);
     StartLocation = GetActorLocation();
     Mesh->SetHiddenInGame(false);
+    Mesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }
 
 void AProjectile::Stop()
 {
     GetWorld()->GetTimerManager().ClearTimer(MovementTimerHandle);
     Mesh->SetHiddenInGame(true);
-    
+    Mesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     UActorPoolSubsystem* Pool = GetWorld()->GetSubsystem<UActorPoolSubsystem>();
     if (Pool->IsActorInPool(this))
     {

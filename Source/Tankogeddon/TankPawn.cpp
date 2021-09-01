@@ -23,15 +23,6 @@ ATankPawn::ATankPawn()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Tank body"));
-	RootComponent = BodyMesh;
-
-    TurretMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Tank turret"));
-    TurretMesh->SetupAttachment(BodyMesh);
-
-    CannonSetupPoint = CreateDefaultSubobject<UArrowComponent>(TEXT("Cannon setup point"));
-    CannonSetupPoint->AttachToComponent(TurretMesh, FAttachmentTransformRules::KeepRelativeTransform);
-
     SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring arm"));
     SpringArm->SetupAttachment(BodyMesh);
     SpringArm->bDoCollisionTest = false;
@@ -42,12 +33,6 @@ ATankPawn::ATankPawn()
     Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
     Camera->SetupAttachment(SpringArm);
 
-	HitCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("Hit collider"));
-	HitCollider->SetupAttachment(BodyMesh);
-
-	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
-	HealthComponent->OnDie.AddDynamic(this, &ATankPawn::Die);
-	HealthComponent->OnDamaged.AddDynamic(this, &ATankPawn::DamageTaken);
 }
 
 void ATankPawn::MoveForward(float AxisValue)
@@ -66,57 +51,7 @@ void ATankPawn::BeginPlay()
 	Super::BeginPlay();
 	
     TankController = Cast<ATankPlayerController>(GetController());
-    SetupCannon(CannonClass);
-}
-
-void ATankPawn::Die()
-{
-    Destroy();
-}
-
-void ATankPawn::DamageTaken(float InDamage)
-{
-    UE_LOG(LogTankogeddon, Warning, TEXT("Tank %s taked damage:%f Health:%f"), *GetName(), InDamage, HealthComponent->GetHealth());
-}
-
-void ATankPawn::SetupCannon(TSubclassOf<ACannon> InCannonClass)
-{
-    if (ActiveCannon)
-    {
-        ActiveCannon->Destroy();
-        ActiveCannon = nullptr;
-    }
-
-    FActorSpawnParameters Params;
-    Params.Instigator = this;
-    Params.Owner = this;
-    ActiveCannon = GetWorld()->SpawnActor<ACannon>(InCannonClass, Params);
-    ActiveCannon->AttachToComponent(CannonSetupPoint, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-}
-
-void ATankPawn::CycleCannon()
-{
-    Swap(ActiveCannon, InactiveCannon);
-    if (ActiveCannon)
-    {
-        ActiveCannon->SetVisibility(true);
-    }
-
-    if (InactiveCannon)
-    {
-        InactiveCannon->SetVisibility(false);
-    }
-}
-
-ACannon* ATankPawn::GetActiveCannon() const
-{
-    return ActiveCannon;
-}
-
-
-void ATankPawn::TakeDamage(FDamageData DamageData)
-{
-	HealthComponent->TakeDamage(DamageData);
+ 
 }
 
 // Called every frame
@@ -162,19 +97,4 @@ void ATankPawn::Tick(float DeltaTime)
     }
 }
 
-void ATankPawn::Fire()
-{
-    if (ActiveCannon)
-    {
-        ActiveCannon->Fire();
-    }
-}
-
-void ATankPawn::FireSpecial()
-{
-    if (ActiveCannon)
-    {
-        ActiveCannon->FireSpecial();
-    }
-}
 
