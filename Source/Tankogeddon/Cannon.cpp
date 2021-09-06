@@ -157,6 +157,7 @@ void ACannon::Shot()
             if (Projectile)
             {
                 Projectile->SetInstigator(GetInstigator());
+                Projectile->OnDestroyedTarget.AddUObject(this, &ACannon::NotifyTargetDestroyed);
                 Projectile->Start();
             }
         }
@@ -174,9 +175,11 @@ void ACannon::Shot()
             if (GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_Visibility, TraceParams))
             {
                 DrawDebugLine(GetWorld(), Start, HitResult.Location, FColor::Red, false, 0.5f, 0, 5);
+                bool bWasTargetDestroyed = false;
                 if (HitResult.Component.IsValid() && HitResult.Component->GetCollisionObjectType() == ECollisionChannel::ECC_Destructible)
                 {
                     HitResult.Actor.Get()->Destroy();
+                    bWasTargetDestroyed = true;
                 }
 				else if (IDamageTaker* DamageTaker = Cast<IDamageTaker>(HitResult.Actor))
 				{
@@ -187,8 +190,12 @@ void ACannon::Shot()
 						DamageData.DamageValue = FireDamage;
 						DamageData.DamageMaker = this;
 						DamageData.Instigator = MyInstigator;
-						DamageTaker->TakeDamage(DamageData);
+                        bWasTargetDestroyed = DamageTaker->TakeDamage(DamageData);
 					}
+				}
+				if (bWasTargetDestroyed)
+				{
+					NotifyTargetDestroyed(HitResult.Actor.Get());
 				}
                 else
                 {
@@ -207,4 +214,12 @@ void ACannon::Shot()
                 GetWorld()->GetTimerManager().SetTimer(ReloadTimerHandle, this, &ACannon::Reload, 1.f / FireRate, false);
             }
         }
+}
+
+void ACannon::NotifyTargetDestroyed(AActor* Target)
+{
+	if (OnDestroyedTarget.IsBound())
+	{
+		OnDestroyedTarget.Broadcast(Target);
+	}
 }

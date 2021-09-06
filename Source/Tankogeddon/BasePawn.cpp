@@ -8,12 +8,13 @@
 #include "HealthComponent.h"
 #include "Tankogeddon.h"
 #include "Cannon.h"
+#include <Kismet/KismetMathLibrary.h>
 
 // Sets default values
 ABasePawn::ABasePawn()
 {
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Body Mesh"));
 	BodyMesh->bEditableWhenInherited = true;
@@ -58,6 +59,11 @@ void ABasePawn::Destroyed()
 	}
 }
 
+void ABasePawn::TargetDestroyed(AActor* Target)
+{
+
+}
+
 void ABasePawn::Fire()
 {
 	if (ActiveCannon)
@@ -87,6 +93,7 @@ void ABasePawn::SetupCannon(TSubclassOf<ACannon> InCannonClass)
 	Params.Owner = this;
 	ActiveCannon = GetWorld()->SpawnActor<ACannon>(InCannonClass, Params);
 	ActiveCannon->AttachToComponent(CannonSetupPoint, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	ActiveCannon->OnDestroyedTarget.AddUObject(this, &ABasePawn::TargetDestroyed);
 }
 
 void ABasePawn::CycleCannon()
@@ -117,6 +124,27 @@ bool ABasePawn::TakeDamage(FDamageData DamageData)
 void ABasePawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TurretTarget);
+	FRotator CurrRotation = TurretMesh->GetComponentRotation();
+	TargetRotation.Pitch = CurrRotation.Pitch;
+	TargetRotation.Roll = CurrRotation.Roll;
+	TurretMesh->SetWorldRotation(FMath::RInterpConstantTo(CurrRotation, TargetRotation, GetWorld()->GetDeltaSeconds(), TurretRotationSpeed));
+}
+
+FVector ABasePawn::GetTurretForwardVector()
+{
+	return TurretMesh->GetForwardVector();
+}
+
+void ABasePawn::SetTurretTarget(FVector TargetPosition)
+{
+	TurretTarget = TargetPosition;
+}
+
+FVector ABasePawn::GetEyesPosition()
+{
+	return CannonSetupPoint->GetComponentLocation();
 
 }
 

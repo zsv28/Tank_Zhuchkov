@@ -83,12 +83,17 @@ public:
     void SetVisibility(bool bIsVisible);
     void AddAmmo(int32 InNumAmmo);
 
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnDestoyedTarget, AActor*);
+	FOnDestoyedTarget OnDestroyedTarget;
+
 protected:
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
     void Reload();
     void Shot();
+
+    void NotifyTargetDestroyed(AActor* Target);
 
     int32 NumAmmo = 0;
     int32 ShotsLeft = 0;

@@ -35,6 +35,11 @@ void ATankPlayerController::Tick(float DeltaTime)
     MousePos = PawnPos + Dir * 1000.f;
 
     DrawDebugLine(GetWorld(), PawnPos, MousePos, FColor::Green, false, 0.1f, 0.f, 5.f);
+
+	if (TankPawn)
+	{
+		TankPawn->SetTurretTarget(MousePos);
+	}
 }
 
 void ATankPlayerController::BeginPlay()

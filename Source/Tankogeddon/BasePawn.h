@@ -43,9 +43,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Turret|Cannon")
 	TSubclassOf<ACannon> CannonClass;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Turret")
+	float TurretRotationSpeed = 0.5f;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	virtual void Destroyed() override;
+	virtual void TargetDestroyed(AActor* Target);
 
 public:
 	UFUNCTION()
@@ -69,12 +73,24 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
+	FVector GetTurretForwardVector();
+
+	UFUNCTION()
+	void SetTurretTarget(FVector TargetPosition);
+
+	UFUNCTION()
+	FVector GetEyesPosition();
+
 private:
 	UPROPERTY()
 	ACannon* ActiveCannon;
 
 	UPROPERTY()
 	ACannon* InactiveCannon;
+
+	UPROPERTY()
+	FVector TurretTarget;
 
 	UFUNCTION()
 	void Die();
