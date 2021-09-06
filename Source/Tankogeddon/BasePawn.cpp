@@ -9,6 +9,7 @@
 #include "Tankogeddon.h"
 #include "Cannon.h"
 #include <Kismet/KismetMathLibrary.h>
+#include <Kismet/GameplayStatics.h>
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -48,6 +49,9 @@ void ABasePawn::BeginPlay()
 
 void ABasePawn::Destroyed()
 {
+	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DestuctionParticleSystem, GetActorTransform());
+	UGameplayStatics::PlaySoundAtLocation(GetWorld(), DestructionSound, GetActorLocation());
+
 	if (ActiveCannon)
 	{
 		ActiveCannon->Destroy();

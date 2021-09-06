@@ -14,6 +14,8 @@ class UArrowComponent;
 class ACannon;
 class UHealthComponent;
 class UBoxComponent;
+class UParticleSystem;
+class USoundBase;
 
 UCLASS()
 class TANKOGEDDON_API ABasePawn : public APawn, public IDamageTaker
@@ -42,6 +44,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Turret|Cannon")
 	TSubclassOf<ACannon> CannonClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Effects")
+	UParticleSystem* DestuctionParticleSystem;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
+	USoundBase* DestructionSound;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Turret")
 	float TurretRotationSpeed = 0.5f;
