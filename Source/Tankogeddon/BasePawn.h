@@ -59,6 +59,12 @@ protected:
 	virtual void Destroyed() override;
 	virtual void TargetDestroyed(AActor* Target);
 
+	UFUNCTION()
+	void Die();
+
+	UFUNCTION()
+	void DamageTaken(float InDamage);
+
 public:
 	UFUNCTION()
 	void Fire();
@@ -100,9 +106,4 @@ private:
 	UPROPERTY()
 	FVector TurretTarget;
 
-	UFUNCTION()
-	void Die();
-
-	UFUNCTION()
-	void DamageTaken(float InDamage);
 };

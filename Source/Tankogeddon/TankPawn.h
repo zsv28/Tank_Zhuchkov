@@ -49,9 +49,16 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI|Move params|Accurency")
 	float MovementAccuracy = 50.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
+	UForceFeedbackEffect* HitForceEffect;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
+	TSubclassOf<UMatineeCameraShake> HitShake;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	virtual void TargetDestroyed(AActor* Target) override;
+	virtual void DamageTaken(float DamageValue) override;
 
 public:	
 	// Called every frame

@@ -59,6 +59,27 @@ void ATankPawn::TargetDestroyed(AActor* Target)
 	}
 }
 
+void ATankPawn::DamageTaken(float DamageValue)
+{
+	Super::DamageTaken(DamageValue);
+
+	if (this == GetWorld()->GetFirstPlayerController()->GetPawn())
+	{
+		if (HitForceEffect)
+		{
+			FForceFeedbackParameters HitForceEffectParams;
+			HitForceEffectParams.bLooping = false;
+			HitForceEffectParams.Tag = "HitForceEffectParams";
+			GetWorld()->GetFirstPlayerController()->ClientPlayForceFeedback(HitForceEffect, HitForceEffectParams);
+		}
+
+		if (HitShake)
+		{
+			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitShake);
+		}
+	}
+}
+
 // Called every frame
 void ATankPawn::Tick(float DeltaTime)
 {
