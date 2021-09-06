@@ -16,6 +16,7 @@ class UHealthComponent;
 class UBoxComponent;
 class UParticleSystem;
 class USoundBase;
+class AAmmoBox;
 
 UCLASS()
 class TANKOGEDDON_API ABasePawn : public APawn, public IDamageTaker
@@ -53,6 +54,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Turret")
 	float TurretRotationSpeed = 0.5f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bonus")
+	TSubclassOf<AAmmoBox> DestructionBonusBox;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

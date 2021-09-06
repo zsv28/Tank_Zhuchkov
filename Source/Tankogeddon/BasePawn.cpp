@@ -10,6 +10,7 @@
 #include "Cannon.h"
 #include <Kismet/KismetMathLibrary.h>
 #include <Kismet/GameplayStatics.h>
+#include "AmmoBox.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -49,8 +50,6 @@ void ABasePawn::BeginPlay()
 
 void ABasePawn::Destroyed()
 {
-	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DestuctionParticleSystem, GetActorTransform());
-	UGameplayStatics::PlaySoundAtLocation(GetWorld(), DestructionSound, GetActorLocation());
 
 	if (ActiveCannon)
 	{
@@ -170,6 +169,14 @@ FVector ABasePawn::GetEyesPosition()
 
 void ABasePawn::Die()
 {
+	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DestuctionParticleSystem, GetActorTransform());
+	UGameplayStatics::PlaySoundAtLocation(GetWorld(), DestructionSound, GetActorLocation());
+	if (DestructionBonusBox)
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.bNoFail = true;
+		GetWorld()->SpawnActor<AAmmoBox>(DestructionBonusBox, GetActorTransform(), SpawnParams);
+	}
 	Destroy();
 }
 
