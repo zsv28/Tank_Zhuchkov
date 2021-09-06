@@ -64,10 +64,10 @@ protected:
 	virtual void TargetDestroyed(AActor* Target);
 
 	UFUNCTION()
-	void Die();
+	virtual void Die();
 
 	UFUNCTION()
-	void DamageTaken(float InDamage);
+	virtual void DamageTaken(float InDamage);
 
 public:
 	UFUNCTION()
