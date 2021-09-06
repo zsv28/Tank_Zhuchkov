@@ -91,6 +91,9 @@ public:
 	FVector GetTurretForwardVector();
 
 	UFUNCTION()
+	void SetTurretRotationAxis(float AxisValue);
+
+	UFUNCTION()
 	void SetTurretTarget(FVector TargetPosition);
 
 	UFUNCTION()
@@ -105,5 +108,8 @@ private:
 
 	UPROPERTY()
 	FVector TurretTarget;
+
+	bool bIsTurretTargetSet = false;
+	float TurretRotationAxis = 0.f;
 
 };

@@ -129,11 +129,20 @@ void ABasePawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TurretTarget);
-	FRotator CurrRotation = TurretMesh->GetComponentRotation();
-	TargetRotation.Pitch = CurrRotation.Pitch;
-	TargetRotation.Roll = CurrRotation.Roll;
-	TurretMesh->SetWorldRotation(FMath::RInterpConstantTo(CurrRotation, TargetRotation, GetWorld()->GetDeltaSeconds(), TurretRotationSpeed));
+	if (bIsTurretTargetSet)
+	{
+		FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TurretTarget);
+		FRotator CurrRotation = TurretMesh->GetComponentRotation();
+		TargetRotation.Pitch = CurrRotation.Pitch;
+		TargetRotation.Roll = CurrRotation.Roll;
+		TurretMesh->SetWorldRotation(FMath::RInterpConstantTo(CurrRotation, TargetRotation, DeltaTime, TurretRotationSpeed));
+	}
+	else
+	{
+		FRotator NewRotation = TurretMesh->GetComponentRotation();
+		NewRotation.Yaw += TurretRotationSpeed * DeltaTime * TurretRotationAxis;
+		TurretMesh->SetWorldRotation(NewRotation);
+	}
 }
 
 FVector ABasePawn::GetTurretForwardVector()
@@ -141,9 +150,16 @@ FVector ABasePawn::GetTurretForwardVector()
 	return TurretMesh->GetForwardVector();
 }
 
+void ABasePawn::SetTurretRotationAxis(float AxisValue)
+{
+	TurretRotationAxis = AxisValue;
+	bIsTurretTargetSet = false;
+}
+
 void ABasePawn::SetTurretTarget(FVector TargetPosition)
 {
 	TurretTarget = TargetPosition;
+	bIsTurretTargetSet = true;
 }
 
 FVector ABasePawn::GetEyesPosition()

@@ -1,6 +1,33 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "BasePawnAIController.h"
+#include "BasePawn.h"
+
+void ABasePawnAIController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	MyPawn = Cast<ABasePawn>(GetPawn());
+	PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+}
+
+void ABasePawnAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (!MyPawn || !PlayerPawn)
+	{
+		return;
+	}
+
+	if (DetectCanFire())
+	{
+		Fire();
+	}
 	else
 	{
-	RotateToPlayer();
+		RotateToPlayer();
 	}
 }
 
