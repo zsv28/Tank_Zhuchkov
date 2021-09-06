@@ -5,18 +5,23 @@
 #include <Components/StaticMeshComponent.h>
 #include <GameFramework/SpringArmComponent.h>
 #include <Camera/CameraComponent.h>
+#include <Math/UnrealMathUtility.h>
+#include <Kismet/KismetMathLibrary.h>
+#include <Components/ArrowComponent.h>
+#include <Components/BoxComponent.h>
+
+
+#include "Tankogeddon.h"
+#include "TankPlayerController.h"
+#include "Cannon.h"
+#include "HealthComponent.h"
+
 
 // Sets default values
 ATankPawn::ATankPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Tank body"));
-	RootComponent = BodyMesh;
-
-    TurretMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Tank turret"));
-    TurretMesh->SetupAttachment(BodyMesh);
 
     SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring arm"));
     SpringArm->SetupAttachment(BodyMesh);
@@ -27,6 +32,7 @@ ATankPawn::ATankPawn()
 
     Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
     Camera->SetupAttachment(SpringArm);
+
 }
 
 void ATankPawn::MoveForward(float AxisValue)
@@ -34,17 +40,18 @@ void ATankPawn::MoveForward(float AxisValue)
     TargetForwardAxisValue = AxisValue;
 }
 
-void ATankPawn::MoveRight(float AxisValue)
+void ATankPawn::RotateRight(float AxisValue)
 {
     TargetRightAxisValue = AxisValue;
 }
-
 
 // Called when the game starts or when spawned
 void ATankPawn::BeginPlay()
 {
 	Super::BeginPlay();
 	
+    TankController = Cast<ATankPlayerController>(GetController());
+ 
 }
 
 // Called every frame
@@ -52,10 +59,42 @@ void ATankPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+    // Tank movement
+    CurrentForwardAxisValue = FMath::FInterpTo(CurrentForwardAxisValue, TargetForwardAxisValue, DeltaTime, MovementSmootheness);
+    
     FVector CurrentLocation = GetActorLocation();
     FVector ForwardVector = GetActorForwardVector();
-    FVector RightVector = GetActorRightVector();
-    FVector MovePosition = CurrentLocation + (ForwardVector * TargetForwardAxisValue + RightVector * TargetRightAxisValue) * MoveSpeed * DeltaTime;
-    SetActorLocation(MovePosition, true);
+    FVector MovePosition = CurrentLocation + ForwardVector * CurrentForwardAxisValue * MoveSpeed * DeltaTime;
+
+    FHitResult* SweepHitResult = nullptr;
+    SetActorLocation(MovePosition, true, SweepHitResult);
+    if (SweepHitResult)
+    {
+        CurrentForwardAxisValue = 0.f;
+    }
+
+    // Tank rotation
+    CurrentRightAxisValue = FMath::FInterpTo(CurrentRightAxisValue, TargetRightAxisValue, DeltaTime, RotationSmootheness);
+
+    UE_LOG(LogTankogeddon, Verbose, TEXT("CurrentRightAxisValue = %f TargetRightAxisValue = %f"), CurrentRightAxisValue, TargetRightAxisValue);
+
+    FRotator CurrentRotation = GetActorRotation();
+    float YawRotation = CurrentRightAxisValue * RotationSpeed * DeltaTime;
+    YawRotation += CurrentRotation.Yaw;
+
+    FRotator NewRotation = FRotator(0.f, YawRotation, 0.f);
+    SetActorRotation(NewRotation);
+
+    // Turret rotation
+    if (TankController)
+    {
+        FVector MousePos = TankController->GetMousePos();
+        FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), MousePos);
+        FRotator CurrRotation = TurretMesh->GetComponentRotation();
+        TargetRotation.Pitch = CurrRotation.Pitch;
+        TargetRotation.Roll = CurrRotation.Roll;
+        TurretMesh->SetWorldRotation(FMath::RInterpConstantTo(CurrRotation, TargetRotation, DeltaTime, TurretRotationSpeed));
+    }
 }
+
 
