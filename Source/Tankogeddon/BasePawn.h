@@ -26,22 +26,22 @@ public:
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
-		UStaticMeshComponent* BodyMesh;
+	UStaticMeshComponent* BodyMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
-		UStaticMeshComponent* TurretMesh;
+	UStaticMeshComponent* TurretMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
-		UArrowComponent* CannonSetupPoint;
+	UArrowComponent* CannonSetupPoint;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
-		UHealthComponent* HealthComponent;
+	UHealthComponent* HealthComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
-		UBoxComponent* HitCollider;
+	UBoxComponent* HitCollider;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Turret|Cannon")
-		TSubclassOf<ACannon> CannonClass;
+	TSubclassOf<ACannon> CannonClass;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -49,36 +49,36 @@ protected:
 
 public:
 	UFUNCTION()
-		void Fire();
+	void Fire();
 
 	UFUNCTION()
-		void FireSpecial();
+	void FireSpecial();
 
 	UFUNCTION()
-		void SetupCannon(TSubclassOf<ACannon> InCannonClass);
+	void SetupCannon(TSubclassOf<ACannon> InCannonClass);
 
 	UFUNCTION()
-		void CycleCannon();
+	void CycleCannon();
 
 	UFUNCTION()
-		ACannon* GetActiveCannon() const;
+	ACannon* GetActiveCannon() const;
 
 	UFUNCTION()
-		virtual void TakeDamage(FDamageData DamageData) override;
+	virtual bool TakeDamage(FDamageData DamageData) override;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 private:
 	UPROPERTY()
-		ACannon* ActiveCannon;
+	ACannon* ActiveCannon;
 
 	UPROPERTY()
-		ACannon* InactiveCannon;
+	ACannon* InactiveCannon;
 
 	UFUNCTION()
-		void Die();
+	void Die();
 
 	UFUNCTION()
-		void DamageTaken(float InDamage);
+	void DamageTaken(float InDamage);
 };

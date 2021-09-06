@@ -15,7 +15,7 @@ class UHealthComponent;
 class ACannon;
 
 UCLASS()
-class TANKOGEDDON_API ATurret : ABasePawn
+class TANKOGEDDON_API ATurret : public ABasePawn
 {
     GENERATED_BODY()
 

@@ -108,9 +108,9 @@ ACannon* ABasePawn::GetActiveCannon() const
 	return ActiveCannon;
 }
 
-void ABasePawn::TakeDamage(FDamageData DamageData)
+bool ABasePawn::TakeDamage(FDamageData DamageData)
 {
-	HealthComponent->TakeDamage(DamageData);
+	return HealthComponent->TakeDamage(DamageData);
 }
 
 // Called every frame

@@ -12,10 +12,6 @@
 class USpringArmComponent;
 class UCameraComponent;
 class ATankPlayerController;
-class UArrowComponent;
-class ACannon;
-class UBoxComponent;
-class UHealthComponent;
 
 
 UCLASS()
@@ -50,12 +46,6 @@ protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Turret")
     float TurretRotationSpeed = 0.5f;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
-	UHealthComponent* HealthComponent;
-
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
-	UBoxComponent* HitCollider;
-
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
@@ -68,9 +58,6 @@ public:
 
 	UFUNCTION()
 	void RotateRight(float AxisValue);
-
-
-
 
 private:
     float TargetForwardAxisValue = 0.f;
