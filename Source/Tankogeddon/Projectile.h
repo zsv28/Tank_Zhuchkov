@@ -39,8 +39,8 @@ public:
     void Start();
     void Stop();
 
-	DECLARE_MULTICAST_DELEGATE_OneParam(FOnDestoyedTarget, AActor*);
-	FOnDestoyedTarget OnDestroyedTarget;
+    DECLARE_MULTICAST_DELEGATE_OneParam(FOnDestoyedTarget, AActor*);
+    FOnDestoyedTarget OnDestroyedTarget;
 
 protected:
     UFUNCTION()

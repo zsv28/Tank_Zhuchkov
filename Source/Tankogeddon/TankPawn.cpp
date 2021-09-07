@@ -9,11 +9,11 @@
 #include <Kismet/KismetMathLibrary.h>
 #include <Components/ArrowComponent.h>
 #include <Components/BoxComponent.h>
-
 #include "Tankogeddon.h"
 #include "Cannon.h"
 #include "HealthComponent.h"
 #include "Scorable.h"
+#include <Engine/TargetPoint.h>
 
 // Sets default values
 ATankPawn::ATankPawn()
@@ -30,7 +30,6 @@ ATankPawn::ATankPawn()
 
     Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
     Camera->SetupAttachment(SpringArm);
-
 }
 
 void ATankPawn::MoveForward(float AxisValue)
@@ -43,41 +42,56 @@ void ATankPawn::RotateRight(float AxisValue)
     TargetRightAxisValue = AxisValue;
 }
 
+TArray<FVector> ATankPawn::GetPatrollingPoints()
+{
+    TArray<FVector> Result;
+    for (ATargetPoint* Point : PatrollingPoints)
+    {
+        Result.Add(Point->GetActorLocation());
+    }
+
+    return Result;
+}
+
+void ATankPawn::SetPatrollingPoints(const TArray<ATargetPoint*>& NewPatrollingPoints)
+{
+    PatrollingPoints = NewPatrollingPoints;
+}
+
 // Called when the game starts or when spawned
 void ATankPawn::BeginPlay()
 {
 	Super::BeginPlay();
- 
 }
 
 void ATankPawn::TargetDestroyed(AActor* Target)
 {
-	if (IScorable* Scorable = Cast<IScorable>(Target))
-	{
-		AccumulatedScores += Scorable->GetScores();
-		UE_LOG(LogTankogeddon, Log, TEXT("Destroyed target %s. Current scores: %d"), *Target->GetName(), AccumulatedScores);
-	}
+    if (IScorable* Scorable = Cast<IScorable>(Target))
+    {
+        AccumulatedScores += Scorable->GetScores();
+        UE_LOG(LogTankogeddon, Log, TEXT("Destroyed target %s. Current scores: %d"), *Target->GetName(), AccumulatedScores);
+    }
 }
 
 void ATankPawn::DamageTaken(float DamageValue)
 {
-	Super::DamageTaken(DamageValue);
+    Super::DamageTaken(DamageValue);
 
-	if (this == GetWorld()->GetFirstPlayerController()->GetPawn())
-	{
-		if (HitForceEffect)
-		{
-			FForceFeedbackParameters HitForceEffectParams;
-			HitForceEffectParams.bLooping = false;
-			HitForceEffectParams.Tag = "HitForceEffectParams";
-			GetWorld()->GetFirstPlayerController()->ClientPlayForceFeedback(HitForceEffect, HitForceEffectParams);
-		}
+    if (this == GetWorld()->GetFirstPlayerController()->GetPawn())
+    {
+        if (HitForceEffect)
+        {
+            FForceFeedbackParameters HitForceEffectParams;
+            HitForceEffectParams.bLooping = false;
+            HitForceEffectParams.Tag = "HitForceEffectParams";
+            GetWorld()->GetFirstPlayerController()->ClientPlayForceFeedback(HitForceEffect, HitForceEffectParams);
+        }
 
-		if (HitShake)
-		{
-			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitShake);
-		}
-	}
+        if (HitShake)
+        {
+            GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitShake);
+        }
+    }
 }
 
 // Called every frame
@@ -110,7 +124,4 @@ void ATankPawn::Tick(float DeltaTime)
 
     FRotator NewRotation = FRotator(0.f, YawRotation, 0.f);
     SetActorRotation(NewRotation);
-
 }
-
-

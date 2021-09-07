@@ -40,6 +40,7 @@ void AProjectile::Stop()
     GetWorld()->GetTimerManager().ClearTimer(MovementTimerHandle);
     Mesh->SetHiddenInGame(true);
     Mesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    
     UActorPoolSubsystem* Pool = GetWorld()->GetSubsystem<UActorPoolSubsystem>();
     if (Pool->IsActorInPool(this))
     {
@@ -54,14 +55,12 @@ void AProjectile::Stop()
 void AProjectile::OnMeshOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
     UE_LOG(LogTankogeddon, Warning, TEXT("Projectile %s collided with %s. "), *GetName(), *OtherActor->GetName());
-
-	if (OtherActor == GetInstigator())
-	{
-		return;
-	}
+    if (OtherActor == GetInstigator())
+    {
+        return;
+    }
 
     bool bWasTargetDestroyed = false;
-    
     if (OtherComp && OtherComp->GetCollisionObjectType() == ECollisionChannel::ECC_Destructible)
     {
         OtherActor->Destroy();
@@ -69,16 +68,17 @@ void AProjectile::OnMeshOverlapBegin(class UPrimitiveComponent* OverlappedComp, 
     }
     else if (IDamageTaker* DamageTaker = Cast<IDamageTaker>(OtherActor))
     {
-		FDamageData DamageData;
-		DamageData.DamageValue = Damage;
-		DamageData.DamageMaker = this;
-		DamageData.Instigator = GetInstigator();
-		bWasTargetDestroyed = DamageTaker->TakeDamage(DamageData);
+        FDamageData DamageData;
+        DamageData.DamageValue = Damage;
+        DamageData.DamageMaker = this;
+        DamageData.Instigator = GetInstigator();
+        bWasTargetDestroyed = DamageTaker->TakeDamage(DamageData);
     }
-	if (bWasTargetDestroyed && OnDestroyedTarget.IsBound())
-	{
-		OnDestroyedTarget.Broadcast(OtherActor);
-	}
+
+    if (bWasTargetDestroyed && OnDestroyedTarget.IsBound())
+    {
+        OnDestroyedTarget.Broadcast(OtherActor);
+    }
 
     Stop();
 }

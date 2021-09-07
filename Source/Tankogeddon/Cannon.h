@@ -15,6 +15,7 @@ class UAudioComponent;
 class UForceFeedbackEffect;
 class UMatineeCameraShake;
 
+
 UCLASS()
 class TANKOGEDDON_API ACannon : public AActor
 {
@@ -27,20 +28,20 @@ protected:
     UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UArrowComponent* ProjectileSpawnPoint;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
-	UParticleSystemComponent* ShootEffect;
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+    UParticleSystemComponent* ShootEffect;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UAudioComponent* ShotAudioEffect;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
     TSubclassOf<AProjectile> ProjectileClass;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
-	UForceFeedbackEffect* ShootForceEffect;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
+    UForceFeedbackEffect* ShootForceEffect;
 
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<UMatineeCameraShake> ShootShake;
+    UPROPERTY(EditAnywhere)
+    TSubclassOf<UMatineeCameraShake> ShootShake;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
     float FireRate = 1.f;
@@ -83,8 +84,8 @@ public:
     void SetVisibility(bool bIsVisible);
     void AddAmmo(int32 InNumAmmo);
 
-	DECLARE_MULTICAST_DELEGATE_OneParam(FOnDestoyedTarget, AActor*);
-	FOnDestoyedTarget OnDestroyedTarget;
+    DECLARE_MULTICAST_DELEGATE_OneParam(FOnDestoyedTarget, AActor*);
+    FOnDestoyedTarget OnDestroyedTarget;
 
 protected:
     virtual void BeginPlay() override;

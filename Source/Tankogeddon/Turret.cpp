@@ -15,13 +15,11 @@
 // Sets default values
 ATurret::ATurret()
 {
- 	
     UStaticMesh* TurretMeshTemp = LoadObject<UStaticMesh>(this, *TurretMeshPath);
     if (TurretMeshTemp)
     {
         TurretMesh->SetStaticMesh(TurretMeshTemp);
     }
-        
 
     UStaticMesh* BodyMeshTemp = LoadObject<UStaticMesh>(this, *BodyMeshPath);
     if (BodyMeshTemp)
@@ -32,7 +30,5 @@ ATurret::ATurret()
 
 int32 ATurret::GetScores() const
 {
-	return DestructionScores;
+    return DestructionScores;
 }
-
-

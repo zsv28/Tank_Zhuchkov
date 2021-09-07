@@ -11,25 +11,25 @@ class APawn;
 class ABasePawn;
 
 /**
- *
+ * 
  */
 UCLASS()
 class TANKOGEDDON_API ABasePawnAIController : public AAIController
 {
-    GENERATED_BODY()
-
+	GENERATED_BODY()
+        
 protected:
     UPROPERTY()
-        ABasePawn* MyPawn;
+    ABasePawn* MyPawn;
 
     UPROPERTY()
-        APawn* PlayerPawn;
+    APawn* PlayerPawn;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Targeting")
-        float TargetingRange = 1000.f;
+    float TargetingRange = 1000.f;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Targeting")
-        float Accuracy = 10.f;
+    float Accuracy = 10.f;
 
 protected:
     virtual void BeginPlay() override;

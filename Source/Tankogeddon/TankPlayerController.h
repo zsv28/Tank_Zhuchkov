@@ -21,9 +21,9 @@ protected:
     ATankPawn* TankPawn;
 
     UPROPERTY()
-	FVector2D LastFrameMousePosition;
+    FVector2D LastFrameMousePosition;
 
-	bool bIsControllingFromMouse = false;
+    bool bIsControllingFromMouse = false;
 
 public:
     ATankPlayerController();

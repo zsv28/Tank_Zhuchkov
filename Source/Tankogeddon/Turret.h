@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "DamageTaker.h"
 #include "BasePawn.h"
 #include "Scorable.h"
@@ -21,15 +20,15 @@ class TANKOGEDDON_API ATurret : public ABasePawn, public IScorable
     GENERATED_BODY()
 
 protected:
-    
     const FString BodyMeshPath = "StaticMesh'/Game/CSC/Meshes/SM_CSC_Tower1.SM_CSC_Tower1'";
     const FString TurretMeshPath = "StaticMesh'/Game/CSC/Meshes/SM_CSC_Gun1.SM_CSC_Gun1'";
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Scorable")
-	int32 DestructionScores = 5;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Scorable")
+    int32 DestructionScores = 5;
 
 public:
     ATurret();
 
     virtual int32 GetScores() const override;
+
 };
