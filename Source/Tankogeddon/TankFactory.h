@@ -29,6 +29,9 @@ class TANKOGEDDON_API ATankFactory : public AActor, public IDamageTaker
 protected:
     UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UStaticMeshComponent* BuildingMesh;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+	UStaticMeshComponent* DestroyedMesh;
     
     UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UArrowComponent* TankSpawnPoint;

@@ -27,6 +27,10 @@ ATankFactory::ATankFactory()
     BuildingMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Building Mesh"));
     BuildingMesh->SetupAttachment(SceneComp);
 
+	DestroyedMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Destroyed Mesh"));
+	DestroyedMesh->SetupAttachment(SceneComp);
+	DestroyedMesh->SetVisibility(false);
+
     TankSpawnPoint = CreateDefaultSubobject<UArrowComponent>(TEXT("Cannon setup point"));
     TankSpawnPoint->AttachToComponent(SceneComp, FAttachmentTransformRules::KeepRelativeTransform);
 
@@ -56,6 +60,9 @@ void ATankFactory::BeginPlay()
 {
 	Super::BeginPlay();
 
+	BuildingMesh->SetVisibility(true);
+	DestroyedMesh->SetVisibility(false);
+
     if (LinkedMapLoader)
     {
         LinkedMapLoader->SetIsActivated(false);
@@ -84,7 +91,8 @@ void ATankFactory::Die()
     {
         LinkedMapLoader->SetIsActivated(true);
     }
-
+	BuildingMesh->SetVisibility(false);
+	DestroyedMesh->SetVisibility(true);
     K2_PlayOnDie();
 
     Destroy();
