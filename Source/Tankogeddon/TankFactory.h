@@ -15,6 +15,10 @@ class UHealthComponent;
 class ATankPawn;
 class ATargetPoint;
 class AMapLoader;
+class UParticleSystemComponent;
+class UAudioComponent;
+class UParticleSystem;
+class USoundBase;
 
 
 UCLASS()
@@ -34,6 +38,12 @@ protected:
     
     UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UHealthComponent* HealthComponent;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+	UParticleSystemComponent* TankSpawnVFX;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+	UAudioComponent* TankSpawnSFX;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn tanks params")
     TSubclassOf<ATankPawn> SpawnTankClass;
@@ -63,6 +73,9 @@ protected:
 
     UFUNCTION()
     void Die();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "TankFactory", meta = (DisplayName = "OnDie", ScriptName = "OnDie"))
+	void K2_PlayOnDie();
 
     UFUNCTION()
     void DamageTaked(float DamageValue);

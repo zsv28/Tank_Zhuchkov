@@ -11,6 +11,9 @@
 #include "TankPawn.h"
 #include <Kismet/GameplayStatics.h>
 #include "MapLoader.h"
+#include <Particles/ParticleSystemComponent.h>
+#include <Components/AudioComponent.h>
+#include <Engine/World.h>
 
 // Sets default values
 ATankFactory::ATankFactory()
@@ -26,6 +29,14 @@ ATankFactory::ATankFactory()
 
     TankSpawnPoint = CreateDefaultSubobject<UArrowComponent>(TEXT("Cannon setup point"));
     TankSpawnPoint->AttachToComponent(SceneComp, FAttachmentTransformRules::KeepRelativeTransform);
+
+	TankSpawnVFX = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Tank spawn VFX"));
+	TankSpawnVFX->SetupAttachment(TankSpawnPoint);
+	TankSpawnVFX->bAutoActivate = false;
+
+	TankSpawnSFX = CreateDefaultSubobject<UAudioComponent>(TEXT("Tank spawn SFX"));
+	TankSpawnSFX->SetupAttachment(TankSpawnPoint);
+	TankSpawnSFX->bAutoActivate = false;
 
     HitCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("Hit collider"));
     HitCollider->SetupAttachment(SceneComp);
@@ -62,6 +73,9 @@ void ATankFactory::SpawnNewTank()
     NewTank->SetPatrollingPoints(TankWayPoints);
     //
     UGameplayStatics::FinishSpawningActor(NewTank, SpawnTransform);
+
+	TankSpawnVFX->ActivateSystem();
+	TankSpawnSFX->Play();
 }
 
 void ATankFactory::Die()
@@ -70,6 +84,9 @@ void ATankFactory::Die()
     {
         LinkedMapLoader->SetIsActivated(true);
     }
+
+    K2_PlayOnDie();
+
     Destroy();
 }
 
