@@ -29,10 +29,10 @@ class TANKOGEDDON_API ATankFactory : public AActor, public IDamageTaker
 protected:
     UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UStaticMeshComponent* BuildingMesh;
-
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
-	UStaticMeshComponent* DestroyedMesh;
     
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+    UStaticMeshComponent* DestroyedMesh;
+
     UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UArrowComponent* TankSpawnPoint;
     
@@ -42,11 +42,11 @@ protected:
     UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UHealthComponent* HealthComponent;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
-	UParticleSystemComponent* TankSpawnVFX;
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+    UParticleSystemComponent* TankSpawnVFX;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
-	UAudioComponent* TankSpawnSFX;
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+    UAudioComponent* TankSpawnSFX;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn tanks params")
     TSubclassOf<ATankPawn> SpawnTankClass;
@@ -77,8 +77,8 @@ protected:
     UFUNCTION()
     void Die();
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "TankFactory", meta = (DisplayName = "OnDie", ScriptName = "OnDie"))
-	void K2_PlayOnDie();
+    UFUNCTION(BlueprintImplementableEvent, Category = "TankFactory", meta=(DisplayName = "OnDie", ScriptName = "OnDie"))
+    void K2_PlayOnDie();
 
     UFUNCTION()
     void DamageTaked(float DamageValue);

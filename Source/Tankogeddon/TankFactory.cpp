@@ -27,21 +27,21 @@ ATankFactory::ATankFactory()
     BuildingMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Building Mesh"));
     BuildingMesh->SetupAttachment(SceneComp);
 
-	DestroyedMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Destroyed Mesh"));
-	DestroyedMesh->SetupAttachment(SceneComp);
-	DestroyedMesh->SetVisibility(false);
+    DestroyedMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Destroyed Mesh"));
+    DestroyedMesh->SetupAttachment(SceneComp);
+    DestroyedMesh->SetVisibility(false);
 
     TankSpawnPoint = CreateDefaultSubobject<UArrowComponent>(TEXT("Cannon setup point"));
     TankSpawnPoint->AttachToComponent(SceneComp, FAttachmentTransformRules::KeepRelativeTransform);
 
-	TankSpawnVFX = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Tank spawn VFX"));
-	TankSpawnVFX->SetupAttachment(TankSpawnPoint);
-	TankSpawnVFX->bAutoActivate = false;
+    TankSpawnVFX = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Tank spawn VFX"));
+    TankSpawnVFX->SetupAttachment(TankSpawnPoint);
+    TankSpawnVFX->bAutoActivate = false;
 
-	TankSpawnSFX = CreateDefaultSubobject<UAudioComponent>(TEXT("Tank spawn SFX"));
-	TankSpawnSFX->SetupAttachment(TankSpawnPoint);
-	TankSpawnSFX->bAutoActivate = false;
-
+    TankSpawnSFX = CreateDefaultSubobject<UAudioComponent>(TEXT("Tank spawn SFX"));
+    TankSpawnSFX->SetupAttachment(TankSpawnPoint);
+    TankSpawnSFX->bAutoActivate = false;
+    
     HitCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("Hit collider"));
     HitCollider->SetupAttachment(SceneComp);
 
@@ -60,9 +60,8 @@ void ATankFactory::BeginPlay()
 {
 	Super::BeginPlay();
 
-	BuildingMesh->SetVisibility(true);
-	DestroyedMesh->SetVisibility(false);
-
+    BuildingMesh->SetVisibility(true);
+    DestroyedMesh->SetVisibility(false);
     if (LinkedMapLoader)
     {
         LinkedMapLoader->SetIsActivated(false);
@@ -81,8 +80,8 @@ void ATankFactory::SpawnNewTank()
     //
     UGameplayStatics::FinishSpawningActor(NewTank, SpawnTransform);
 
-	TankSpawnVFX->ActivateSystem();
-	TankSpawnSFX->Play();
+    TankSpawnVFX->ActivateSystem();
+    TankSpawnSFX->Play();
 }
 
 void ATankFactory::Die()
@@ -91,11 +90,10 @@ void ATankFactory::Die()
     {
         LinkedMapLoader->SetIsActivated(true);
     }
-	BuildingMesh->SetVisibility(false);
-	DestroyedMesh->SetVisibility(true);
-    K2_PlayOnDie();
 
-    Destroy();
+    BuildingMesh->SetVisibility(false);
+    DestroyedMesh->SetVisibility(true);
+    K2_PlayOnDie();
 }
 
 void ATankFactory::DamageTaked(float DamageValue)
