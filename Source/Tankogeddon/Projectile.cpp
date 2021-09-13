@@ -75,13 +75,19 @@ void AProjectile::OnMeshOverlapBegin(class UPrimitiveComponent* OverlappedComp, 
         DamageData.Instigator = GetInstigator();
         bWasTargetDestroyed = DamageTaker->TakeDamage(DamageData);
     }
-    else 
+    else if(UPrimitiveComponent* PrimComp = Cast<UPrimitiveComponent>(OtherComp))
     {
-        UPrimitiveComponent* PrimComp = Cast<UPrimitiveComponent>(OtherComp);
         if (PrimComp && PrimComp->IsSimulatingPhysics())
         {
             FVector ForceVector = GetActorForwardVector();
-            PrimComp->AddImpulseAtLocation(ForceVector * PushForce, SweepResult.ImpactPoint);
+			if (bImpulseImpact)
+			{
+				PrimComp->AddImpulseAtLocation(ForceVector * PushForce, SweepResult.ImpactPoint);
+			}
+			else
+			{
+				PrimComp->AddForceAtLocation(ForceVector * PushForce, SweepResult.ImpactPoint);
+			}
         }
     }
 

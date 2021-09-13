@@ -88,14 +88,21 @@ void APhysicsProjectile::Explode()
                     {
                         FVector ForceVector = OtherActor->GetActorLocation() - GetActorLocation();
                         ForceVector.Normalize();
-                        PrimComp->AddImpulse(ForceVector * PushForce, NAME_None, true);
+                        if (bImpulseImpact)
+                        {
+                            PrimComp->AddImpulse(ForceVector * PushForce, NAME_None, true);
+                        }
+                        else
+                        {
+                            PrimComp->AddForce(ForceVector * PushForce, NAME_None, true);
+                        }
                     }
                 }
+
             }
-
         }
-    }
 
+    }
 }
 
 void APhysicsProjectile::Move()
