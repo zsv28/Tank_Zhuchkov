@@ -37,6 +37,11 @@ void AProjectile::Start()
 
 void AProjectile::Explode()
 {
+	if (!bDamageRadius)
+	{
+		return;
+	}
+
 	FVector StartPos = GetActorLocation();
 	FVector EndPos = StartPos + FVector(0.1f);
 

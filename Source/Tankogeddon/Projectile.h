@@ -32,11 +32,14 @@ protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Damage")
     float PushForce = 1000.f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (EditCondition = "bDamageRadius == true", EditConditionHides), Category = "Damage")
 	float ExplodeRadius = 50.f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Damage")
 	bool bImpulseImpact = true;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Damage")
+	bool bDamageRadius = false;
 
     FTimerHandle MovementTimerHandle;
     FVector StartLocation;
