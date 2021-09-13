@@ -16,7 +16,7 @@ struct FDamageData
     GENERATED_BODY()
 
     UPROPERTY()
-    float DamageValue;
+    float DamageValue = 0.f;
 
     UPROPERTY()
     AActor* Instigator;
@@ -26,4 +26,7 @@ struct FDamageData
 
     UPROPERTY()
     FVector HitLocation;
+
+    UPROPERTY()
+    bool bOutIsFatalDamage = false;
 };

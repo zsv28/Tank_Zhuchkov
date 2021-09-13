@@ -2,16 +2,17 @@
 
 
 #include "Projectile.h"
+
 #include <Components/SceneComponent.h>
 #include <Components/StaticMeshComponent.h>
-#include <TimerManager.h>
-#include <Engine/World.h>
+#include <Components/PrimitiveComponent.h>
 
 #include "Tankogeddon.h"
 #include "ActorPoolSubsystem.h"
 #include "DamageTaker.h"
 #include "GameStructs.h"
-#include <Components/PrimitiveComponent.h>
+
+
 
 // Sets default values
 AProjectile::AProjectile()
@@ -56,7 +57,7 @@ void AProjectile::Explode()
 
 	bool SweepResult = GetWorld()->SweepMultiByChannel
 	(
-		AttackHit,
+		OUT AttackHit,
 		StartPos,
 		EndPos,
 		Rotation,
@@ -76,40 +77,15 @@ void AProjectile::Explode()
 			{
 				continue;
 			}
-
-			IDamageTaker* DamageTakerActor = Cast<IDamageTaker>(OtherActor);
-			if (DamageTakerActor)
-			{
-				FDamageData DamageData;
-				DamageData.DamageValue = Damage;
-				DamageData.Instigator = GetOwner();
-				DamageData.DamageMaker = this;
-
-				DamageTakerActor->TakeDamage(DamageData);
-			}
-			else
+			if (!CheckDamageForActor(OtherActor))
 			{
 				UPrimitiveComponent* PrimComp = Cast<UPrimitiveComponent>(OtherActor->GetRootComponent());
-				if (PrimComp)
-				{
-					if (PrimComp->IsSimulatingPhysics())
-					{
-						FVector ForceVector = OtherActor->GetActorLocation() - GetActorLocation();
-						ForceVector.Normalize();
-						if (bImpulseImpact)
-						{
-							PrimComp->AddImpulse(ForceVector * PushForce, NAME_None, true);
-						}
-						else
-						{
-							PrimComp->AddForce(ForceVector * PushForce, NAME_None, true);
-						}
-					}
-				}
-
+				FVector ForceVector = OtherActor->GetActorLocation() - GetActorLocation();
+				ForceVector.Normalize();
+				CheckPhysicsForComponent(PrimComp, ForceVector);
 			}
-		}
 
+		}
 	}
 }
 
@@ -138,40 +114,25 @@ void AProjectile::OnMeshOverlapBegin(class UPrimitiveComponent* OverlappedComp, 
     {
         return;
     }
-
-    bool bWasTargetDestroyed = false;
     if (OtherComp && OtherComp->GetCollisionObjectType() == ECollisionChannel::ECC_Destructible)
     {
         OtherActor->Destroy();
-        bWasTargetDestroyed = true;
     }
-    else if (IDamageTaker* DamageTaker = Cast<IDamageTaker>(OtherActor))
+    else
     {
-        FDamageData DamageData;
-        DamageData.DamageValue = Damage;
-        DamageData.DamageMaker = this;
-        DamageData.Instigator = GetInstigator();
-        bWasTargetDestroyed = DamageTaker->TakeDamage(DamageData);
-    }
-    else if(UPrimitiveComponent* PrimComp = Cast<UPrimitiveComponent>(OtherComp))
-    {
-        if (PrimComp && PrimComp->IsSimulatingPhysics())
-        {
+		bool bIsFatalDamage;
+		if (CheckDamageForActor(OtherActor, OUT & bIsFatalDamage))
+		{
+			if (bIsFatalDamage && OnDestroyedTarget.IsBound())
+			{
+				OnDestroyedTarget.Broadcast(OtherActor);
+			}
+		}
+		else
+		{
             FVector ForceVector = GetActorForwardVector();
-			if (bImpulseImpact)
-			{
-				PrimComp->AddImpulseAtLocation(ForceVector * PushForce, SweepResult.ImpactPoint);
-			}
-			else
-			{
-				PrimComp->AddForceAtLocation(ForceVector * PushForce, SweepResult.ImpactPoint);
-			}
+			CheckPhysicsForComponent(OtherComp, SweepResult, ForceVector);
         }
-    }
-
-    if (bWasTargetDestroyed && OnDestroyedTarget.IsBound())
-    {
-        OnDestroyedTarget.Broadcast(OtherActor);
     }
 
     Stop();
@@ -183,7 +144,64 @@ void AProjectile::Move()
     SetActorLocation(NextPosition);
     if (FVector::Distance(NextPosition, StartLocation) > FlyRange) 
     {
+		Explode();
         Stop();
     }
 }
 
+bool AProjectile::CheckDamageForActor(AActor* DamageTakerActor, bool* bOutIsFatal)
+{
+
+	if (IDamageTaker* DamageTakerInterface = Cast<IDamageTaker>(DamageTakerActor))
+	{
+		FDamageData DamageData;
+		DamageData.DamageValue = Damage;
+		DamageData.DamageMaker = this;
+		DamageData.Instigator = GetInstigator();
+		DamageTakerInterface->TakeDamage(OUT DamageData);
+
+		if (bOutIsFatal != nullptr)
+		{
+			*bOutIsFatal = DamageData.bOutIsFatalDamage;
+		}
+		return true;
+	}
+
+	if (bOutIsFatal != nullptr)
+	{
+		*bOutIsFatal = false;
+	}
+	return false;
+}
+
+// --------------------------------------------------------------------------------------
+void AProjectile::CheckPhysicsForComponent(UPrimitiveComponent* PrimComp, const FHitResult& SweepResult, const FVector& ForceVector)
+{
+	if (PrimComp && PrimComp->IsSimulatingPhysics())
+	{
+		if (bImpulseImpact)
+		{
+			PrimComp->AddImpulseAtLocation(ForceVector * PushForce, SweepResult.ImpactPoint);
+		}
+		else
+		{
+			PrimComp->AddForceAtLocation(ForceVector * PushForce, SweepResult.ImpactPoint);
+		}
+	}
+}
+
+// --------------------------------------------------------------------------------------
+void AProjectile::CheckPhysicsForComponent(UPrimitiveComponent* PrimComp, const FVector& ForceVector)
+{
+	if (PrimComp->IsSimulatingPhysics())
+	{
+		if (bImpulseImpact)
+		{
+			PrimComp->AddImpulse(ForceVector * PushForce, NAME_None, true);
+		}
+		else
+		{
+			PrimComp->AddForce(ForceVector * PushForce, NAME_None, true);
+		}
+	}
+}
