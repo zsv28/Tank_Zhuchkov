@@ -33,6 +33,9 @@ protected:
     float PushForce = 1000.f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
+	float ExplodeRadius = 50.f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
 	bool bImpulseImpact = true;
 
     FTimerHandle MovementTimerHandle;
@@ -42,6 +45,7 @@ public:
     AProjectile();
 
     virtual void Start();
+    void Explode();
     void Stop();
 
     DECLARE_MULTICAST_DELEGATE_OneParam(FOnDestoyedTarget, AActor*);
