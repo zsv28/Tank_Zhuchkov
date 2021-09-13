@@ -6,6 +6,7 @@
 #include <Components/SceneComponent.h>
 #include <Components/StaticMeshComponent.h>
 #include <Components/PrimitiveComponent.h>
+#include <Particles/ParticleSystemComponent.h>
 
 #include "Tankogeddon.h"
 #include "ActorPoolSubsystem.h"
@@ -26,6 +27,10 @@ AProjectile::AProjectile()
     Mesh->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnMeshOverlapBegin);
     Mesh->SetCollisionObjectType(ECollisionChannel::ECC_GameTraceChannel1);
     Mesh->SetHiddenInGame(true);
+
+	TrailEffect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Trail effect"));
+	TrailEffect->SetupAttachment(RootComponent);
+	TrailEffect->SetAutoActivate(false);
 }
 
 void AProjectile::Start()
@@ -34,6 +39,7 @@ void AProjectile::Start()
     StartLocation = GetActorLocation();
     Mesh->SetHiddenInGame(false);
     Mesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	TrailEffect->ActivateSystem();
 }
 
 void AProjectile::Explode()
@@ -91,10 +97,14 @@ void AProjectile::Explode()
 
 void AProjectile::Stop()
 {
+
+	Explode();
+
     OnDestroyedTarget.Clear();
     GetWorld()->GetTimerManager().ClearTimer(MovementTimerHandle);
     Mesh->SetHiddenInGame(true);
     Mesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	TrailEffect->DeactivateSystem();
     
     UActorPoolSubsystem* Pool = GetWorld()->GetSubsystem<UActorPoolSubsystem>();
     if (Pool->IsActorInPool(this))
@@ -193,7 +203,7 @@ void AProjectile::CheckPhysicsForComponent(UPrimitiveComponent* PrimComp, const 
 // --------------------------------------------------------------------------------------
 void AProjectile::CheckPhysicsForComponent(UPrimitiveComponent* PrimComp, const FVector& ForceVector)
 {
-	if (PrimComp->IsSimulatingPhysics())
+	if (PrimComp && PrimComp->IsSimulatingPhysics())
 	{
 		if (bImpulseImpact)
 		{
