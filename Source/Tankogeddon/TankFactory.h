@@ -77,9 +77,9 @@ protected:
     UFUNCTION()
     void Die();
 
-    UFUNCTION(BlueprintImplementableEvent, Category = "TankFactory", meta=(DisplayName = "OnDie", ScriptName = "OnDie"))
-    void K2_PlayOnDie();
-
     UFUNCTION()
     void DamageTaked(float DamageValue);
+
+private:
+    FTimerHandle SpawnTimerHandle;
 };
