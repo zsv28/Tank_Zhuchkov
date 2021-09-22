@@ -174,9 +174,10 @@ void ABasePawn::Die()
     {
         FActorSpawnParameters SpawnParams;
         SpawnParams.bNoFail = true;
-        GetWorld()->SpawnActor<AAmmoBox>(DestructionBonusBox, GetActorTransform(), SpawnParams);
-        //GetWorld()->SpawnActor <AAmmoBox>(DestructionBonusBox, GetActorLocation(), GetActorRotation(), SpawnParams);
+        //GetWorld()->SpawnActor<AAmmoBox>(DestructionBonusBox, GetActorTransform(), SpawnParams);
+        GetWorld()->SpawnActor <AAmmoBox>(DestructionBonusBox, GetActorLocation(), GetActorRotation(), SpawnParams);
     }
+    
 
     Destroy();
 }

@@ -49,6 +49,9 @@ protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
     float FireRange = 1000.f;
     
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
+	int32 NumAmmo = 0;
+
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
     int32 MaxAmmo = 10;
 
@@ -96,6 +99,5 @@ protected:
 
     void NotifyTargetDestroyed(AActor* Target);
 
-    int32 NumAmmo = 0;
     int32 ShotsLeft = 0;
 };

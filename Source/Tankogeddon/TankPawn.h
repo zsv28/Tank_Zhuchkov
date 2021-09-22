@@ -58,9 +58,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
     virtual void TargetDestroyed(AActor* Target) override;
-
     virtual void DamageTaken(float DamageValue) override;
-
+    virtual void Die();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

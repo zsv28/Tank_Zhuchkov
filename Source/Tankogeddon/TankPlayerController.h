@@ -15,10 +15,11 @@ UCLASS()
 class TANKOGEDDON_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
 protected:
-    UPROPERTY()
-    ATankPawn* TankPawn;
+
+	UPROPERTY()
+	ATankPawn* TankPawn;
 
     UPROPERTY()
     FVector2D LastFrameMousePosition;

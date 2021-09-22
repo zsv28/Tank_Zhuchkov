@@ -14,6 +14,8 @@
 #include "HealthComponent.h"
 #include "Scorable.h"
 #include <Engine/TargetPoint.h>
+#include <Kismet/GameplayStatics.h>
+#include "TankogeddonGameModeBase.h"
 
 // Sets default values
 ATankPawn::ATankPawn()
@@ -124,4 +126,17 @@ void ATankPawn::Tick(float DeltaTime)
 
     FRotator NewRotation = FRotator(0.f, YawRotation, 0.f);
     SetActorRotation(NewRotation);
+}
+
+void ATankPawn::Die()
+{
+    bool IsPlayerPawn = Cast<APawn>(this) == GetWorld()->GetFirstPlayerController()->GetPawn();
+    
+    if (IsPlayerPawn)
+    {
+        auto CurrentGameMode = Cast<ATankogeddonGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+        CurrentGameMode->OnPawnDie();
+    }
+
+    Super::Die();
 }
