@@ -10,6 +10,11 @@
 class UStaticMeshComponent;
 class UArrowComponent;
 class AProjectile;
+class UParticleSystemComponent;
+class UAudioComponent;
+class UForceFeedbackEffect;
+class UMatineeCameraShake;
+
 
 UCLASS()
 class TANKOGEDDON_API ACannon : public AActor
@@ -23,8 +28,20 @@ protected:
     UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UArrowComponent* ProjectileSpawnPoint;
 
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+    UParticleSystemComponent* ShootEffect;
+
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+    UAudioComponent* ShotAudioEffect;
+
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
     TSubclassOf<AProjectile> ProjectileClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
+    UForceFeedbackEffect* ShootForceEffect;
+
+    UPROPERTY(EditAnywhere)
+    TSubclassOf<UMatineeCameraShake> ShootShake;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
     float FireRate = 1.f;
@@ -32,6 +49,9 @@ protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
     float FireRange = 1000.f;
     
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
+	int32 NumAmmo = 0;
+
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
     int32 MaxAmmo = 10;
 
@@ -67,6 +87,9 @@ public:
     void SetVisibility(bool bIsVisible);
     void AddAmmo(int32 InNumAmmo);
 
+    DECLARE_MULTICAST_DELEGATE_OneParam(FOnDestoyedTarget, AActor*);
+    FOnDestoyedTarget OnDestroyedTarget;
+
 protected:
     virtual void BeginPlay() override;
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
@@ -74,6 +97,7 @@ protected:
     void Reload();
     void Shot();
 
-    int32 NumAmmo = 0;
+    void NotifyTargetDestroyed(AActor* Target);
+
     int32 ShotsLeft = 0;
 };

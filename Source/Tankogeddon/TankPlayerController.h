@@ -15,19 +15,21 @@ UCLASS()
 class TANKOGEDDON_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
 protected:
-    UPROPERTY()
-    ATankPawn* TankPawn;
+
+	UPROPERTY()
+	ATankPawn* TankPawn;
 
     UPROPERTY()
-    FVector MousePos;
+    FVector2D LastFrameMousePosition;
+
+    bool bIsControllingFromMouse = false;
 
 public:
     ATankPlayerController();
     virtual void SetupInputComponent() override;
     virtual void Tick(float DeltaTime) override;
-    FVector GetMousePos() { return MousePos; };
 
 protected:
     virtual void BeginPlay() override;

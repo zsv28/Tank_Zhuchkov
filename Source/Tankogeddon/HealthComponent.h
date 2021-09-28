@@ -20,8 +20,8 @@ protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Health values")
     float MaxHealth = 10.f;
 
-    UPROPERTY()
-    float CurrentHealth;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Health values")
+    float CurrentHealth = 0.f;
 
 public:
     UPROPERTY(BlueprintAssignable)

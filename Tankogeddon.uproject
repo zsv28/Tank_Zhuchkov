@@ -9,8 +9,17 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"Engine"
+				"Engine",
+				"AIModule",
+				"UMG"
 			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "TextTools",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/b77016229b5246b6a99fad840e2ba909"
 		}
 	]
 }

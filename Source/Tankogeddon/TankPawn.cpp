@@ -9,13 +9,13 @@
 #include <Kismet/KismetMathLibrary.h>
 #include <Components/ArrowComponent.h>
 #include <Components/BoxComponent.h>
-
-
 #include "Tankogeddon.h"
-#include "TankPlayerController.h"
 #include "Cannon.h"
 #include "HealthComponent.h"
-
+#include "Scorable.h"
+#include <Engine/TargetPoint.h>
+#include <Kismet/GameplayStatics.h>
+#include "TankogeddonGameModeBase.h"
 
 // Sets default values
 ATankPawn::ATankPawn()
@@ -32,7 +32,6 @@ ATankPawn::ATankPawn()
 
     Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
     Camera->SetupAttachment(SpringArm);
-
 }
 
 void ATankPawn::MoveForward(float AxisValue)
@@ -45,13 +44,56 @@ void ATankPawn::RotateRight(float AxisValue)
     TargetRightAxisValue = AxisValue;
 }
 
+TArray<FVector> ATankPawn::GetPatrollingPoints()
+{
+    TArray<FVector> Result;
+    for (ATargetPoint* Point : PatrollingPoints)
+    {
+        Result.Add(Point->GetActorLocation());
+    }
+
+    return Result;
+}
+
+void ATankPawn::SetPatrollingPoints(const TArray<ATargetPoint*>& NewPatrollingPoints)
+{
+    PatrollingPoints = NewPatrollingPoints;
+}
+
 // Called when the game starts or when spawned
 void ATankPawn::BeginPlay()
 {
 	Super::BeginPlay();
-	
-    TankController = Cast<ATankPlayerController>(GetController());
- 
+}
+
+void ATankPawn::TargetDestroyed(AActor* Target)
+{
+    if (IScorable* Scorable = Cast<IScorable>(Target))
+    {
+        AccumulatedScores += Scorable->GetScores();
+        UE_LOG(LogTankogeddon, Log, TEXT("Destroyed target %s. Current scores: %d"), *Target->GetName(), AccumulatedScores);
+    }
+}
+
+void ATankPawn::DamageTaken(float DamageValue)
+{
+    Super::DamageTaken(DamageValue);
+
+    if (this == GetWorld()->GetFirstPlayerController()->GetPawn())
+    {
+        if (HitForceEffect)
+        {
+            FForceFeedbackParameters HitForceEffectParams;
+            HitForceEffectParams.bLooping = false;
+            HitForceEffectParams.Tag = "HitForceEffectParams";
+            GetWorld()->GetFirstPlayerController()->ClientPlayForceFeedback(HitForceEffect, HitForceEffectParams);
+        }
+
+        if (HitShake)
+        {
+            GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitShake);
+        }
+    }
 }
 
 // Called every frame
@@ -84,17 +126,17 @@ void ATankPawn::Tick(float DeltaTime)
 
     FRotator NewRotation = FRotator(0.f, YawRotation, 0.f);
     SetActorRotation(NewRotation);
-
-    // Turret rotation
-    if (TankController)
-    {
-        FVector MousePos = TankController->GetMousePos();
-        FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), MousePos);
-        FRotator CurrRotation = TurretMesh->GetComponentRotation();
-        TargetRotation.Pitch = CurrRotation.Pitch;
-        TargetRotation.Roll = CurrRotation.Roll;
-        TurretMesh->SetWorldRotation(FMath::RInterpConstantTo(CurrRotation, TargetRotation, DeltaTime, TurretRotationSpeed));
-    }
 }
 
+void ATankPawn::Die()
+{
+    bool IsPlayerPawn = Cast<APawn>(this) == GetWorld()->GetFirstPlayerController()->GetPawn();
+    
+    if (IsPlayerPawn)
+    {
+        auto CurrentGameMode = Cast<ATankogeddonGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+        CurrentGameMode->OnPawnDie();
+    }
 
+    Super::Die();
+}
