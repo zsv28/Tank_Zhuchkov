@@ -5,21 +5,29 @@
 #include "TankPawn.h"
 #include <DrawDebugHelpers.h>
 #include "ActorPoolSubsystem.h"
+#include <GameFramework/PlayerController.h>
+#include "MyHUD.h"
+
 
 ATankPlayerController::ATankPlayerController()
 {
     bShowMouseCursor = true;
+	bEnableClickEvents = true;
 }
 
 void ATankPlayerController::SetupInputComponent()
 {
     Super::SetupInputComponent();
-    InputComponent->BindAxis("MoveForward", this, &ATankPlayerController::MoveForward);
-    InputComponent->BindAxis("RotateRight", this, &ATankPlayerController::RotateRight);
-    InputComponent->BindAction("Fire",IE_Pressed, this, &ATankPlayerController::Fire);
-    InputComponent->BindAction("FireSpecial",IE_Pressed, this, &ATankPlayerController::FireSpecial);
-    InputComponent->BindAction("CycleCannon",IE_Pressed, this, &ATankPlayerController::CycleCannon);
-    InputComponent->BindAxis("RotateTurretRight");
+    
+    
+        InputComponent->BindAxis("MoveForward", this, &ATankPlayerController::MoveForward);
+        InputComponent->BindAxis("RotateRight", this, &ATankPlayerController::RotateRight);
+        InputComponent->BindAction("Fire", IE_Pressed, this, &ATankPlayerController::Fire);
+        InputComponent->BindAction("FireSpecial", IE_Pressed, this, &ATankPlayerController::FireSpecial);
+        InputComponent->BindAction("CycleCannon", IE_Pressed, this, &ATankPlayerController::CycleCannon);
+        InputComponent->BindAxis("RotateTurretRight");
+        InputComponent->BindKey(EKeys::LeftMouseButton, IE_Released, this, &ATankPlayerController::OnLeftMouseButtonUp);
+    
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
@@ -59,6 +67,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 
     DrawDebugLine(GetWorld(), TankPawn->GetEyesPosition(), TankPawn->GetEyesPosition() + TankPawn->GetTurretForwardVector() * 1000.f, FColor::Green, false, 0.1f, 0.f, 5.f);
 }
+
 
 void ATankPlayerController::BeginPlay()
 {
@@ -106,6 +115,16 @@ void ATankPlayerController::CycleCannon()
     {
         TankPawn->CycleCannon();
     }
+}
+
+void ATankPlayerController::OnLeftMouseButtonUp()
+{
+		OnMouseButtonUp.Broadcast();
+}
+
+void ATankPlayerController::OnLeftMouseButtonDown()
+{
+
 }
 
 void ATankPlayerController::DumpActorPoolSubsystemStats()

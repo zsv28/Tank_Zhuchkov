@@ -23,21 +23,25 @@ protected:
     ABasePawn* MyPawn;
 
     UPROPERTY()
-    APawn* PlayerPawn;
-
-    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Targeting")
-    float TargetingRange = 1000.f;
+    ABasePawn* EnemyPawn;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Targeting")
     float Accuracy = 10.f;
+
+
+public:
+	ABasePawn* GetCurrentEnemy() const;
+
+	void SetCurrentEnemy(ABasePawn* CurrentEnemy);
+	void ResetCurrentEnemy();
 
 protected:
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaTime) override;
 
-    void RotateToPlayer();
-    bool IsPlayerInRange();
-    bool DetectCanFire();
+    void RotateToEnemy();
+    //bool IsPlayerInRange();
     void Fire();
-    bool DetectPlayerVisibility();
+    bool DetectCanFire();
+    bool DetectEnemyVisibility();
 };

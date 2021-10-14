@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "MiniMap.h"
 #include "TankPlayerController.generated.h"
 
 class ATankPawn;
@@ -31,6 +32,10 @@ public:
     virtual void SetupInputComponent() override;
     virtual void Tick(float DeltaTime) override;
 
+    FSimpleMulticastDelegate OnMouseButtonUp;
+
+    
+
 protected:
     virtual void BeginPlay() override;
     void MoveForward(float AxisValue);
@@ -38,6 +43,10 @@ protected:
     void Fire();
     void FireSpecial();
     void CycleCannon();
+    void OnLeftMouseButtonUp();
+    void OnLeftMouseButtonDown();
+  
+
 
     UFUNCTION(exec)
     void DumpActorPoolSubsystemStats();

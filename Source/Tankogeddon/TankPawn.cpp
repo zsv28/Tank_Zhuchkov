@@ -30,8 +30,11 @@ ATankPawn::ATankPawn()
     SpringArm->bInheritYaw = false;
     SpringArm->bInheritRoll = false;
 
-    Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-    Camera->SetupAttachment(SpringArm);
+	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	Camera->SetupAttachment(SpringArm);
+
+	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>("Inventory");
+	InventoryManagerComponent = CreateDefaultSubobject<UInventoryManagerComponent>("InventoryManager");
 }
 
 void ATankPawn::MoveForward(float AxisValue)
@@ -42,6 +45,13 @@ void ATankPawn::MoveForward(float AxisValue)
 void ATankPawn::RotateRight(float AxisValue)
 {
     TargetRightAxisValue = AxisValue;
+}
+
+
+
+void ATankPawn::EnableInventary()
+{
+   InventoryManagerComponent->Init(InventoryComponent);
 }
 
 TArray<FVector> ATankPawn::GetPatrollingPoints()
@@ -64,7 +74,9 @@ void ATankPawn::SetPatrollingPoints(const TArray<ATargetPoint*>& NewPatrollingPo
 void ATankPawn::BeginPlay()
 {
 	Super::BeginPlay();
+  
 }
+
 
 void ATankPawn::TargetDestroyed(AActor* Target)
 {

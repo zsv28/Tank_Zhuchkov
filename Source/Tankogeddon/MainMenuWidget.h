@@ -8,7 +8,11 @@
 #include <Components/Button.h>
 #include <Components/VerticalBox.h>
 #include <Components/RichTextBlock.h>
+#include "RadioButtons.h"
+#include <Components/NativeWidgetHost.h>
 #include "MainMenuWidget.generated.h"
+
+class URadioButtons;
 
 
 /**
@@ -20,8 +24,14 @@ class TANKOGEDDON_API UMainMenuWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
-
+	virtual void NativePreConstruct() override;
 	virtual void NativeConstruct() override;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional))
+	UNativeWidgetHost* RadioButtonsHolder;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidgetOptional))
+	URadioButtons* RadioButtonsWidget;
 
 	UPROPERTY(meta = (BindWidget), BlueprintReadOnly)
 	UButton* NewGame;

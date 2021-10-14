@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "DamageTaker.h"
 #include "BasePawn.h"
+#include "Components/SceneCaptureComponent2D.h"
+#include "InventoryManagerComponent.h"
+#include "InventoryComponent.h"
 #include "TankPawn.generated.h"
 
 
@@ -13,6 +16,11 @@ class USpringArmComponent;
 class UCameraComponent;
 class ATankPlayerController;
 class ATargetPoint;
+class UInventoryManagerComponent;
+class UInventoryComponent;
+
+
+
 
 
 UCLASS()
@@ -55,6 +63,12 @@ protected:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
     TSubclassOf<UMatineeCameraShake> HitShake;
 
+	UPROPERTY(EditDefaultsOnly)
+	UInventoryComponent* InventoryComponent;
+
+	UPROPERTY(EditDefaultsOnly)
+	UInventoryManagerComponent* InventoryManagerComponent;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
     virtual void TargetDestroyed(AActor* Target) override;
@@ -69,6 +83,9 @@ public:
 
     UFUNCTION()
     void RotateRight(float AxisValue);
+
+	UFUNCTION(BlueprintCallable)
+	void EnableInventary();
 
     UFUNCTION()
     TArray<FVector> GetPatrollingPoints();

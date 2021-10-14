@@ -5,12 +5,15 @@
 #include <Components/StaticMeshComponent.h>
 #include <Components/ArrowComponent.h>
 #include <Components/BoxComponent.h>
+#include <Components/SphereComponent.h>
 #include "HealthComponent.h"
 #include "Tankogeddon.h"
 #include "Cannon.h"
 #include <Kismet/KismetMathLibrary.h>
 #include <Kismet/GameplayStatics.h>
 #include "AmmoBox.h"
+#include "BasePawnAIController.h"
+
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -33,6 +36,12 @@ ABasePawn::ABasePawn()
     HitCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("Hit collider"));
     HitCollider->SetupAttachment(BodyMesh);
     HitCollider->bEditableWhenInherited = true;
+
+	TargetingCollider = CreateDefaultSubobject<USphereComponent>(TEXT("Vision collider"));
+	TargetingCollider->SetupAttachment(BodyMesh);
+	TargetingCollider->bEditableWhenInherited = true;
+	TargetingCollider->OnComponentBeginOverlap.AddDynamic(this, &ABasePawn::OnTargetingOverlapBegin);
+	TargetingCollider->OnComponentEndOverlap.AddDynamic(this, &ABasePawn::OnTargetingOverlapEnd);
 
     HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
     HealthComponent->OnDie.AddDynamic(this, &ABasePawn::Die);
@@ -110,6 +119,7 @@ void ABasePawn::CycleCannon()
     {
         InactiveCannon->SetVisibility(false);
     }
+  
 }
 
 ACannon* ABasePawn::GetActiveCannon() const
@@ -169,16 +179,13 @@ void ABasePawn::Die()
 {
     UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DestuctionParticleSystem, GetActorTransform());
     UGameplayStatics::PlaySoundAtLocation(GetWorld(), DestructionSound, GetActorLocation());
-
+ 
     if (DestructionBonusBox)
     {
         FActorSpawnParameters SpawnParams;
         SpawnParams.bNoFail = true;
-        //GetWorld()->SpawnActor<AAmmoBox>(DestructionBonusBox, GetActorTransform(), SpawnParams);
         GetWorld()->SpawnActor <AAmmoBox>(DestructionBonusBox, GetActorLocation(), GetActorRotation(), SpawnParams);
     }
-    
-
     Destroy();
 }
 
@@ -186,3 +193,32 @@ void ABasePawn::DamageTaken(float InDamage)
 {
     UE_LOG(LogTankogeddon, Log, TEXT("Pawn %s taken damage:%f "), *GetName(), InDamage);
 }
+
+
+void ABasePawn::OnTargetingOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (auto OtherPawn = Cast<ABasePawn>(OtherActor))
+	{
+		if (OtherPawn != this && OtherPawn->PlayerGroupID != PlayerGroupID)
+		{
+			if (auto AIController{ Cast<ABasePawnAIController>(GetController()) })
+			{
+				AIController->SetCurrentEnemy(OtherPawn);
+			}
+		}
+	}
+
+	return;
+}
+
+void ABasePawn::OnTargetingOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (auto OtherPawn = Cast<ABasePawn>(OtherActor))
+	{
+		if (auto AIController{ Cast<ABasePawnAIController>(GetController()) })
+		{
+			AIController->ResetCurrentEnemy();
+		}
+	}
+}
+

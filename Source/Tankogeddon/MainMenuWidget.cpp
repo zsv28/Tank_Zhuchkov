@@ -6,8 +6,20 @@
 #include <Kismet/KismetSystemLibrary.h>
 #include <Components/Widget.h>
 #include "Components/SlateWrapperTypes.h"
+#include "StyleSet.h"
+#include "RadioButtonsWidgetStyle.h"
 
 
+
+void UMainMenuWidget::NativePreConstruct()
+{
+	if (RadioButtonsWidget)
+	{
+		RadioButtonsWidget->WidgetStyle = FStyleSet::Get().GetWidgetStyle<FRadioButtonsStyle>("WS_RadioButtons_1");
+	}
+
+	Super::NativePreConstruct();
+}
 
 void UMainMenuWidget::NativeConstruct()
 {
@@ -17,6 +29,7 @@ void UMainMenuWidget::NativeConstruct()
 
 	if (NewGame)
 	{
+		
 		NewGame->OnClicked.AddDynamic(this,&UMainMenuWidget::OnNewGameClicked);
 		NewGame->OnHovered.AddDynamic(this, &UMainMenuWidget::OnNewGameHovered);
 		NewGame->OnUnhovered.AddDynamic(this, &UMainMenuWidget::OnNewGameUnhovered);
