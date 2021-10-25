@@ -9,6 +9,9 @@
 #include "InventoryWidget.generated.h"
 
 class UInventoryComponent;
+class UInventoryCellWidget;
+
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnItemUsed, UInventoryCellWidget* /*CellWidget*/)
 
 /**
  * 
@@ -25,6 +28,8 @@ public:
 	void Init(int32 ItemsNum);
 	
 	bool AddItem(const FInventorySlotInfo& Item, const FInventoryItemInfo& ItemInfo, int32 SlotPosition = -1);
+
+
 
 protected:
 
@@ -45,13 +50,20 @@ protected:
 	
 	UInventoryCellWidget* CreateCellWidget();
 
+	void InitCellWidget(UInventoryCellWidget* Widget);
 public:
 	
 	FOnItemDrop OnItemDrop;
+	FOnItemUsed OnItemUsed;
+	UPROPERTY()
+	class UInventoryComponent* RepresentedInventory;
+
+
 
 protected:
 	
 	void OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DroppedTo);
 	
+	void OnItemUsedFunc(UInventoryCellWidget* CellWidget);
 };
 

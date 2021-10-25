@@ -7,6 +7,9 @@
 #include "ActorPoolSubsystem.h"
 #include <GameFramework/PlayerController.h>
 #include "MyHUD.h"
+#include "InventoryManagerComponent.h"
+
+
 
 
 ATankPlayerController::ATankPlayerController()
@@ -131,5 +134,6 @@ void ATankPlayerController::DumpActorPoolSubsystemStats()
 {
     GetWorld()->GetSubsystem<UActorPoolSubsystem>()->DumpPoolStats();
 }
+
 
 

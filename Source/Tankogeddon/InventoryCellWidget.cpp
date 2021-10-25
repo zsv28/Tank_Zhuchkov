@@ -12,6 +12,12 @@ bool UInventoryCellWidget::AddItem(const FInventorySlotInfo& Item, const FInvent
 		return false;
 	}
 
+	if (Item.Count == 0)
+	{
+		Clear();
+		return true;
+	}
+
 	if (ItemImage)
 	{
 		ItemImage->SetBrushFromTexture(ItemInfo.Icon.Get());
@@ -57,9 +63,25 @@ const FInventorySlotInfo& UInventoryCellWidget::GetItem()
 
 FReply UInventoryCellWidget::NativeOnMouseButtonDown(const FGeometry& MovieSceneBlends, const FPointerEvent& InMouseEvent)
 {
-	if (bIsDraggable && bHasItem && InMouseEvent.IsMouseButtonDown(EKeys::LeftMouseButton))
+	if (bIsDraggable && bHasItem)
 	{
-		return UWidgetBlueprintLibrary::DetectDragIfPressed(InMouseEvent, this, EKeys::LeftMouseButton).NativeReply;
+		if (InMouseEvent.IsMouseButtonDown(EKeys::LeftMouseButton))
+		{
+			return UWidgetBlueprintLibrary::DetectDragIfPressed(InMouseEvent, this, EKeys::LeftMouseButton).NativeReply;
+		}
+
+		if (InMouseEvent.IsMouseButtonDown(EKeys::RightMouseButton))
+		{
+			if (StoredItem.Count > 0)
+			{
+				OnItemUse.Broadcast(this);
+			}
+
+			if (--StoredItem.Count <= 0)
+			{
+				Clear();
+			}
+		}
 	}
 	return FReply::Handled();
 }

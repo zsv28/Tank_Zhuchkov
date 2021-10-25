@@ -6,6 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "GameStructs.h"
 #include "DamageTaker.h"
+#include <Components/StaticMeshComponent.h>
 #include "BasePawn.generated.h"
 
 
@@ -19,6 +20,7 @@ class UBoxComponent;
 class UParticleSystem;
 class USoundBase;
 class AAmmoBox;
+
 
 
 
@@ -125,6 +127,10 @@ public:
     UFUNCTION()
     FVector GetEyesPosition();
 
+	UFUNCTION()
+	bool IsPlayerPawn() const;
+
+	
 
 private:
     UPROPERTY()

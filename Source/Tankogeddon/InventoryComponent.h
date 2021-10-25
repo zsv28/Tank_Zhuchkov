@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "InventoryItem.h"
 #include "Components/ActorComponent.h"
+#include "InventoryWidget.h"
 #include "InventoryComponent.generated.h"
 
 
@@ -25,15 +26,16 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	FInventorySlotInfo* GetItem(int32 SlotIndex);
-	void SetItem(int32 SlotIndex, const FInventorySlotInfo& Item);
+	virtual FInventorySlotInfo* GetItem(int32 SlotIndex);
+	virtual void SetItem(int32 SlotIndex, const FInventorySlotInfo& Item);
 	void ClearItem(int32 SlotIndex);
 	const TMap<int32, FInventorySlotInfo>& GetItems() const;
 	int32 GetItemsNum() const; 
+	virtual int32 GetMaxItemAmount(int32 SlotIndex, const FInventoryItemInfo& Item);
 
 protected:
 	
 	UPROPERTY(EditAnywhere)
     TMap<int32, FInventorySlotInfo> Items;
-	
+
 };

@@ -16,6 +16,8 @@
 #include <Engine/TargetPoint.h>
 #include <Kismet/GameplayStatics.h>
 #include "TankogeddonGameModeBase.h"
+#include "EquipInventoryComponent.h"
+#include <GameFramework/Actor.h>
 
 // Sets default values
 ATankPawn::ATankPawn()
@@ -35,6 +37,8 @@ ATankPawn::ATankPawn()
 
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>("Inventory");
 	InventoryManagerComponent = CreateDefaultSubobject<UInventoryManagerComponent>("InventoryManager");
+	EquipmentInventoryComponent = CreateDefaultSubobject<UEquipInventoryComponent>("EquipInventory");
+
 }
 
 void ATankPawn::MoveForward(float AxisValue)
@@ -51,7 +55,9 @@ void ATankPawn::RotateRight(float AxisValue)
 
 void ATankPawn::EnableInventary()
 {
-   InventoryManagerComponent->Init(InventoryComponent);
+   InventoryManagerComponent->InitLocalInventory(InventoryComponent);
+   InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
+
 }
 
 TArray<FVector> ATankPawn::GetPatrollingPoints()
@@ -74,7 +80,16 @@ void ATankPawn::SetPatrollingPoints(const TArray<ATargetPoint*>& NewPatrollingPo
 void ATankPawn::BeginPlay()
 {
 	Super::BeginPlay();
-  
+
+	if (InventoryManagerComponent)
+	{
+		InventoryManagerComponent->InitLocalInventory(InventoryComponent);
+		if (IsPlayerPawn())
+		{
+			InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
+		}
+	}
+
 }
 
 
@@ -151,4 +166,64 @@ void ATankPawn::Die()
     }
 
     Super::Die();
+}
+void ATankPawn::EquipItem(EEquipSlot Slot, FName ItemID)
+{
+    UStaticMeshComponent* EquipComponent = GetEquipComponents(Slot);
+    if (EquipComponent)
+    {
+        FInventoryItemInfo* ItemInfoPtr = InventoryManagerComponent->GetItemData(ItemID);
+        if (ItemInfoPtr)
+        {
+            EquipComponent->SetStaticMesh(ItemInfoPtr->Mesh.LoadSynchronous());
+
+            //Damage += ItemInfoPtr->Damage;
+            //Armor += ItemInfoPtr->Armor;
+            //Intelligence += ItemInfoPtr->Intelligence;
+        }
+    }
+}
+void ATankPawn::UnequipItem(EEquipSlot Slot, FName ItemID)
+{
+	UStaticMeshComponent* EquipComponent = GetEquipComponents(Slot);
+	if (EquipComponent)
+	{
+		EquipComponent->SetStaticMesh(nullptr);
+		/*FInventoryItemInfo* ItemInfoPtr = InventoryManagerComponent->GetItemData(ItemID);
+		if (ItemInfoPtr)
+		{
+			Damage -= ItemInfoPtr->Damage;
+			Armor -= ItemInfoPtr->Armor;
+			Intelligence -= ItemInfoPtr->Intelligence;
+		}*/
+	}
+}
+
+UStaticMeshComponent* ATankPawn::GetEquipComponents(EEquipSlot Slot)
+{
+	FName EquipTag = "";
+
+	switch (Slot)
+	{
+	case EEquipSlot::ES_None:
+		break;
+	case EEquipSlot::ES_Cannon:
+		EquipTag = "Equip_Ñannon";
+		break;
+	case EEquipSlot::ES_Tower:
+		EquipTag = "Equip_Tower";
+		break;
+	case EEquipSlot::ES_Engine:
+		EquipTag = "Equip_Engine";
+		break;
+	case EEquipSlot::ES_TankTrack:
+		EquipTag = "Equip_TankTrack";
+		break;
+	case EEquipSlot::ES_Bullet:
+		EquipTag = "Equip_Bullet";
+		break;
+	}
+
+	TArray<UActorComponent*> Components = GetComponentsByTag(UStaticMeshComponent::StaticClass(), EquipTag);
+	return Components.Num() > 0 ? Cast<UStaticMeshComponent>(Components[0]) : nullptr;
 }

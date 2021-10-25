@@ -2,6 +2,8 @@
 
 
 #include "InventoryComponent.h"
+#include "InventoryManagerComponent.h"
+#include <Blueprint/UserWidget.h>
 
 
 // Sets default values for this component's properties
@@ -57,5 +59,17 @@ const TMap<int32, FInventorySlotInfo>& UInventoryComponent::GetItems() const
 int32 UInventoryComponent::GetItemsNum() const
 {
 	return Items.Num();
+}
+
+
+int32 UInventoryComponent::GetMaxItemAmount(int32 SlotIndex, const FInventoryItemInfo& Item)
+{
+	FInventorySlotInfo* InfoPtr = Items.Find(SlotIndex);
+	if (InfoPtr && InfoPtr->ID != Item.ID)
+	{
+		return 0;
+	}
+	return -1;
+
 }
 

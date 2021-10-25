@@ -2,10 +2,17 @@
 
 
 #include "InventoryWidget.h"
+#include <Blueprint/UserWidget.h>
 
 void UInventoryWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
+
+	for (auto CellWidget : CellWidgets)
+	{
+		InitCellWidget(CellWidget);
+	}
+
 }
 
 void UInventoryWidget::Init(int32 ItemsNum)
@@ -74,14 +81,31 @@ UInventoryCellWidget* UInventoryWidget::CreateCellWidget()
 		UInventoryCellWidget* Cell = CreateWidget<UInventoryCellWidget>(this, CellWidgetClass);
 		CellWidgets.Add(Cell);
 		
-		Cell->OnItemDrop.AddUObject(this, &UInventoryWidget::OnItemDropped);
+		//Cell->OnItemDrop.AddUObject(this, &UInventoryWidget::OnItemDropped);
+		InitCellWidget(Cell);
 		
 		return Cell;
 	}
 	return nullptr;
 }
+void UInventoryWidget::InitCellWidget(UInventoryCellWidget* Cell)
+{
+	if (Cell)
+	{
+		Cell->OnItemDrop.AddUObject(this, &UInventoryWidget::OnItemDropped);
+		Cell->ParentInventoryWidget = this;
+	}
+}
 
 void UInventoryWidget::OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DroppedTo)
 {
 	OnItemDrop.Broadcast(DraggedFrom, DroppedTo);
+}
+
+void UInventoryWidget::OnItemUsedFunc(UInventoryCellWidget* CellWidget)
+{
+	if (CellWidget)
+	{
+		OnItemUsed.Broadcast(CellWidget);
+	}
 }

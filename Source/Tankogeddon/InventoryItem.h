@@ -23,6 +23,17 @@ enum class EItemRarity : uint8
     IR_Legendary
 };
 
+UENUM()
+enum class EEquipSlot : uint8
+{
+    ES_None,
+    ES_Cannon,
+    ES_Tower,
+	ES_Engine,
+    ES_TankTrack,
+    ES_Bullet
+};
+
 USTRUCT(BlueprintType)
 struct FInventoryItemInfo : public FTableRowBase
 {
@@ -44,6 +55,10 @@ public:
     EItemType Type;
     UPROPERTY(EditAnywhere, Category = "Typing")
     EItemRarity Rarity;
+    UPROPERTY(EditAnywhere, Category = "Typing")
+    EEquipSlot EquipSlot;
+
+
 
     // visual representation
     UPROPERTY(EditAnywhere, Category = "Visual")
@@ -53,11 +68,15 @@ public:
 
     // stats
     UPROPERTY(EditAnywhere, Category = "Stats")
-    int32 Damage;
+    int32 DamageStat;
     UPROPERTY(EditAnywhere, Category = "Stats")
-    int32 Armor;
+    int32 ArmorStat;
     UPROPERTY(EditAnywhere, Category = "Stats")
-    int32 Intelligence;
+    int32 IntelligenceStat;
+	/*UPROPERTY(EditAnywhere, Category = "Stats")
+	float AmmoStat;
+	UPROPERTY(EditAnywhere, Category = "Stats")
+	float HealthStat;*/
 };
 
 USTRUCT(BlueprintType)

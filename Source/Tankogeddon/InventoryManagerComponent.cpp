@@ -3,6 +3,8 @@
 
 #include "InventoryManagerComponent.h"
 #include <tuple>
+#include "EquipInventoryWidget.h"
+
 
 
 // Sets default values for this component's properties
@@ -34,7 +36,7 @@ void UInventoryManagerComponent::TickComponent(float DeltaTime, ELevelTick TickT
 	// ...
 }
 
-void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
+void UInventoryManagerComponent::InitLocalInventory(UInventoryComponent* InInventoryComponent)
 {
 	if (InInventoryComponent && InventoryItemsData && InventoryWidgetClass)
 	{
@@ -42,16 +44,19 @@ void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 		{
 			InventoryWidget->RemoveFromViewport();
 		}
-		
+
 		LocalInventoryComponent = InInventoryComponent;
 
 		InventoryWidget = CreateWidget<UInventoryWidget>(GetWorld(), InventoryWidgetClass);
-		
+
+		InventoryWidget->RepresentedInventory = LocalInventoryComponent;
+
 		InventoryWidget->AddToViewport();
 
 		InventoryWidget->Init(FMath::Max(LocalInventoryComponent->GetItemsNum(), MinInventorySize));
 
 		InventoryWidget->OnItemDrop.AddUObject(this, &UInventoryManagerComponent::OnItemDropped);
+
 
 		for (auto& Item : LocalInventoryComponent->GetItems())
 		{
@@ -62,6 +67,43 @@ void UInventoryManagerComponent::Init(UInventoryComponent* InInventoryComponent)
 			}
 		}
 	}
+
+
+
+
+}
+
+bool UInventoryManagerComponent::EquipInventoryWidgetIsVisibled() const
+{
+	return EquipInventoryWidget ? EquipInventoryWidget->IsInViewport() : false;
+}
+
+void UInventoryManagerComponent::SetEquipInventoryWidgetVisible(bool bVisible)
+{
+	if (EquipInventoryWidget)
+	{
+		if (bVisible)
+		{
+			EquipInventoryWidget->AddToViewport();
+		}
+		else
+		{
+			EquipInventoryWidget->RemoveFromViewport();
+		}
+	}
+	return;
+}
+
+void UInventoryManagerComponent::InitEquipment(UInventoryComponent* InInventoryComponent)
+{
+	if (EquipInventoryWidgetClass)
+	{
+		EquipInventoryWidget = CreateWidget<UEquipInventoryWidget>(GetWorld(), EquipInventoryWidgetClass);
+		EquipInventoryWidget->RepresentedInventory = InInventoryComponent;
+
+		EquipInventoryWidget->OnItemDrop.AddUObject(this, &UInventoryManagerComponent::OnItemDropped);
+		EquipInventoryWidget->AddToViewport();
+	}
 }
 
 FInventoryItemInfo* UInventoryManagerComponent::GetItemData(FName ItemID)
@@ -71,16 +113,29 @@ FInventoryItemInfo* UInventoryManagerComponent::GetItemData(FName ItemID)
 
 void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DroppedTo)
 {
-	if (DraggedFrom == nullptr || DroppedTo == nullptr || LocalInventoryComponent == nullptr)
+	if (DraggedFrom == nullptr || DroppedTo == nullptr)
 	{
 		return;
 	}
-	
+
+	UInventoryComponent* FromInventory = DraggedFrom->ParentInventoryWidget->RepresentedInventory;
+	UInventoryComponent* ToInventory = DroppedTo->ParentInventoryWidget->RepresentedInventory;
+
+	if (FromInventory == nullptr || ToInventory == nullptr)
+	{
+		return;
+	}
+
 	LocalInventoryComponent->SetItem(DraggedFrom->IndexInInventory, DroppedTo->GetItem());
 	LocalInventoryComponent->SetItem(DroppedTo->IndexInInventory, DraggedFrom->GetItem());
 
 	FInventorySlotInfo FromSlot = DraggedFrom->GetItem();
 	FInventorySlotInfo ToSlot = DroppedTo->GetItem();
+
+	if (FromSlot.Count <= 0)
+	{
+		return;
+	}
 
 	FInventoryItemInfo* FromInfo = GetItemData(FromSlot.ID);
 	FInventoryItemInfo* ToInfo = GetItemData(ToSlot.ID);
@@ -90,6 +145,25 @@ void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom
 		return;
 	}
 
+	const int32 MaxCount = ToInventory->GetMaxItemAmount(DroppedTo->IndexInInventory, *FromInfo);
+
+	if (MaxCount == 0)
+	{
+		return;
+	}
+	else if (MaxCount > 0)
+	{
+		int32 ItemsToAdd = FMath::Min(MaxCount, FromSlot.Count);
+
+		ToSlot.Count = FromSlot.Count - ItemsToAdd;
+		ToSlot.ID = FromSlot.ID;
+		ToInfo = FromInfo;
+		FromSlot.Count = ItemsToAdd;
+	}
+
+	FromInventory->SetItem(DraggedFrom->IndexInInventory, ToSlot);
+	ToInventory->SetItem(DroppedTo->IndexInInventory, FromSlot);
+	
 	DraggedFrom->Clear();
 	if (ToInfo)
 	{
@@ -98,5 +172,17 @@ void UInventoryManagerComponent::OnItemDropped(UInventoryCellWidget* DraggedFrom
 
 	DroppedTo->Clear();
 	DroppedTo->AddItem(FromSlot, *FromInfo);
+}
+
+void UInventoryManagerComponent::OnItemUsed(UInventoryCellWidget* CellWidget)
+{
+	const auto SlotInfo{ CellWidget->GetItem() };
+	if (const auto ItemInfo = GetItemData(SlotInfo.ID))
+	{
+		if (ItemInfo->Type == EItemType::IT_Consumable)
+		{
+			OnConsumableItemUsed.Broadcast(ItemInfo);
+		}
+	}
 }
 

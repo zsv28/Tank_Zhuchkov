@@ -6,9 +6,12 @@
 #include "DamageTaker.h"
 #include "BasePawn.h"
 #include "Components/SceneCaptureComponent2D.h"
-#include "InventoryManagerComponent.h"
 #include "InventoryComponent.h"
+#include "InventoryWidget.h"
+#include "InventoryManagerComponent.h"
+#include "EquipInventoryComponent.h"
 #include "TankPawn.generated.h"
+
 
 
 
@@ -16,8 +19,10 @@ class USpringArmComponent;
 class UCameraComponent;
 class ATankPlayerController;
 class ATargetPoint;
-class UInventoryManagerComponent;
 class UInventoryComponent;
+class UInventoryManagerComponent;
+class UEquipInventoryComponent;
+
 
 
 
@@ -38,6 +43,15 @@ protected:
 
     UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UCameraComponent* Camera;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Components")
+	UInventoryComponent* InventoryComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Components")
+	UInventoryManagerComponent* InventoryManagerComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Components")
+	UEquipInventoryComponent* EquipmentInventoryComponent;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Speed")
     float MoveSpeed = 100.f;
@@ -63,18 +77,13 @@ protected:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
     TSubclassOf<UMatineeCameraShake> HitShake;
 
-	UPROPERTY(EditDefaultsOnly)
-	UInventoryComponent* InventoryComponent;
-
-	UPROPERTY(EditDefaultsOnly)
-	UInventoryManagerComponent* InventoryManagerComponent;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
     virtual void TargetDestroyed(AActor* Target) override;
     virtual void DamageTaken(float DamageValue) override;
     virtual void Die();
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -85,7 +94,7 @@ public:
     void RotateRight(float AxisValue);
 
 	UFUNCTION(BlueprintCallable)
-	void EnableInventary();
+		void EnableInventary();
 
     UFUNCTION()
     TArray<FVector> GetPatrollingPoints();
@@ -99,6 +108,13 @@ public:
         return MovementAccuracy; 
     };
 
+	virtual void EquipItem(EEquipSlot Slot, FName ItemID);
+
+	virtual void UnequipItem(EEquipSlot Slot, FName ItemID);
+
+	UStaticMeshComponent* GetEquipComponents(EEquipSlot Slot);
+
+	FORCEINLINE UInventoryManagerComponent* GetInventoryManagerComponent() const { return InventoryManagerComponent; }
 private:
     float TargetForwardAxisValue = 0.f;
     float CurrentForwardAxisValue = 0.f;
@@ -106,4 +122,5 @@ private:
     float CurrentRightAxisValue = 0.f;
 
     int32 AccumulatedScores = 0;
+    
 };

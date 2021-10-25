@@ -13,6 +13,7 @@
 #include <Kismet/GameplayStatics.h>
 #include "AmmoBox.h"
 #include "BasePawnAIController.h"
+#include <GameFramework/Actor.h>
 
 
 // Sets default values
@@ -121,6 +122,12 @@ void ABasePawn::CycleCannon()
     }
   
 }
+bool ABasePawn::IsPlayerPawn() const
+{
+	return (Cast<APawn>(this) == GetWorld()->GetFirstPlayerController()->GetPawn());
+}
+
+
 
 ACannon* ABasePawn::GetActiveCannon() const
 {

@@ -11,6 +11,7 @@
 
 class UInventoryWidget;
 DECLARE_MULTICAST_DELEGATE_TwoParams(FOnItemDrop, UInventoryCellWidget* /*from*/, UInventoryCellWidget* /*to*/);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnItemUse, UInventoryCellWidget* /*CellWidget*/);
 
 /**
  * 
@@ -33,6 +34,14 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	int32 IndexInInventory = -1;
+
+	FOnItemDrop OnItemDrop;
+	FOnItemUse OnItemUse;
+
+
+	UPROPERTY()
+	UInventoryWidget* ParentInventoryWidget;
+
     
 protected:
   
@@ -47,10 +56,6 @@ protected:
 	UPROPERTY()
 	FInventorySlotInfo StoredItem;
 
-public:
-
-	FOnItemDrop OnItemDrop;
-
 protected:
 	
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
@@ -59,9 +64,4 @@ protected:
     
 	UPROPERTY(EditDefaultsOnly)
 	bool bIsDraggable = true;
-
-public:
-
-	UPROPERTY()
-	UInventoryWidget* ParentInventoryWidget;
 };

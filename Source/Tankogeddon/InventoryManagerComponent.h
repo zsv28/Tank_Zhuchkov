@@ -3,20 +3,26 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "InventoryComponent.h"
+#include "EquipInventoryWidget.h"
 #include "InventoryWidget.h"
-#include "Components/ActorComponent.h"
+#include "InventoryComponent.h"
+#include <Templates/SubclassOf.h>
 #include "InventoryManagerComponent.generated.h"
 
+class UEquipInventoryWidget;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnConsumableItemUsed, const FInventoryItemInfo* /*ItemInfo*/)
+
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TANKOGEDDON_API UInventoryManagerComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
+
 public:
 	// Sets default values for this component's properties
 	UInventoryManagerComponent();
+	FOnConsumableItemUsed OnConsumableItemUsed;
 
 protected:
 	// Called when the game starts
@@ -26,12 +32,17 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
-	void Init(UInventoryComponent* InInventoryComponent);
+	void InitLocalInventory(UInventoryComponent* InInventoryComponent);
+	void InitEquipment(UInventoryComponent* InInventoryComponent);
 
 	FInventoryItemInfo* GetItemData(FName ItemID);
-
+	void OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DroppedTo);
+	void SetEquipInventoryWidgetVisible(bool bVisible);
+	bool EquipInventoryWidgetIsVisibled() const;
+	void OnItemUsed(UInventoryCellWidget* CellWidget);
 protected:
-	
+
+
 	UPROPERTY()
 	UInventoryComponent* LocalInventoryComponent;
     
@@ -43,10 +54,18 @@ protected:
     
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UInventoryWidget> InventoryWidgetClass;
+
+	UPROPERTY()
+	UEquipInventoryWidget* EquipInventoryWidget;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UEquipInventoryWidget> EquipInventoryWidgetClass;
 	
 	UPROPERTY(EditAnywhere)
 	int32 MinInventorySize = 20;
+
+
 	
-	void OnItemDropped(UInventoryCellWidget* DraggedFrom, UInventoryCellWidget* DroppedTo);
+	
 	
 };
