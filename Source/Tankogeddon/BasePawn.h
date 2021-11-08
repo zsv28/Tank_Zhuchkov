@@ -24,6 +24,7 @@ class AAmmoBox;
 
 
 
+
 UENUM()
 enum class EPlayerGroupID {
 	None,
@@ -127,8 +128,8 @@ public:
     UFUNCTION()
     FVector GetEyesPosition();
 
-	UFUNCTION()
-	bool IsPlayerPawn() const;
+	UFUNCTION(BlueprintCallable)
+	bool IsPawn() const;
 
 	
 

@@ -122,7 +122,7 @@ void ABasePawn::CycleCannon()
     }
   
 }
-bool ABasePawn::IsPlayerPawn() const
+bool ABasePawn::IsPawn() const
 {
 	return (Cast<APawn>(this) == GetWorld()->GetFirstPlayerController()->GetPawn());
 }

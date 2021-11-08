@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "ModulesInventary",
+	"Description": "",
+	"Category": "Other",
+	"CreatedBy": "Zhuchkov S.V.",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "ModulesInventary",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

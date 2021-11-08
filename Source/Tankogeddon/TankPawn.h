@@ -6,10 +6,14 @@
 #include "DamageTaker.h"
 #include "BasePawn.h"
 #include "Components/SceneCaptureComponent2D.h"
-#include "InventoryComponent.h"
-#include "InventoryWidget.h"
-#include "InventoryManagerComponent.h"
+
 #include "EquipInventoryComponent.h"
+#include "InventoryManagerComponent.h"
+#include "InventoryComponent.h"
+#include "InventoryOwner.h"
+#include "QuestList.h"
+#include "QuestListComponent.h"
+
 #include "TankPawn.generated.h"
 
 
@@ -22,14 +26,13 @@ class ATargetPoint;
 class UInventoryComponent;
 class UInventoryManagerComponent;
 class UEquipInventoryComponent;
-
-
-
+class UQuestListComponent;
+class UQuestList;
 
 
 
 UCLASS()
-class TANKOGEDDON_API ATankPawn : public ABasePawn
+class TANKOGEDDON_API ATankPawn : public ABasePawn, public IInventoryOwner
 {
 	GENERATED_BODY()
 
@@ -44,14 +47,24 @@ protected:
     UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
     UCameraComponent* Camera;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Components")
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
 	UInventoryComponent* InventoryComponent;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Components")
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
 	UInventoryManagerComponent* InventoryManagerComponent;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Components")
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
 	UEquipInventoryComponent* EquipmentInventoryComponent;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+    UQuestListComponent* QuestListComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "QuestSystem")
+	TSubclassOf<UQuestList> QuestListClass;
+
+	UPROPERTY()
+    UQuestList* QuestList;
+
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement|Speed")
     float MoveSpeed = 100.f;
@@ -94,7 +107,11 @@ public:
     void RotateRight(float AxisValue);
 
 	UFUNCTION(BlueprintCallable)
-		void EnableInventary();
+	void EnableInventary();
+
+
+	UFUNCTION(BlueprintCallable)
+	void ToggleQuestListVisibility();
 
     UFUNCTION()
     TArray<FVector> GetPatrollingPoints();
@@ -115,6 +132,8 @@ public:
 	UStaticMeshComponent* GetEquipComponents(EEquipSlot Slot);
 
 	FORCEINLINE UInventoryManagerComponent* GetInventoryManagerComponent() const { return InventoryManagerComponent; }
+
+
 private:
     float TargetForwardAxisValue = 0.f;
     float CurrentForwardAxisValue = 0.f;

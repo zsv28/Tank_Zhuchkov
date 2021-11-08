@@ -5,19 +5,19 @@
 #include <Components/StaticMeshComponent.h>
 #include <GameFramework/SpringArmComponent.h>
 #include <Camera/CameraComponent.h>
-#include <Math/UnrealMathUtility.h>
 #include <Kismet/KismetMathLibrary.h>
 #include <Components/ArrowComponent.h>
 #include <Components/BoxComponent.h>
+#include <Engine/TargetPoint.h>
+#include <Kismet/GameplayStatics.h>
+
 #include "Tankogeddon.h"
 #include "Cannon.h"
 #include "HealthComponent.h"
 #include "Scorable.h"
-#include <Engine/TargetPoint.h>
-#include <Kismet/GameplayStatics.h>
+#include <Blueprint/WidgetBlueprintLibrary.h>
 #include "TankogeddonGameModeBase.h"
-#include "EquipInventoryComponent.h"
-#include <GameFramework/Actor.h>
+
 
 // Sets default values
 ATankPawn::ATankPawn()
@@ -39,6 +39,8 @@ ATankPawn::ATankPawn()
 	InventoryManagerComponent = CreateDefaultSubobject<UInventoryManagerComponent>("InventoryManager");
 	EquipmentInventoryComponent = CreateDefaultSubobject<UEquipInventoryComponent>("EquipInventory");
 
+	QuestListComponent = CreateDefaultSubobject<UQuestListComponent>("Quest List Component");
+
 }
 
 void ATankPawn::MoveForward(float AxisValue)
@@ -55,8 +57,39 @@ void ATankPawn::RotateRight(float AxisValue)
 
 void ATankPawn::EnableInventary()
 {
-   InventoryManagerComponent->InitLocalInventory(InventoryComponent);
-   InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
+	if (InventoryManagerComponent)
+	{
+		InventoryManagerComponent->InitLocalInventory(InventoryComponent);
+		if (IsPawn())
+		{
+			InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
+		}
+	}
+}
+
+void ATankPawn::ToggleQuestListVisibility()
+{
+	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+
+	if (QuestList)
+	{
+		QuestList->RemoveFromParent();
+		QuestList = nullptr;
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+		PC->bShowMouseCursor = false;
+	}
+	else
+	{
+		if (QuestListClass)
+		{
+			QuestList = CreateWidget<UQuestList>(GetWorld(), QuestListClass);
+			QuestList->Init(QuestListComponent);
+			QuestList->AddToViewport();
+			UWidgetBlueprintLibrary::SetInputMode_GameAndUI(PC);
+			PC->bShowMouseCursor = true;
+		}
+	}
+
 
 }
 
@@ -84,12 +117,11 @@ void ATankPawn::BeginPlay()
 	if (InventoryManagerComponent)
 	{
 		InventoryManagerComponent->InitLocalInventory(InventoryComponent);
-		if (IsPlayerPawn())
+		if (IsPawn())
 		{
 			InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
 		}
 	}
-
 }
 
 
@@ -227,3 +259,4 @@ UStaticMeshComponent* ATankPawn::GetEquipComponents(EEquipSlot Slot)
 	TArray<UActorComponent*> Components = GetComponentsByTag(UStaticMeshComponent::StaticClass(), EquipTag);
 	return Components.Num() > 0 ? Cast<UStaticMeshComponent>(Components[0]) : nullptr;
 }
+

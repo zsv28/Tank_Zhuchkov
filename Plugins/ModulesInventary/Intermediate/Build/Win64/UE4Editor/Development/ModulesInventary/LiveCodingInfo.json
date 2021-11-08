@@ -1,0 +1,28 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.ModulesInventary.cpp.obj": [
+			"EquipInventoryComponent.cpp.obj",
+			"EquipInventoryWidget.cpp.obj",
+			"InventoryCellWidget.cpp.obj",
+			"InventoryComponent.cpp.obj",
+			"InventoryManagerComponent.cpp.obj",
+			"InventoryOwner.cpp.obj",
+			"InventoryWidget.cpp.obj",
+			"ModulesInventary.cpp.obj",
+			"ModulesInventaryEdMode.cpp.obj",
+			"ModulesInventaryEdModeToolkit.cpp.obj"
+		],
+		"Module.ModulesInventary.gen.cpp.obj": [
+			"EquipInventoryComponent.gen.cpp.obj",
+			"EquipInventoryWidget.gen.cpp.obj",
+			"InventoryCellWidget.gen.cpp.obj",
+			"InventoryComponent.gen.cpp.obj",
+			"InventoryItem.gen.cpp.obj",
+			"InventoryManagerComponent.gen.cpp.obj",
+			"InventoryOwner.gen.cpp.obj",
+			"InventoryWidget.gen.cpp.obj",
+			"ModulesInventary.init.gen.cpp.obj"
+		]
+	}
+}
