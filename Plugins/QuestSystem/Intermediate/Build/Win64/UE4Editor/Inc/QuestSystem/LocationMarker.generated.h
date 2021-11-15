@@ -13,10 +13,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define QUESTSYSTEM_LocationMarker_generated_h
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_SPARSE_DATA
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_RPC_WRAPPERS
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_RPC_WRAPPERS_NO_PURE_DECLS
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_STANDARD_CONSTRUCTORS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_SPARSE_DATA
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_RPC_WRAPPERS
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_RPC_WRAPPERS_NO_PURE_DECLS
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	QUESTSYSTEM_API ULocationMarker(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULocationMarker) \
@@ -29,7 +29,7 @@ private: \
 public:
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_ENHANCED_CONSTRUCTORS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	QUESTSYSTEM_API ULocationMarker(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -42,7 +42,7 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(ULocationMarker); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULocationMarker)
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_GENERATED_UINTERFACE_BODY() \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_GENERATED_UINTERFACE_BODY() \
 private: \
 	static void StaticRegisterNativesULocationMarker(); \
 	friend struct Z_Construct_UClass_ULocationMarker_Statics; \
@@ -51,22 +51,22 @@ public: \
 	DECLARE_SERIALIZER(ULocationMarker)
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_GENERATED_BODY_LEGACY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_GENERATED_BODY_LEGACY \
 		PRAGMA_DISABLE_DEPRECATION_WARNINGS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_GENERATED_UINTERFACE_BODY() \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_STANDARD_CONSTRUCTORS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_GENERATED_UINTERFACE_BODY() \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_STANDARD_CONSTRUCTORS \
 	PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_GENERATED_BODY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_GENERATED_BODY \
 	PRAGMA_DISABLE_DEPRECATION_WARNINGS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_GENERATED_UINTERFACE_BODY() \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_ENHANCED_CONSTRUCTORS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_GENERATED_UINTERFACE_BODY() \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 	PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_INCLASS_IINTERFACE_NO_PURE_DECLS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_INCLASS_IINTERFACE_NO_PURE_DECLS \
 protected: \
 	virtual ~ILocationMarker() {} \
 public: \
@@ -75,7 +75,7 @@ public: \
 	virtual UObject* _getUObject() const { check(0 && "Missing required implementation."); return nullptr; }
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_INCLASS_IINTERFACE \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_INCLASS_IINTERFACE \
 protected: \
 	virtual ~ILocationMarker() {} \
 public: \
@@ -84,23 +84,23 @@ public: \
 	virtual UObject* _getUObject() const { check(0 && "Missing required implementation."); return nullptr; }
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_13_PROLOG
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_26_GENERATED_BODY_LEGACY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_13_PROLOG
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_26_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_SPARSE_DATA \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_RPC_WRAPPERS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_INCLASS_IINTERFACE \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_SPARSE_DATA \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_RPC_WRAPPERS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_INCLASS_IINTERFACE \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_26_GENERATED_BODY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_26_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_SPARSE_DATA \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_INCLASS_IINTERFACE_NO_PURE_DECLS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_SPARSE_DATA \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h_16_INCLASS_IINTERFACE_NO_PURE_DECLS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -108,7 +108,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> QUESTSYSTEM_API UClass* StaticClass<class ULocationMarker>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h
+#define CURRENT_FILE_ID TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_LocationMarker_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

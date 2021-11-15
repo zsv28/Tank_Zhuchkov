@@ -1,0 +1,10 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.AddetQuestActors.cpp.obj": [
+			"AddetQuestActors.cpp.obj",
+			"AddetQuestActorsCommands.cpp.obj",
+			"AddetQuestActorsStyle.cpp.obj"
+		]
+	}
+}

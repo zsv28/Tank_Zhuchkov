@@ -1,0 +1,10 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.backlightMode.cpp.obj": [
+			"backlightMode.cpp.obj",
+			"backlightModeEdMode.cpp.obj",
+			"backlightModeEdModeToolkit.cpp.obj"
+		]
+	}
+}

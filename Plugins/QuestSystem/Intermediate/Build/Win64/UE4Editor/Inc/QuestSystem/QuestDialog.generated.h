@@ -13,20 +13,20 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define QUESTSYSTEM_QuestDialog_generated_h
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_SPARSE_DATA
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_RPC_WRAPPERS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_SPARSE_DATA
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execAcceptQuest); \
 	DECLARE_FUNCTION(execRejectQuest);
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execAcceptQuest); \
 	DECLARE_FUNCTION(execRejectQuest);
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_INCLASS_NO_PURE_DECLS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUQuestDialog(); \
 	friend struct Z_Construct_UClass_UQuestDialog_Statics; \
@@ -35,7 +35,7 @@ public: \
 	DECLARE_SERIALIZER(UQuestDialog)
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_INCLASS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_INCLASS \
 private: \
 	static void StaticRegisterNativesUQuestDialog(); \
 	friend struct Z_Construct_UClass_UQuestDialog_Statics; \
@@ -44,7 +44,7 @@ public: \
 	DECLARE_SERIALIZER(UQuestDialog)
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_STANDARD_CONSTRUCTORS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UQuestDialog(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UQuestDialog) \
@@ -57,7 +57,7 @@ private: \
 public:
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_ENHANCED_CONSTRUCTORS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UQuestDialog(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -70,33 +70,33 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UQuestDialog); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UQuestDialog)
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_PRIVATE_PROPERTY_OFFSET \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__Description() { return STRUCT_OFFSET(UQuestDialog, Description); } \
 	FORCEINLINE static uint32 __PPO__RejectButton() { return STRUCT_OFFSET(UQuestDialog, RejectButton); } \
 	FORCEINLINE static uint32 __PPO__AcceptButton() { return STRUCT_OFFSET(UQuestDialog, AcceptButton); }
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_15_PROLOG
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_GENERATED_BODY_LEGACY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_15_PROLOG
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_PRIVATE_PROPERTY_OFFSET \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_SPARSE_DATA \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_RPC_WRAPPERS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_INCLASS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_STANDARD_CONSTRUCTORS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_PRIVATE_PROPERTY_OFFSET \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_SPARSE_DATA \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_RPC_WRAPPERS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_INCLASS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_GENERATED_BODY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_PRIVATE_PROPERTY_OFFSET \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_SPARSE_DATA \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_INCLASS_NO_PURE_DECLS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_ENHANCED_CONSTRUCTORS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_PRIVATE_PROPERTY_OFFSET \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_SPARSE_DATA \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_INCLASS_NO_PURE_DECLS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h_18_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -104,7 +104,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> QUESTSYSTEM_API UClass* StaticClass<class UQuestDialog>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h
+#define CURRENT_FILE_ID TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestDialog_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

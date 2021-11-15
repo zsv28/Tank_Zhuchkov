@@ -14,29 +14,29 @@ class AActor;
 #endif
 #define QUESTSYSTEM_InteractableObject_generated_h
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_SPARSE_DATA
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_RPC_WRAPPERS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_SPARSE_DATA
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_RPC_WRAPPERS \
 	virtual void Interact_Implementation(AActor* ActorInteractedWithObject) {}; \
  \
 	DECLARE_FUNCTION(execInteract_Implementation); \
 	DECLARE_FUNCTION(execInteract);
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execInteract_Implementation); \
 	DECLARE_FUNCTION(execInteract);
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_EVENT_PARMS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_EVENT_PARMS \
 	struct InteractableObject_eventInteract_Parms \
 	{ \
 		AActor* ActorInteractedWithObject; \
 	};
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_CALLBACK_WRAPPERS
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_STANDARD_CONSTRUCTORS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_CALLBACK_WRAPPERS
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	QUESTSYSTEM_API UInteractableObject(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UInteractableObject) \
@@ -49,7 +49,7 @@ private: \
 public:
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_ENHANCED_CONSTRUCTORS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	QUESTSYSTEM_API UInteractableObject(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -62,7 +62,7 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UInteractableObject); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UInteractableObject)
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_GENERATED_UINTERFACE_BODY() \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_GENERATED_UINTERFACE_BODY() \
 private: \
 	static void StaticRegisterNativesUInteractableObject(); \
 	friend struct Z_Construct_UClass_UInteractableObject_Statics; \
@@ -71,22 +71,22 @@ public: \
 	DECLARE_SERIALIZER(UInteractableObject)
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_GENERATED_BODY_LEGACY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_GENERATED_BODY_LEGACY \
 		PRAGMA_DISABLE_DEPRECATION_WARNINGS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_GENERATED_UINTERFACE_BODY() \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_STANDARD_CONSTRUCTORS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_GENERATED_UINTERFACE_BODY() \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_STANDARD_CONSTRUCTORS \
 	PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_GENERATED_BODY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_GENERATED_BODY \
 	PRAGMA_DISABLE_DEPRECATION_WARNINGS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_GENERATED_UINTERFACE_BODY() \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_ENHANCED_CONSTRUCTORS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_GENERATED_UINTERFACE_BODY() \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_ENHANCED_CONSTRUCTORS \
 private: \
 	PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_INCLASS_IINTERFACE_NO_PURE_DECLS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_INCLASS_IINTERFACE_NO_PURE_DECLS \
 protected: \
 	virtual ~IInteractableObject() {} \
 public: \
@@ -96,7 +96,7 @@ public: \
 	virtual UObject* _getUObject() const { check(0 && "Missing required implementation."); return nullptr; }
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_INCLASS_IINTERFACE \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_INCLASS_IINTERFACE \
 protected: \
 	virtual ~IInteractableObject() {} \
 public: \
@@ -106,28 +106,28 @@ public: \
 	virtual UObject* _getUObject() const { check(0 && "Missing required implementation."); return nullptr; }
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_14_PROLOG \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_EVENT_PARMS
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_14_PROLOG \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_EVENT_PARMS
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_25_GENERATED_BODY_LEGACY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_25_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_SPARSE_DATA \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_RPC_WRAPPERS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_CALLBACK_WRAPPERS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_INCLASS_IINTERFACE \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_SPARSE_DATA \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_RPC_WRAPPERS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_CALLBACK_WRAPPERS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_INCLASS_IINTERFACE \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_25_GENERATED_BODY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_25_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_SPARSE_DATA \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_CALLBACK_WRAPPERS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_INCLASS_IINTERFACE_NO_PURE_DECLS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_SPARSE_DATA \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_CALLBACK_WRAPPERS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h_17_INCLASS_IINTERFACE_NO_PURE_DECLS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -135,7 +135,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> QUESTSYSTEM_API UClass* StaticClass<class UInteractableObject>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h
+#define CURRENT_FILE_ID TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_InteractableObject_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

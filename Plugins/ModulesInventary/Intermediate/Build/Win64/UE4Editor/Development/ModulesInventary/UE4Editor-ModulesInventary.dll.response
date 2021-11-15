@@ -33,10 +33,10 @@
 /NODEFAULTLIB:"LIBCD"
 /NODEFAULTLIB:"LIBCPD"
 /FUNCTIONPADMIN
-"C:\UE-4\Tank_Zhuchkov\Intermediate\Build\Win64\TankogeddonEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
-"C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Module.ModulesInventary.cpp.obj"
-"C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Module.ModulesInventary.gen.cpp.obj"
-"C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Default.rc2.res"
+"C:\UE-4\TankZhuchkov\Intermediate\Build\Win64\TankogeddonEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
+"C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Module.ModulesInventary.cpp.obj"
+"C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Module.ModulesInventary.gen.cpp.obj"
+"C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Default.rc2.res"
 "C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Development\CoreUObject\UE4Editor-CoreUObject.lib"
 "C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\UE4Editor-Engine.lib"
 "C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Development\Slate\UE4Editor-Slate.lib"
@@ -70,8 +70,8 @@
 "setupapi.lib"
 "dwmapi.lib"
 "imm32.lib"
-/OUT:"C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Binaries\Win64\UE4Editor-ModulesInventary.dll"
-/IMPLIB:"C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\UE4Editor-ModulesInventary.suppressed.lib"
-/PDB:"C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Binaries\Win64\UE4Editor-ModulesInventary.pdb"
+/OUT:"C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Binaries\Win64\UE4Editor-ModulesInventary.dll"
+/IMPLIB:"C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\UE4Editor-ModulesInventary.suppressed.lib"
+/PDB:"C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Binaries\Win64\UE4Editor-ModulesInventary.pdb"
 /ignore:4078
 /INCLUDE:IMPLEMENT_MODULE_ModulesInventary

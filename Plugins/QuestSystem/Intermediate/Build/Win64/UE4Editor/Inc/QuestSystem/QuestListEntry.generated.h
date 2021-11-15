@@ -13,18 +13,18 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define QUESTSYSTEM_QuestListEntry_generated_h
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_SPARSE_DATA
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_RPC_WRAPPERS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_SPARSE_DATA
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execSelectQuest);
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execSelectQuest);
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_INCLASS_NO_PURE_DECLS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUQuestListEntry(); \
 	friend struct Z_Construct_UClass_UQuestListEntry_Statics; \
@@ -33,7 +33,7 @@ public: \
 	DECLARE_SERIALIZER(UQuestListEntry)
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_INCLASS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_INCLASS \
 private: \
 	static void StaticRegisterNativesUQuestListEntry(); \
 	friend struct Z_Construct_UClass_UQuestListEntry_Statics; \
@@ -42,7 +42,7 @@ public: \
 	DECLARE_SERIALIZER(UQuestListEntry)
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_STANDARD_CONSTRUCTORS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UQuestListEntry(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UQuestListEntry) \
@@ -55,7 +55,7 @@ private: \
 public:
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_ENHANCED_CONSTRUCTORS \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UQuestListEntry(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -68,33 +68,33 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UQuestListEntry); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UQuestListEntry)
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_PRIVATE_PROPERTY_OFFSET \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__QuestText() { return STRUCT_OFFSET(UQuestListEntry, QuestText); } \
 	FORCEINLINE static uint32 __PPO__SelectQuestButton() { return STRUCT_OFFSET(UQuestListEntry, SelectQuestButton); } \
 	FORCEINLINE static uint32 __PPO__SelectionBorder() { return STRUCT_OFFSET(UQuestListEntry, SelectionBorder); }
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_16_PROLOG
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_GENERATED_BODY_LEGACY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_16_PROLOG
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_PRIVATE_PROPERTY_OFFSET \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_SPARSE_DATA \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_RPC_WRAPPERS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_INCLASS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_STANDARD_CONSTRUCTORS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_PRIVATE_PROPERTY_OFFSET \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_SPARSE_DATA \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_RPC_WRAPPERS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_INCLASS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_GENERATED_BODY \
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_PRIVATE_PROPERTY_OFFSET \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_SPARSE_DATA \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_INCLASS_NO_PURE_DECLS \
-	Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_ENHANCED_CONSTRUCTORS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_PRIVATE_PROPERTY_OFFSET \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_SPARSE_DATA \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_INCLASS_NO_PURE_DECLS \
+	TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h_19_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -102,7 +102,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> QUESTSYSTEM_API UClass* StaticClass<class UQuestListEntry>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID Tank_Zhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h
+#define CURRENT_FILE_ID TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_QuestListEntry_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

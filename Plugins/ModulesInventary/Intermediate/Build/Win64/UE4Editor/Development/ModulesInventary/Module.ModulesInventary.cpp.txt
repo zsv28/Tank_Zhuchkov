@@ -1,11 +1,11 @@
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Definitions.ModulesInventary.h
-C:/UE-4/Tank_Zhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/EquipInventoryComponent.cpp
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\EquipInventoryComponent.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryItem.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryItem.generated.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryComponent.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryWidget.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryCellWidget.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Definitions.ModulesInventary.h
+C:/UE-4/TankZhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/EquipInventoryComponent.cpp
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\EquipInventoryComponent.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryItem.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryItem.generated.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryComponent.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryWidget.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryCellWidget.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Blueprint/UserWidget.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/SlateWrapperTypes.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\SlateWrapperTypes.generated.h
@@ -138,51 +138,51 @@ C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/TextWidgetTypes.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\TextWidgetTypes.generated.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\TextBlock.generated.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryCellWidget.generated.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryCellWidget.generated.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/UniformGridPanel.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/PanelWidget.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/PanelSlot.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\PanelSlot.generated.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\PanelWidget.generated.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\UniformGridPanel.generated.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryWidget.generated.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryComponent.generated.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryOwner.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryOwner.generated.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\EquipInventoryComponent.generated.h
-C:/UE-4/Tank_Zhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/EquipInventoryWidget.cpp
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\EquipInventoryWidget.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\EquipInventoryWidget.generated.h
-C:/UE-4/Tank_Zhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/InventoryCellWidget.cpp
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryWidget.generated.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryComponent.generated.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryOwner.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryOwner.generated.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\EquipInventoryComponent.generated.h
+C:/UE-4/TankZhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/EquipInventoryWidget.cpp
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\EquipInventoryWidget.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\EquipInventoryWidget.generated.h
+C:/UE-4/TankZhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/InventoryCellWidget.cpp
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Blueprint/WidgetBlueprintLibrary.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Blueprint/DragDropOperation.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\DragDropOperation.generated.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Engine\Public\Slate/SGameLayerManager.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Slate\Public\Widgets/SCanvas.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetBlueprintLibrary.generated.h
-C:/UE-4/Tank_Zhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/InventoryComponent.cpp
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryManagerComponent.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryManagerComponent.generated.h
-C:/UE-4/Tank_Zhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/InventoryManagerComponent.cpp
+C:/UE-4/TankZhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/InventoryComponent.cpp
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\InventoryManagerComponent.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Inc\ModulesInventary\InventoryManagerComponent.generated.h
+C:/UE-4/TankZhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/InventoryManagerComponent.cpp
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE\tuple
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE\xutility
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE\utility
-C:/UE-4/Tank_Zhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/InventoryOwner.cpp
-C:/UE-4/Tank_Zhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/InventoryWidget.cpp
-C:/UE-4/Tank_Zhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/ModulesInventary.cpp
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\ModulesInventary.h
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\ModulesInventaryEdMode.h
+C:/UE-4/TankZhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/InventoryOwner.cpp
+C:/UE-4/TankZhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/InventoryWidget.cpp
+C:/UE-4/TankZhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/ModulesInventary.cpp
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\ModulesInventary.h
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\ModulesInventaryEdMode.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Editor\UnrealEd\Public\EdMode.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Editor\UnrealEd\Public\EditorModeRegistry.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Editor\UnrealEd\Public\Tools/UEdMode.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Experimental\InteractiveToolsFramework\Public\InputState.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\InteractiveToolsFramework\InputState.generated.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEd\UEdMode.generated.h
-C:/UE-4/Tank_Zhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/ModulesInventaryEdMode.cpp
-C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\ModulesInventaryEdModeToolkit.h
+C:/UE-4/TankZhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/ModulesInventaryEdMode.cpp
+C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Source\ModulesInventary\Public\ModulesInventaryEdModeToolkit.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Editor\UnrealEd\Public\Toolkits/ToolkitManager.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Editor\UnrealEd\Public\EditorModeManager.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Slate\Public\Widgets/Layout/SWidgetSwitcher.h
-C:/UE-4/Tank_Zhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/ModulesInventaryEdModeToolkit.cpp
+C:/UE-4/TankZhuchkov/Plugins/ModulesInventary/Source/ModulesInventary/Private/ModulesInventaryEdModeToolkit.cpp
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Engine\Classes\Engine/Selection.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\Selection.generated.h

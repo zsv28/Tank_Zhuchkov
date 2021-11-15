@@ -6,9 +6,9 @@
 /NAME:"UE4Editor-ModulesInventary.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\UE-4\Tank_Zhuchkov\Intermediate\Build\Win64\TankogeddonEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
-"C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Module.ModulesInventary.cpp.obj"
-"C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Module.ModulesInventary.gen.cpp.obj"
-"C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Default.rc2.res"
-/OUT:"C:\UE-4\Tank_Zhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\UE4Editor-ModulesInventary.lib"
+"C:\UE-4\TankZhuchkov\Intermediate\Build\Win64\TankogeddonEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
+"C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Module.ModulesInventary.cpp.obj"
+"C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Module.ModulesInventary.gen.cpp.obj"
+"C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\Default.rc2.res"
+/OUT:"C:\UE-4\TankZhuchkov\Plugins\ModulesInventary\Intermediate\Build\Win64\UE4Editor\Development\ModulesInventary\UE4Editor-ModulesInventary.lib"
 /INCLUDE:IMPLEMENT_MODULE_ModulesInventary

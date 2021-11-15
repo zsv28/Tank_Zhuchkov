@@ -13,14 +13,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define MODULESINVENTARY_InventoryItem_generated_h
 
-#define Tank_Zhuchkov_Plugins_ModulesInventary_Source_ModulesInventary_Public_InventoryItem_h_85_GENERATED_BODY \
+#define TankZhuchkov_Plugins_ModulesInventary_Source_ModulesInventary_Public_InventoryItem_h_85_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FInventorySlotInfo_Statics; \
 	MODULESINVENTARY_API static class UScriptStruct* StaticStruct();
 
 
 template<> MODULESINVENTARY_API UScriptStruct* StaticStruct<struct FInventorySlotInfo>();
 
-#define Tank_Zhuchkov_Plugins_ModulesInventary_Source_ModulesInventary_Public_InventoryItem_h_40_GENERATED_BODY \
+#define TankZhuchkov_Plugins_ModulesInventary_Source_ModulesInventary_Public_InventoryItem_h_40_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FInventoryItemInfo_Statics; \
 	MODULESINVENTARY_API static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -29,7 +29,7 @@ template<> MODULESINVENTARY_API UScriptStruct* StaticStruct<struct FInventorySlo
 template<> MODULESINVENTARY_API UScriptStruct* StaticStruct<struct FInventoryItemInfo>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID Tank_Zhuchkov_Plugins_ModulesInventary_Source_ModulesInventary_Public_InventoryItem_h
+#define CURRENT_FILE_ID TankZhuchkov_Plugins_ModulesInventary_Source_ModulesInventary_Public_InventoryItem_h
 
 
 #define FOREACH_ENUM_EEQUIPSLOT(op) \

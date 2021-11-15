@@ -29,11 +29,13 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
 	UFUNCTION(BlueprintCallable, CallInEditor)
 	void AddLocationObjective();
 
 	UFUNCTION(BlueprintCallable, CallInEditor)
 	void AddInteractObjective();
+
 	void OnObjectiveCompleted(UObjective* Objective);
 public:	
 	// Called every frame

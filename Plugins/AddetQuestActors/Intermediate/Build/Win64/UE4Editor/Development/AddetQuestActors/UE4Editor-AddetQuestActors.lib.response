@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-AddetQuestActors.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\UE-4\TankZhuchkov\Intermediate\Build\Win64\TankogeddonEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
+"C:\UE-4\TankZhuchkov\Plugins\AddetQuestActors\Intermediate\Build\Win64\UE4Editor\Development\AddetQuestActors\Module.AddetQuestActors.cpp.obj"
+"C:\UE-4\TankZhuchkov\Plugins\AddetQuestActors\Intermediate\Build\Win64\UE4Editor\Development\AddetQuestActors\Default.rc2.res"
+/OUT:"C:\UE-4\TankZhuchkov\Plugins\AddetQuestActors\Intermediate\Build\Win64\UE4Editor\Development\AddetQuestActors\UE4Editor-AddetQuestActors.lib"
+/INCLUDE:IMPLEMENT_MODULE_AddetQuestActors
