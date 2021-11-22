@@ -14,6 +14,8 @@
 #include "AmmoBox.h"
 #include "BasePawnAIController.h"
 #include <GameFramework/Actor.h>
+#include "MySaveGame.h"
+
 
 
 // Sets default values
@@ -60,15 +62,16 @@ void ABasePawn::BeginPlay()
 
 void ABasePawn::Destroyed()
 {
-    if (ActiveCannon)
-    {
-        ActiveCannon->Destroy();
-    }
+	if (ActiveCannon)
+	{
+		ActiveCannon->Destroy();
+	}
 
-    if (InactiveCannon)
-    {
-        InactiveCannon->Destroy();
-    }
+	if (InactiveCannon)
+	{
+		InactiveCannon->Destroy();
+	}
+
 }
 
 void ABasePawn::TargetDestroyed(AActor* Target)
@@ -78,15 +81,15 @@ void ABasePawn::TargetDestroyed(AActor* Target)
 
 void ABasePawn::Fire()
 {
-    if (ActiveCannon)
-    {
-        ActiveCannon->Fire();
-    }
+	if (ActiveCannon && ActiveCannon->IsReadyToFire())
+	{
+		ActiveCannon->Fire();
+	}
 }
 
 void ABasePawn::FireSpecial()
 {
-    if (ActiveCannon)
+    if (ActiveCannon && ActiveCannon->IsReadyToFire())
     {
         ActiveCannon->FireSpecial();
     }
@@ -94,6 +97,12 @@ void ABasePawn::FireSpecial()
 
 void ABasePawn::SetupCannon(TSubclassOf<ACannon> InCannonClass)
 {
+
+	if (!InCannonClass)
+	{
+		return;
+	}
+
     if (ActiveCannon)
     {
         ActiveCannon->Destroy();
@@ -106,6 +115,8 @@ void ABasePawn::SetupCannon(TSubclassOf<ACannon> InCannonClass)
     ActiveCannon = GetWorld()->SpawnActor<ACannon>(InCannonClass, Params);
     ActiveCannon->AttachToComponent(CannonSetupPoint, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
     ActiveCannon->OnDestroyedTarget.AddUObject(this, &ABasePawn::TargetDestroyed);
+
+
 }
 
 void ABasePawn::CycleCannon()
@@ -180,6 +191,39 @@ void ABasePawn::SetTurretTarget(FVector TargetPosition)
 FVector ABasePawn::GetEyesPosition()
 {
     return CannonSetupPoint->GetComponentLocation();
+}
+
+void ABasePawn::SaveState(UPawnSaveData* SaveDataPawn) const
+{
+	if (SaveDataPawn)
+	{
+        SaveDataPawn->BasePawnClass = this->GetClass();
+        SaveDataPawn->CurrentHealth = HealthComponent->GetHealth();
+        SaveDataPawn->MaxHealth = HealthComponent->GetMaxHealth();
+		if (ActiveCannon)
+		{
+            SaveDataPawn->CurrentAmmo = ActiveCannon->GetCurrentAmmo();
+            SaveDataPawn->MaxAmmo = ActiveCannon->GetMaxAmmo();
+		}
+        SaveDataPawn->PlayerTransform = GetActorTransform();
+
+	}
+
+}
+
+void ABasePawn::LoadState(const UPawnSaveData* LoadDataPawn)
+{
+	if (LoadDataPawn)
+	{
+		HealthComponent->SetHealth(LoadDataPawn->CurrentHealth);
+		HealthComponent->SetMaxHealth(LoadDataPawn->MaxHealth);
+		if (ActiveCannon)
+		{
+			ActiveCannon->SetAmmo(LoadDataPawn->CurrentAmmo);
+			ActiveCannon->SetMaxAmmo(LoadDataPawn->MaxAmmo);
+		}
+		SetActorTransform(LoadDataPawn->PlayerTransform, false, nullptr, ETeleportType::TeleportPhysics);
+	}
 }
 
 void ABasePawn::Die()

@@ -50,7 +50,7 @@ protected:
     float FireRange = 1000.f;
     
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
-	int32 NumAmmo = 0;
+	int32 CurrentAmmo = 0;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Fire params")
     int32 MaxAmmo = 10;
@@ -83,9 +83,12 @@ public:
 
     bool IsReadyToFire() const;
     bool HasSpecialFire() const;
-
     void SetVisibility(bool bIsVisible);
     void AddAmmo(int32 InNumAmmo);
+    int32 GetCurrentAmmo()const;
+    int32 GetMaxAmmo() const;
+	void SetAmmo(int32 Ammo);
+	void SetMaxAmmo(int MaxAmmo);
 
     DECLARE_MULTICAST_DELEGATE_OneParam(FOnDestoyedTarget, AActor*);
     FOnDestoyedTarget OnDestroyedTarget;

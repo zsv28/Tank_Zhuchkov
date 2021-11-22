@@ -51,9 +51,24 @@ float UHealthComponent::GetHealth() const
 	return CurrentHealth;
 }
 
+float UHealthComponent::GetMaxHealth() const
+{
+	return MaxHealth;
+}
+
 float UHealthComponent::GetHealthState() const
 {
 	return CurrentHealth / MaxHealth;
+}
+
+void UHealthComponent::SetHealth(float HealthValue)
+{
+	CurrentHealth = FMath::Clamp(HealthValue, 0.f, MaxHealth);
+}
+
+void UHealthComponent::SetMaxHealth(float HealthValue)
+{
+	MaxHealth = FMath::Clamp(HealthValue, CurrentHealth, HealthValue);
 }
 
 void UHealthComponent::AddHealth(float AddiditionalHealthValue)

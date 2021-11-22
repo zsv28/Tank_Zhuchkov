@@ -50,7 +50,7 @@ void ACannon::Fire()
     }
 
     bReadyToFire = false;
-    --NumAmmo;
+    --CurrentAmmo;
     ShotsLeft = NumShotsInSeries;
     Shot();
     
@@ -74,7 +74,7 @@ void ACannon::Fire()
     }
 
 
-    UE_LOG(LogTankogeddon, Log, TEXT("Fire! Ammo left: %d"), NumAmmo);
+    UE_LOG(LogTankogeddon, Log, TEXT("Fire! Ammo left: %d"), CurrentAmmo);
 }
 
 void ACannon::FireSpecial()
@@ -85,7 +85,7 @@ void ACannon::FireSpecial()
     }
 
     bReadyToFire = false;
-    --NumAmmo;
+    --CurrentAmmo;
 
     if (Type == ECannonType::FireProjectile)
     {
@@ -97,12 +97,12 @@ void ACannon::FireSpecial()
     }
 
     GetWorld()->GetTimerManager().SetTimer(ReloadTimerHandle, this, &ACannon::Reload, 1.f / FireRate, false);
-    UE_LOG(LogTankogeddon, Log, TEXT("FireSpecial! Ammo left: %d"), NumAmmo);
+    UE_LOG(LogTankogeddon, Log, TEXT("FireSpecial! Ammo left: %d"), CurrentAmmo);
 }
 
 bool ACannon::IsReadyToFire() const
 {
-    return bReadyToFire && NumAmmo > 0 && ShotsLeft == 0;
+    return bReadyToFire && CurrentAmmo > 0 && ShotsLeft == 0;
 }
 
 bool ACannon::HasSpecialFire() const
@@ -117,8 +117,29 @@ void ACannon::SetVisibility(bool bIsVisible)
 
 void ACannon::AddAmmo(int32 InNumAmmo)
 {
-    NumAmmo = FMath::Clamp(NumAmmo + InNumAmmo, 0, MaxAmmo);
-    UE_LOG(LogTankogeddon, Log, TEXT("AddAmmo(%d)! NumAmmo: %d"), InNumAmmo, NumAmmo);
+    CurrentAmmo = FMath::Clamp(CurrentAmmo + InNumAmmo, 0, MaxAmmo);
+    UE_LOG(LogTankogeddon, Log, TEXT("AddAmmo(%d)! NumAmmo: %d"), InNumAmmo, CurrentAmmo);
+}
+
+
+int32 ACannon::GetCurrentAmmo() const
+{
+    return CurrentAmmo;
+}
+
+int32 ACannon::GetMaxAmmo() const
+{
+    return MaxAmmo;
+}
+
+void ACannon::SetAmmo(int32 Ammo)
+{
+    CurrentAmmo = FMath::Clamp(Ammo, 0, MaxAmmo);
+}
+
+void ACannon::SetMaxAmmo(int AmmoMax)
+{
+    MaxAmmo = FMath::Clamp(AmmoMax, CurrentAmmo, AmmoMax);
 }
 
 // Called when the game starts or when spawned
@@ -128,7 +149,7 @@ void ACannon::BeginPlay()
 	
     bReadyToFire = true;
     ShotsLeft = 0;
-    NumAmmo = MaxAmmo;
+    CurrentAmmo = MaxAmmo;
 }
 
 void ACannon::EndPlay(const EEndPlayReason::Type EndPlayReason)

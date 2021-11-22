@@ -133,7 +133,6 @@ public:
 
 	FORCEINLINE UInventoryManagerComponent* GetInventoryManagerComponent() const { return InventoryManagerComponent; }
 
-
 private:
     float TargetForwardAxisValue = 0.f;
     float CurrentForwardAxisValue = 0.f;

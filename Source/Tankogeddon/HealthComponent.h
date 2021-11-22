@@ -39,8 +39,10 @@ public:
     bool TakeDamage(FDamageData DamageData);
 
     float GetHealth() const;
-
+    float GetMaxHealth() const;
     float GetHealthState() const;
 
+	void SetHealth(float HealthValue);
+	void SetMaxHealth(float HealthValue);
     void AddHealth(float AddiditionalHealthValue);
 };

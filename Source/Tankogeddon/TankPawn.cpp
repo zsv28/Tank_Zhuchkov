@@ -85,7 +85,7 @@ void ATankPawn::ToggleQuestListVisibility()
 			QuestList = CreateWidget<UQuestList>(GetWorld(), QuestListClass);
 			QuestList->Init(QuestListComponent);
 			QuestList->AddToViewport();
-			UWidgetBlueprintLibrary::SetInputMode_GameAndUI(PC);
+			UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
 			PC->bShowMouseCursor = true;
 		}
 	}
@@ -114,14 +114,14 @@ void ATankPawn::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (InventoryManagerComponent)
-	{
-		InventoryManagerComponent->InitLocalInventory(InventoryComponent);
-		if (IsPawn())
-		{
-			InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
-		}
-	}
+	//if (InventoryManagerComponent)
+	//{
+	//	InventoryManagerComponent->InitLocalInventory(InventoryComponent);
+	//	if (IsPawn())
+	//	{
+	//		InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
+	//	}
+	//}
 }
 
 
@@ -138,7 +138,7 @@ void ATankPawn::DamageTaken(float DamageValue)
 {
     Super::DamageTaken(DamageValue);
 
-    if (this == GetWorld()->GetFirstPlayerController()->GetPawn())
+    if (IsPawn())
     {
         if (HitForceEffect)
         {
@@ -189,9 +189,8 @@ void ATankPawn::Tick(float DeltaTime)
 
 void ATankPawn::Die()
 {
-    bool IsPlayerPawn = Cast<APawn>(this) == GetWorld()->GetFirstPlayerController()->GetPawn();
     
-    if (IsPlayerPawn)
+    if (IsPawn())
     {
         auto CurrentGameMode = Cast<ATankogeddonGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
         CurrentGameMode->OnPawnDie();

@@ -116,6 +116,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable)
+	bool IsPawn() const;
+
     UFUNCTION()
     FVector GetTurretForwardVector();
 
@@ -128,10 +131,11 @@ public:
     UFUNCTION()
     FVector GetEyesPosition();
 
-	UFUNCTION(BlueprintCallable)
-	bool IsPawn() const;
+	UFUNCTION()
+	virtual void SaveState(UPawnSaveData* SaveDataPawn) const;
 
-	
+	UFUNCTION()
+	virtual void LoadState(const UPawnSaveData* LoadDataPawn);
 
 private:
     UPROPERTY()
