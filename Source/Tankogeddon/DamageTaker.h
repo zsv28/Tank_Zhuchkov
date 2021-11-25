@@ -24,5 +24,5 @@ class TANKOGEDDON_API IDamageTaker
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	// Returns true if damage taker was destroyed
-	virtual bool TakeDamage(FDamageData DamageData) = 0;
+	virtual void TakeDamage(FDamageData& DamageData) = 0;
 };

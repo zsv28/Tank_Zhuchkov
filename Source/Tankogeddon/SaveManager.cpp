@@ -4,15 +4,32 @@
 #include "SaveManager.h"
 #include <Kismet/GameplayStatics.h>
 #include "MySaveGame.h"
-#include "HealthComponent.h"
 #include "TankPawn.h"
 #include "MyGameInstance.h"
 #include "BasePawn.h"
+#include "QuestListComponent.h"
+#include "Quest.h"
+
 
 
 void USaveManager::Init()
 {
 	CurrentSave = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(UMySaveGame::StaticClass()));
+
+	ExistingSavedSlots.Empty();
+	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
+	const FString FilePath = FPaths::Combine(FPaths::ProjectContentDir(),
+	                                         ExistingSavedSlotsFilePath);
+	if (PlatformFile.FileExists(*FilePath))
+	{
+		FString ExistingSavingsArray;
+		if (FFileHelper::LoadFileToString(ExistingSavingsArray, *FilePath))
+		{
+			ExistingSavingsArray.ParseIntoArray(ExistingSavedSlots, TEXT(","));
+		}
+	}
+
+
 }
 
 bool USaveManager::IsSaveGameExist(const FString& SlotName)
@@ -22,17 +39,17 @@ bool USaveManager::IsSaveGameExist(const FString& SlotName)
 
 void USaveManager::LoadGame(const FString& SlotName)
 {
-
-	UMyGameInstance* MyGameInstance = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	TArray<AActor*> FoundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ABasePawn::StaticClass(), FoundActors);
-	UMySaveGame* LoadData = MyGameInstance->SaveManager->GetCurrentSave();
+	UMySaveGame* LoadDataGame = GetCurrentSave();
 	
-	if (!LoadData)
+	if (!LoadDataGame)
 	{
 		return;
 	}
-	
+	FString FileGame;
+	FileLoadGame(SlotName, FileGame);
+	LoadDataGame->LoadData(FileGame);
 	for (const auto Actor : FoundActors)
 	{
 		ABasePawn* Pawn = Cast<ABasePawn>(Actor);
@@ -43,12 +60,17 @@ void USaveManager::LoadGame(const FString& SlotName)
 		}
 		else
 		{
-			Pawn->LoadState(LoadData->TankPlayer);
+			Pawn->LoadState(LoadDataGame->TankPlayer);
+			UQuestListComponent* QuestListComponent = Cast<UQuestListComponent>((Pawn->GetComponentByClass(UQuestListComponent::StaticClass())));
+			if (QuestListComponent)
+			{
+				QuestListComponent->SetActiveQuest(LoadDataGame->Quest);
+			}
 		}
 	}
 
 	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(GetWorld());
-	for (auto LoadPawn : LoadData->EnemyPlayer)
+	for (auto LoadPawn : LoadDataGame->EnemyPlayer)
 	{
 		FActorSpawnParameters SpawnParameters;
 		SpawnParameters.bNoFail = true;
@@ -62,39 +84,52 @@ void USaveManager::LoadGame(const FString& SlotName)
 	{
 		return;
 	}
-
+	
 	UGameplayStatics::AsyncLoadGameFromSlot(SlotName, 0,FAsyncLoadGameFromSlotDelegate::CreateUObject (this,&USaveManager::OnGameLoadedHandle));
 }
 
 void USaveManager::SaveCurrentGame(const FString& SlotName)
 {
-	UMyGameInstance* MyGameInstance = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	TArray<AActor*> FoundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ABasePawn::StaticClass(), FoundActors);
-	UMySaveGame* SaveData =  MyGameInstance->SaveManager->GetCurrentSave();
+	UMySaveGame* SaveDataGame =  GetCurrentSave();
 
-	if (!SaveData)
+	if (!SaveDataGame)
 	{
 		return;
 	}
 
-	SaveData->EnemyPlayer.Empty();
+	SaveDataGame->EnemyPlayer.Empty();
+	SaveDataGame->QuestsArray.Empty();
 	for (const auto Actor : FoundActors)
 	{
-		ABasePawn* Pawn = Cast<ABasePawn>(Actor);
-		
-		if (Pawn->IsPawn())
+		if (AQuest* Quests = Cast<AQuest>(Actor))
 		{
-			Pawn->SaveState(SaveData->TankPlayer);
+			SaveDataGame->QuestsArray.AddUnique(Quests);
+			
 		}
-		else
+		else if (ABasePawn* Pawn = Cast<ABasePawn>(Actor))
 		{
-			UPawnSaveData* EnemyPlayerSaveData = NewObject<UPawnSaveData>();
-			Pawn->SaveState(EnemyPlayerSaveData);
-			SaveData->EnemyPlayer.Add(EnemyPlayerSaveData);
+
+			if (Pawn->IsPawn())
+			{
+				Pawn->SaveState(SaveDataGame->TankPlayer);
+
+				UQuestListComponent* QuestListComponent = Cast<UQuestListComponent>((Pawn->GetComponentByClass(UQuestListComponent::StaticClass())));
+				if (QuestListComponent)
+				{
+					SaveDataGame->Quest = QuestListComponent->GetActiveQuest();
+				}
+			}
+			else
+			{
+				UPawnSaveData* EnemyPlayerSaveData = NewObject<UPawnSaveData>();
+				Pawn->SaveState(EnemyPlayerSaveData);
+				SaveDataGame->EnemyPlayer.Add(EnemyPlayerSaveData);
+			}
 		}
 	}
-
+	FileSaveGame(SlotName, SaveDataGame->SaveData());
 	UGameplayStatics::AsyncSaveGameToSlot(CurrentSave, SlotName, 0, FAsyncSaveGameToSlotDelegate::CreateUObject(this, &USaveManager::OnGameSavedHandle));
 }
 
@@ -107,5 +142,39 @@ void USaveManager::OnGameLoadedHandle(const FString& SlotName, const int32 UserI
 void USaveManager::OnGameSavedHandle(const FString& SlotName, const int32 UserIndex, bool bSuccess)
 {
 	
+	if (!ExistingSavedSlots.Contains(SlotName))
+	{
+		ExistingSavedSlots.AddUnique(SlotName);
+		CacheExistingSavedSlotsInfo();
+
+	}
+
 	OnGameSaved.Broadcast(SlotName);
+}
+
+void USaveManager::CacheExistingSavedSlotsInfo()
+{
+	const FString FilePath = FPaths::Combine(FPaths::ProjectContentDir(), ExistingSavedSlotsFilePath);
+
+	FString ExistingSavingsArray = "";
+	for (const FString& Slot : ExistingSavedSlots)
+	{
+		ExistingSavingsArray += Slot + ",";
+	}
+
+	FFileHelper::SaveStringToFile(ExistingSavingsArray, *FilePath, FFileHelper::EEncodingOptions::ForceUnicode, &IFileManager::Get(), FILEWRITE_EvenIfReadOnly);
+}
+void USaveManager::FileSaveGame(const FString& SlotName, const FString& Text)
+{
+	const FString FilePath = FPaths::Combine(FPaths::ProjectSavedDir(), SlotName + ".sav");
+
+	FFileHelper::SaveStringToFile(Text, *FilePath, FFileHelper::EEncodingOptions::ForceUnicode, &IFileManager::Get(), FILEWRITE_EvenIfReadOnly);
+}
+
+void USaveManager::FileLoadGame(const FString& SlotName, FString& Text) const
+{
+	const FString FilePath = FPaths::Combine(FPaths::ProjectSavedDir(), SlotName + ".sav");
+
+	FFileHelper::LoadFileToString(Text, *FilePath);
+
 }

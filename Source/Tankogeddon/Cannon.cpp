@@ -211,7 +211,8 @@ void ACannon::Shot()
                     DamageData.DamageValue = FireDamage;
                     DamageData.DamageMaker = this;
                     DamageData.Instigator = MyInstigator;
-                    bWasTargetDestroyed = DamageTaker->TakeDamage(DamageData);
+                    DamageTaker->TakeDamage(OUT DamageData);
+                    bWasTargetDestroyed = DamageData.bOutIsFatalDamage;
                 }
             }
 

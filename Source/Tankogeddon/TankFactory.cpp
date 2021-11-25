@@ -50,7 +50,7 @@ ATankFactory::ATankFactory()
     HealthComponent->OnDamaged.AddDynamic(this, &ATankFactory::DamageTaked);
 }
 
-bool ATankFactory::TakeDamage(FDamageData DamageData)
+void ATankFactory::TakeDamage(FDamageData& DamageData)
 {
     return HealthComponent->TakeDamage(DamageData);
 }

@@ -22,7 +22,6 @@ AQuest::AQuest()
 void AQuest::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 // Called every frame
@@ -89,18 +88,22 @@ void AQuest::OnObjectiveCompleted(UObjective* Objective)
 	OnQuestStatusUpdated.Broadcast(this);
 
 }
+bool AQuest::IsVisible() const
+{
+	return InfoComponent->IsVisible();
+}
 
 void AQuest::SetVisibility(bool bActive)
 {
 	InfoComponent->SetVisibility(bActive);
 }
 
-FText AQuest::GetName()
+FText AQuest::GetName() const
 {
 	return Name;
 }
 
-FText AQuest::GetDescription()
+FText AQuest::GetDescription() const
 {
 	return Descrition;
 }

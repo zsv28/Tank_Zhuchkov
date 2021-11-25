@@ -8,8 +8,9 @@
 #include <GameFramework/PlayerController.h>
 #include "MyHUD.h"
 #include "InventoryManagerComponent.h"
+#include "TankWidget.h"
 
-
+#define GET_HUD Cast<AMyHUD>(GetHUD())
 
 
 ATankPlayerController::ATankPlayerController()
@@ -76,8 +77,14 @@ void ATankPlayerController::BeginPlay()
 {
     Super::BeginPlay();
 
-    GetMousePosition(LastFrameMousePosition.X, LastFrameMousePosition.Y);
     TankPawn = Cast<ATankPawn>(GetPawn());
+
+	if (auto HUD = GET_HUD)
+	{
+		HUD->UseWidget(EWidgetID::WI_PawnHealth);
+	}
+
+	SetTickableWhenPaused(false);
 }
 
 void ATankPlayerController::MoveForward(float AxisValue)
@@ -133,6 +140,20 @@ void ATankPlayerController::OnLeftMouseButtonDown()
 void ATankPlayerController::DumpActorPoolSubsystemStats()
 {
     GetWorld()->GetSubsystem<UActorPoolSubsystem>()->DumpPoolStats();
+}
+
+void ATankPlayerController::SetHealthWidgetValue(int32 CurrentHealth, int32 MaxHealth)
+{
+	if (auto HUD = GET_HUD)
+	{
+		if (HUD->GetCurrentWidgetId() == EWidgetID::WI_PawnHealth)
+		{
+			if (auto PlayerTankWidget = Cast<UTankWidget>(HUD->GetCurrentWidget()))
+			{
+				PlayerTankWidget->UpdateHealthBar(CurrentHealth, MaxHealth);
+			}
+		}
+	}
 }
 
 

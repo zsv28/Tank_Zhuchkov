@@ -4,8 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include <Components/ProgressBar.h>
 #include "HpBarWidget.generated.h"
+
+class UProgressBar;
 
 /**
  * 
@@ -20,5 +21,5 @@ protected:
 	UProgressBar* MainBar;
 
 public:
-	void SetHP(float CurrentHealth, float MaxHealth);
+	void SetHP(float CurrentHealth, float MaxHealth) const;
 };

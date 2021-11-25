@@ -15,7 +15,6 @@ public class Tankogeddon : ModuleRules
 			"InputCore", 
 			"UMG", 
 			"Slate", 
-			"SlateCore",
 			"ModulesInventary",
 			"MediaAssets",
 			"DesktopPlatform",

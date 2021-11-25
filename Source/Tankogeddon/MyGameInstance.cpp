@@ -8,9 +8,6 @@
 void UMyGameInstance::Init()
 {
 	Super::Init();
-
-	GLog->Log(ELogVerbosity::Warning, TEXT("MyGameInstance::Init() success"));
-
 	SaveManager = NewObject<USaveManager>(this);
 	SaveManager->Init();
 }

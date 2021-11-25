@@ -18,8 +18,11 @@ class UObjective;
 #define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_Quest_h_23_SPARSE_DATA
 #define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_Quest_h_23_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execGetDescription); \
+	DECLARE_FUNCTION(execGetName); \
 	DECLARE_FUNCTION(execGetPrerquisedQuest); \
 	DECLARE_FUNCTION(execUpdateLocation); \
+	DECLARE_FUNCTION(execKeepObjectivesOrder); \
 	DECLARE_FUNCTION(execGetObjectives); \
 	DECLARE_FUNCTION(execAddInteractObjective); \
 	DECLARE_FUNCTION(execAddLocationObjective);
@@ -27,8 +30,11 @@ class UObjective;
 
 #define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_Quest_h_23_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execGetDescription); \
+	DECLARE_FUNCTION(execGetName); \
 	DECLARE_FUNCTION(execGetPrerquisedQuest); \
 	DECLARE_FUNCTION(execUpdateLocation); \
+	DECLARE_FUNCTION(execKeepObjectivesOrder); \
 	DECLARE_FUNCTION(execGetObjectives); \
 	DECLARE_FUNCTION(execAddInteractObjective); \
 	DECLARE_FUNCTION(execAddLocationObjective);
@@ -76,11 +82,7 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AQuest); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AQuest)
 
 
-#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_Quest_h_23_PRIVATE_PROPERTY_OFFSET \
-	FORCEINLINE static uint32 __PPO__Name() { return STRUCT_OFFSET(AQuest, Name); } \
-	FORCEINLINE static uint32 __PPO__Descrition() { return STRUCT_OFFSET(AQuest, Descrition); }
-
-
+#define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_Quest_h_23_PRIVATE_PROPERTY_OFFSET
 #define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_Quest_h_20_PROLOG
 #define TankZhuchkov_Plugins_QuestSystem_Source_QuestSystem_Public_Quest_h_23_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \

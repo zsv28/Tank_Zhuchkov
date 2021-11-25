@@ -5,9 +5,11 @@
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
 #include "BasePawn.h"
+#include "Quest.h"
 #include "MySaveGame.generated.h"
 
 class ABasePawn;
+class AQuest;
 
 
 
@@ -52,6 +54,16 @@ public:
 
 	UPROPERTY(BlueprintReadWrite)
 	TArray<UPawnSaveData*> EnemyPlayer;
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<AQuest*> QuestsArray;
+
+	UPROPERTY(BlueprintReadWrite)
+	AQuest* Quest;
+
+	FString SaveData() const;
+
+	void LoadData(const FString& File) const;
 
 
 };

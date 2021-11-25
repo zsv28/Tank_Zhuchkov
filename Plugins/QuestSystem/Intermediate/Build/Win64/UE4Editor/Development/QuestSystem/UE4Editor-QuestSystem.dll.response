@@ -34,7 +34,12 @@
 /NODEFAULTLIB:"LIBCPD"
 /FUNCTIONPADMIN
 "C:\UE-4\TankZhuchkov\Intermediate\Build\Win64\TankogeddonEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
+"C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\QuestSystem\CurrentObjectives.cpp.obj"
+"C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\QuestSystem\Quest.cpp.obj"
+"C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\QuestSystem\QuestSystemCharacter.cpp.obj"
 "C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\QuestSystem\Module.QuestSystem.cpp.obj"
+"C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\QuestSystem\Quest.gen.cpp.obj"
+"C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\QuestSystem\QuestSystem.init.gen.cpp.obj"
 "C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\QuestSystem\Module.QuestSystem.gen.cpp.obj"
 "C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\QuestSystem\Default.rc2.res"
 "C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Development\CoreUObject\UE4Editor-CoreUObject.lib"

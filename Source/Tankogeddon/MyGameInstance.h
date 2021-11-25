@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "SaveManager.h"
-#include <UObject/Object.h>
 #include "MyGameInstance.generated.h"
 
 class USaveManager;
@@ -26,7 +25,7 @@ public:
 	UFUNCTION(BlueprintPure, meta = (WorldContext = WorldContextObject))
 	static USaveManager* GetSaveManager(UObject* WorldContextObject);
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	USaveManager* SaveManager;
 	
 };

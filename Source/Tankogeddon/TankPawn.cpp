@@ -17,7 +17,13 @@
 #include "Scorable.h"
 #include <Blueprint/WidgetBlueprintLibrary.h>
 #include "TankogeddonGameModeBase.h"
+#include "TankPlayerController.h"
+#include "BasePawn.h"
+#include "HpBarWidget.h"
+#include "HealthComponent.h"
 
+
+#define CONTROLLER Cast<ATankPlayerController>(GetWorld()->GetFirstPlayerController())
 
 // Sets default values
 ATankPawn::ATankPawn()
@@ -122,6 +128,11 @@ void ATankPawn::BeginPlay()
 	//		InventoryManagerComponent->InitEquipment(EquipmentInventoryComponent);
 	//	}
 	//}
+
+	if (IsPawn())
+	{
+		CONTROLLER->SetHealthWidgetValue(HealthComponent->GetHealth(), HealthComponent->GetMaxHealth());
+	}
 }
 
 
@@ -138,21 +149,22 @@ void ATankPawn::DamageTaken(float DamageValue)
 {
     Super::DamageTaken(DamageValue);
 
-    if (IsPawn())
-    {
-        if (HitForceEffect)
-        {
-            FForceFeedbackParameters HitForceEffectParams;
-            HitForceEffectParams.bLooping = false;
-            HitForceEffectParams.Tag = "HitForceEffectParams";
-            GetWorld()->GetFirstPlayerController()->ClientPlayForceFeedback(HitForceEffect, HitForceEffectParams);
-        }
+	if (IsPawn())
+	{
+		if (HitForceEffect)
+		{
+			FForceFeedbackParameters HitForceEffectParams;
+			HitForceEffectParams.bLooping = false;
+			HitForceEffectParams.Tag = "HitForceEffectParams";
+			GetWorld()->GetFirstPlayerController()->ClientPlayForceFeedback(HitForceEffect, HitForceEffectParams);
+		}
 
-        if (HitShake)
-        {
-            GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitShake);
-        }
-    }
+		if (HitShake)
+		{
+			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitShake);
+		}
+	}
+	
 }
 
 // Called every frame
@@ -258,4 +270,6 @@ UStaticMeshComponent* ATankPawn::GetEquipComponents(EEquipSlot Slot)
 	TArray<UActorComponent*> Components = GetComponentsByTag(UStaticMeshComponent::StaticClass(), EquipTag);
 	return Components.Num() > 0 ? Cast<UStaticMeshComponent>(Components[0]) : nullptr;
 }
+
+
 

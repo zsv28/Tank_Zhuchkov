@@ -28,7 +28,7 @@ public:
 	void Init();
 
 	UFUNCTION(BlueprintPure)
-	bool IsSaveGameExist(const FString& SlotName);
+	static bool IsSaveGameExist(const FString& SlotName);
 
 	UFUNCTION(BlueprintCallable)
 	void LoadGame(const FString& SlotName);
@@ -44,11 +44,21 @@ public:
 	UFUNCTION(BlueprintCallable)
 	UMySaveGame* GetCurrentSave() const { return CurrentSave; }
 
+	UFUNCTION(BlueprintCallable)
+	const TArray<FString>& GetExistingSavedSlots() const { return ExistingSavedSlots; };
+
+
 protected:
 	UPROPERTY(BlueprintReadWrite)
 	UMySaveGame* CurrentSave;
+	TArray<FString> ExistingSavedSlots;
+	const FString ExistingSavedSlotsFilePath{ "existing_slots.txt" };
 
 	void OnGameLoadedHandle(const FString& SlotName, const int32 UserIndex, USaveGame* SaveGame);
+
 	void OnGameSavedHandle(const FString& SlotName, const int32 UserIndex, bool bSuccess);
 
+	void CacheExistingSavedSlotsInfo();
+	static void FileSaveGame(const FString& SlotName, const FString& Text);
+	void FileLoadGame(const FString& SlotName, FString& Text) const;
 };

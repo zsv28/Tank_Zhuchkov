@@ -51,6 +51,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool bIsStoryQuest = true;
 
+
 	UPROPERTY(EditAnywhere)
 	bool bKeepObjectivesOrder = true;
 
@@ -62,7 +63,12 @@ public:
 
 	bool IsCompleted() const;
 
+	bool IsVisible() const;
+
 	void SetVisibility(bool bActive);
+
+	UFUNCTION(BlueprintPure)
+	bool KeepObjectivesOrder() const { return bKeepObjectivesOrder; }
 
 	UPROPERTY(VisibleDefaultsOnly)
 	USceneComponent* RootSceneComponent;
@@ -83,16 +89,22 @@ public:
 		return PrerquisedQuest; 
 	}
 
-	FText GetName();
+	UFUNCTION(BlueprintPure)
+	FText GetName() const;
+	UFUNCTION(BlueprintPure)
+	FText GetDescription() const;
 
-	FText GetDescription();
-
-
-protected:
 
 	UPROPERTY(EditAnywhere)
 	FText Name;
 
 	UPROPERTY(EditAnywhere)
 	FText Descrition;
+public:
+
+	void SetName(FText NewName) { this->Name = NewName; }
+	void SetDescription(FText NewDescription) { this->Descrition = NewDescription; };
+	void SetIsStoryQuest(bool NewIsStoryQuest) { this->bIsStoryQuest = NewIsStoryQuest; };
+	void SetKeepObjectivesOrder(bool NewKeepObjectivesOrder) { this->bKeepObjectivesOrder = NewKeepObjectivesOrder; };
+	void SetIsTaken(bool NewIsTaken) { this->bIsTaken = NewIsTaken; };
 };

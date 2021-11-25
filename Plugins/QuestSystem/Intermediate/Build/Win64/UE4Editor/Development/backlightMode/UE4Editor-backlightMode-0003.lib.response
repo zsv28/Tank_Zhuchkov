@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-backlightMode-0003.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\UE-4\TankZhuchkov\Intermediate\Build\Win64\TankogeddonEditor\Development\UnrealEd\SharedPCH.UnrealEd.ShadowErrors.h.obj"
+"C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\backlightMode\Module.backlightMode.cpp.obj"
+"C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\backlightMode\Default.rc2.res"
+/OUT:"C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\backlightMode\UE4Editor-backlightMode-0003.lib"
+/INCLUDE:IMPLEMENT_MODULE_backlightMode

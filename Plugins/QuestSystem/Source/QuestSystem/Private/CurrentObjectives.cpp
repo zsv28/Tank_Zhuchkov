@@ -11,11 +11,14 @@ void UCurrentObjectives::SetCurrentObjectives(AQuest* Quest)
 	if (ObjectivesList && ObjectiveWidgetClass)
 	{
 		ObjectivesList->ClearChildren();
-		for (UObjective* Objective : Quest->GetObjectives())
+		if (Quest)
 		{
-			UObjectiveWidget* ObjectiveWidget = CreateWidget<UObjectiveWidget>(this, ObjectiveWidgetClass);
-			ObjectiveWidget->Init(Objective);
-			ObjectivesList->AddChildToVerticalBox(ObjectiveWidget);
+			for (auto Objective : Quest->GetObjectives())
+			{
+				auto ObjectiveWidget{ CreateWidget<UObjectiveWidget>(this, ObjectiveWidgetClass) };
+				ObjectiveWidget->Init(Objective);
+				ObjectivesList->AddChildToVerticalBox(ObjectiveWidget);
+			}
 		}
 	}
 

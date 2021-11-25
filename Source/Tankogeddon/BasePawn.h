@@ -6,7 +6,9 @@
 #include "GameFramework/Pawn.h"
 #include "GameStructs.h"
 #include "DamageTaker.h"
-#include <Components/StaticMeshComponent.h>
+#include <Components/WidgetComponent.h>
+#include "HpBarWidget.h"
+#include "MySaveGame.h"
 #include "BasePawn.generated.h"
 
 
@@ -20,6 +22,9 @@ class UBoxComponent;
 class UParticleSystem;
 class USoundBase;
 class AAmmoBox;
+class UWidgetComponent;
+class UHpBarWidget;
+
 
 
 
@@ -50,6 +55,9 @@ protected:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
     UArrowComponent* CannonSetupPoint;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Components")
+	UWidgetComponent* HealthWidgetComponent;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
     UHealthComponent* HealthComponent;
@@ -83,6 +91,8 @@ protected:
     virtual void Destroyed() override;
     virtual void TargetDestroyed(AActor* Target);
 
+    UHpBarWidget* GetHpBarWidget() const { return HpBarWidget; }
+
     UFUNCTION()
     virtual void Die();
 
@@ -96,10 +106,10 @@ protected:
 	void OnTargetingOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 public:	
     UFUNCTION()
-    void Fire();
+    void Fire() const;
 
     UFUNCTION()
-    void FireSpecial();
+    void FireSpecial() const;
 
     UFUNCTION()
     void SetupCannon(TSubclassOf<ACannon> InCannonClass);
@@ -111,7 +121,7 @@ public:
     ACannon* GetActiveCannon() const;
 
     UFUNCTION()
-    virtual bool TakeDamage(FDamageData DamageData) override;
+    virtual void TakeDamage(FDamageData& DamageData) override;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -120,7 +130,7 @@ public:
 	bool IsPawn() const;
 
     UFUNCTION()
-    FVector GetTurretForwardVector();
+    FVector GetTurretForwardVector() const;
 
     UFUNCTION()
     void SetTurretRotationAxis(float AxisValue);
@@ -129,7 +139,8 @@ public:
     void SetTurretTarget(FVector TargetPosition);
 
     UFUNCTION()
-    FVector GetEyesPosition();
+    FVector GetEyesPosition() const;
+
 
 	UFUNCTION()
 	virtual void SaveState(UPawnSaveData* SaveDataPawn) const;
@@ -139,13 +150,16 @@ public:
 
 private:
     UPROPERTY()
-    ACannon* ActiveCannon;
+    ACannon* ActiveCannon = nullptr;
 
     UPROPERTY()
-    ACannon* InactiveCannon;
+    ACannon* InactiveCannon = nullptr;
 
     UPROPERTY()
     FVector TurretTarget;
+
+	UPROPERTY()
+	UHpBarWidget* HpBarWidget = nullptr;
 
     bool bIsTurretTargetSet = false;
     float TurretRotationAxis = 0.f;

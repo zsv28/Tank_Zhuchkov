@@ -34,7 +34,8 @@ public:
 
     FSimpleMulticastDelegate OnMouseButtonUp;
 
-    
+	void SetHealthWidgetValue(int32 CurrentHealth, int32 MaxHealth);
+	
 
 protected:
     virtual void BeginPlay() override;

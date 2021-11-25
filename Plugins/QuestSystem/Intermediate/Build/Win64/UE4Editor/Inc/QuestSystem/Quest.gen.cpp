@@ -21,6 +21,20 @@ void EmptyLinkFunctionForGeneratedCodeQuest() {}
 	ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
 	UMG_API UClass* Z_Construct_UClass_UWidgetComponent_NoRegister();
 // End Cross Module References
+	DEFINE_FUNCTION(AQuest::execGetDescription)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(FText*)Z_Param__Result=P_THIS->GetDescription();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AQuest::execGetName)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(FText*)Z_Param__Result=P_THIS->GetName();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AQuest::execGetPrerquisedQuest)
 	{
 		P_FINISH;
@@ -33,6 +47,13 @@ void EmptyLinkFunctionForGeneratedCodeQuest() {}
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		P_THIS->UpdateLocation();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AQuest::execKeepObjectivesOrder)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=P_THIS->KeepObjectivesOrder();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AQuest::execGetObjectives)
@@ -62,8 +83,11 @@ void EmptyLinkFunctionForGeneratedCodeQuest() {}
 		static const FNameNativePtrPair Funcs[] = {
 			{ "AddInteractObjective", &AQuest::execAddInteractObjective },
 			{ "AddLocationObjective", &AQuest::execAddLocationObjective },
+			{ "GetDescription", &AQuest::execGetDescription },
+			{ "GetName", &AQuest::execGetName },
 			{ "GetObjectives", &AQuest::execGetObjectives },
 			{ "GetPrerquisedQuest", &AQuest::execGetPrerquisedQuest },
+			{ "KeepObjectivesOrder", &AQuest::execKeepObjectivesOrder },
 			{ "UpdateLocation", &AQuest::execUpdateLocation },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -111,6 +135,70 @@ void EmptyLinkFunctionForGeneratedCodeQuest() {}
 		if (!ReturnFunction)
 		{
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AQuest_AddLocationObjective_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AQuest_GetDescription_Statics
+	{
+		struct Quest_eventGetDescription_Parms
+		{
+			FText ReturnValue;
+		};
+		static const UE4CodeGen_Private::FTextPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FTextPropertyParams Z_Construct_UFunction_AQuest_GetDescription_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Text, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Quest_eventGetDescription_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AQuest_GetDescription_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AQuest_GetDescription_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AQuest_GetDescription_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Quest.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_AQuest_GetDescription_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AQuest, nullptr, "GetDescription", nullptr, nullptr, sizeof(Quest_eventGetDescription_Parms), Z_Construct_UFunction_AQuest_GetDescription_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AQuest_GetDescription_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AQuest_GetDescription_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AQuest_GetDescription_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AQuest_GetDescription()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AQuest_GetDescription_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AQuest_GetName_Statics
+	{
+		struct Quest_eventGetName_Parms
+		{
+			FText ReturnValue;
+		};
+		static const UE4CodeGen_Private::FTextPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FTextPropertyParams Z_Construct_UFunction_AQuest_GetName_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Text, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Quest_eventGetName_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AQuest_GetName_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AQuest_GetName_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AQuest_GetName_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Quest.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_AQuest_GetName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AQuest, nullptr, "GetName", nullptr, nullptr, sizeof(Quest_eventGetName_Parms), Z_Construct_UFunction_AQuest_GetName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AQuest_GetName_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AQuest_GetName_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AQuest_GetName_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AQuest_GetName()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AQuest_GetName_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -186,6 +274,43 @@ void EmptyLinkFunctionForGeneratedCodeQuest() {}
 		if (!ReturnFunction)
 		{
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AQuest_GetPrerquisedQuest_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics
+	{
+		struct Quest_eventKeepObjectivesOrder_Parms
+		{
+			bool ReturnValue;
+		};
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((Quest_eventKeepObjectivesOrder_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(Quest_eventKeepObjectivesOrder_Parms), &Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Quest.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AQuest, nullptr, "KeepObjectivesOrder", nullptr, nullptr, sizeof(Quest_eventKeepObjectivesOrder_Parms), Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AQuest_KeepObjectivesOrder()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AQuest_KeepObjectivesOrder_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -274,8 +399,11 @@ void EmptyLinkFunctionForGeneratedCodeQuest() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_AQuest_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AQuest_AddInteractObjective, "AddInteractObjective" }, // 2437665921
 		{ &Z_Construct_UFunction_AQuest_AddLocationObjective, "AddLocationObjective" }, // 274668245
+		{ &Z_Construct_UFunction_AQuest_GetDescription, "GetDescription" }, // 2301533784
+		{ &Z_Construct_UFunction_AQuest_GetName, "GetName" }, // 599107402
 		{ &Z_Construct_UFunction_AQuest_GetObjectives, "GetObjectives" }, // 1263733054
 		{ &Z_Construct_UFunction_AQuest_GetPrerquisedQuest, "GetPrerquisedQuest" }, // 4145622235
+		{ &Z_Construct_UFunction_AQuest_KeepObjectivesOrder, "KeepObjectivesOrder" }, // 33260154
 		{ &Z_Construct_UFunction_AQuest_UpdateLocation, "UpdateLocation" }, // 2210833095
 	};
 #if WITH_METADATA
@@ -354,14 +482,14 @@ void EmptyLinkFunctionForGeneratedCodeQuest() {}
 		{ "ModuleRelativePath", "Public/Quest.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FTextPropertyParams Z_Construct_UClass_AQuest_Statics::NewProp_Name = { "Name", nullptr, (EPropertyFlags)0x0020080000000001, UE4CodeGen_Private::EPropertyGenFlags::Text, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AQuest, Name), METADATA_PARAMS(Z_Construct_UClass_AQuest_Statics::NewProp_Name_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AQuest_Statics::NewProp_Name_MetaData)) };
+	const UE4CodeGen_Private::FTextPropertyParams Z_Construct_UClass_AQuest_Statics::NewProp_Name = { "Name", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Text, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AQuest, Name), METADATA_PARAMS(Z_Construct_UClass_AQuest_Statics::NewProp_Name_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AQuest_Statics::NewProp_Name_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AQuest_Statics::NewProp_Descrition_MetaData[] = {
 		{ "Category", "Quest" },
 		{ "ModuleRelativePath", "Public/Quest.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FTextPropertyParams Z_Construct_UClass_AQuest_Statics::NewProp_Descrition = { "Descrition", nullptr, (EPropertyFlags)0x0020080000000001, UE4CodeGen_Private::EPropertyGenFlags::Text, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AQuest, Descrition), METADATA_PARAMS(Z_Construct_UClass_AQuest_Statics::NewProp_Descrition_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AQuest_Statics::NewProp_Descrition_MetaData)) };
+	const UE4CodeGen_Private::FTextPropertyParams Z_Construct_UClass_AQuest_Statics::NewProp_Descrition = { "Descrition", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Text, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AQuest, Descrition), METADATA_PARAMS(Z_Construct_UClass_AQuest_Statics::NewProp_Descrition_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AQuest_Statics::NewProp_Descrition_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AQuest_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AQuest_Statics::NewProp_Objectives_Inner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AQuest_Statics::NewProp_Objectives,
@@ -401,7 +529,7 @@ void EmptyLinkFunctionForGeneratedCodeQuest() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AQuest, 3541071774);
+	IMPLEMENT_CLASS(AQuest, 2406636249);
 	template<> QUESTSYSTEM_API UClass* StaticClass<AQuest>()
 	{
 		return AQuest::StaticClass();

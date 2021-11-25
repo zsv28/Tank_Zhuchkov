@@ -34,12 +34,13 @@ void AQuestSystemCharacter::BeginPlay()
 					{
 						if (PreviousQuest->IsCompleted())
 						{
-							Quest->SetVisibility(true);
+							Quest->SetVisibility(true);					
 						}
 					});
 			}
 		}
 	}
+	
 	
 }
 

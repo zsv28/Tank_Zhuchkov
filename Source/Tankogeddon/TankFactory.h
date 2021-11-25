@@ -65,7 +65,7 @@ public:
     ATankFactory();
     
     UFUNCTION()
-    virtual bool TakeDamage(FDamageData DamageData) override;
+    virtual void TakeDamage(FDamageData& DamageData) override;
 
 
 protected:

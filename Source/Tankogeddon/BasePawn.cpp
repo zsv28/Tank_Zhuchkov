@@ -15,6 +15,8 @@
 #include "BasePawnAIController.h"
 #include <GameFramework/Actor.h>
 #include "MySaveGame.h"
+#include "HpBarWidget.h"
+
 
 
 
@@ -50,6 +52,10 @@ ABasePawn::ABasePawn()
     HealthComponent->OnDie.AddDynamic(this, &ABasePawn::Die);
     HealthComponent->OnDamaged.AddDynamic(this, &ABasePawn::DamageTaken);
     HealthComponent->bEditableWhenInherited = true;
+
+	HealthWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("HPBar"));
+	HealthWidgetComponent->SetupAttachment(BodyMesh);
+	HealthWidgetComponent->SetWidgetClass(UHpBarWidget::StaticClass());
 }
 
 // Called when the game starts or when spawned
@@ -58,6 +64,15 @@ void ABasePawn::BeginPlay()
 	Super::BeginPlay();
 	
     SetupCannon(CannonClass);
+
+	if (!IsPawn())
+	{
+        HpBarWidget = Cast<UHpBarWidget>(HealthWidgetComponent->GetUserWidgetObject());
+		if (HpBarWidget)
+		{
+            HpBarWidget->SetHP(HealthComponent->GetHealth(), HealthComponent->GetMaxHealth());
+		}
+	}
 }
 
 void ABasePawn::Destroyed()
@@ -72,6 +87,10 @@ void ABasePawn::Destroyed()
 		InactiveCannon->Destroy();
 	}
 
+	if (HealthWidgetComponent->GetWidget())
+	{
+		HealthWidgetComponent->GetWidget()->Destruct();
+	}
 }
 
 void ABasePawn::TargetDestroyed(AActor* Target)
@@ -79,7 +98,7 @@ void ABasePawn::TargetDestroyed(AActor* Target)
 
 }
 
-void ABasePawn::Fire()
+void ABasePawn::Fire() const
 {
 	if (ActiveCannon && ActiveCannon->IsReadyToFire())
 	{
@@ -87,7 +106,7 @@ void ABasePawn::Fire()
 	}
 }
 
-void ABasePawn::FireSpecial()
+void ABasePawn::FireSpecial() const
 {
     if (ActiveCannon && ActiveCannon->IsReadyToFire())
     {
@@ -145,9 +164,15 @@ ACannon* ABasePawn::GetActiveCannon() const
     return ActiveCannon;
 }
 
-bool ABasePawn::TakeDamage(FDamageData DamageData)
+void ABasePawn::TakeDamage(FDamageData& DamageData)
 {
-    return HealthComponent->TakeDamage(DamageData);
+	HealthComponent->TakeDamage(OUT DamageData);
+
+	if (!IsPawn())
+	{
+		HpBarWidget->SetHP(HealthComponent->GetHealth(), HealthComponent->GetMaxHealth());
+	}
+	return;
 }
 
 // Called every frame
@@ -158,7 +183,7 @@ void ABasePawn::Tick(float DeltaTime)
     if (bIsTurretTargetSet)
     {
         FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TurretTarget);
-        FRotator CurrRotation = TurretMesh->GetComponentRotation();
+        const FRotator CurrRotation = TurretMesh->GetComponentRotation();
         TargetRotation.Pitch = CurrRotation.Pitch;
         TargetRotation.Roll = CurrRotation.Roll;
         TurretMesh->SetWorldRotation(FMath::RInterpConstantTo(CurrRotation, TargetRotation, DeltaTime, TurretRotationSpeed));
@@ -171,7 +196,7 @@ void ABasePawn::Tick(float DeltaTime)
     }
 }
 
-FVector ABasePawn::GetTurretForwardVector()
+FVector ABasePawn::GetTurretForwardVector() const
 {
     return TurretMesh->GetForwardVector();
 }
@@ -188,7 +213,7 @@ void ABasePawn::SetTurretTarget(FVector TargetPosition)
     bIsTurretTargetSet = true;
 }
 
-FVector ABasePawn::GetEyesPosition()
+FVector ABasePawn::GetEyesPosition() const
 {
     return CannonSetupPoint->GetComponentLocation();
 }
@@ -237,22 +262,28 @@ void ABasePawn::Die()
         SpawnParams.bNoFail = true;
         GetWorld()->SpawnActor <AAmmoBox>(DestructionBonusBox, GetActorLocation(), GetActorRotation(), SpawnParams);
     }
+
+	if (HealthWidgetComponent)
+	{
+		HealthWidgetComponent->ReleaseResources();
+	}
+
     Destroy();
 }
 
 void ABasePawn::DamageTaken(float InDamage)
 {
-    UE_LOG(LogTankogeddon, Log, TEXT("Pawn %s taken damage:%f "), *GetName(), InDamage);
+    UE_LOG(LogTankogeddon, Log, TEXT("Pawn %s taken damage:%f "), *GetName(), InDamage, HealthComponent->GetHealth());
 }
 
 
 void ABasePawn::OnTargetingOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (auto OtherPawn = Cast<ABasePawn>(OtherActor))
+	if (const auto OtherPawn = Cast<ABasePawn>(OtherActor))
 	{
 		if (OtherPawn != this && OtherPawn->PlayerGroupID != PlayerGroupID)
 		{
-			if (auto AIController{ Cast<ABasePawnAIController>(GetController()) })
+			if (const auto AIController{ Cast<ABasePawnAIController>(GetController()) })
 			{
 				AIController->SetCurrentEnemy(OtherPawn);
 			}
@@ -266,7 +297,7 @@ void ABasePawn::OnTargetingOverlapEnd(UPrimitiveComponent* OverlappedComp, AActo
 {
 	if (auto OtherPawn = Cast<ABasePawn>(OtherActor))
 	{
-		if (auto AIController{ Cast<ABasePawnAIController>(GetController()) })
+		if (const auto AIController{ Cast<ABasePawnAIController>(GetController()) })
 		{
 			AIController->ResetCurrentEnemy();
 		}

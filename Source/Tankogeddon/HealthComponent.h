@@ -36,7 +36,7 @@ public:
 
     virtual void BeginPlay() override;
 
-    bool TakeDamage(FDamageData DamageData);
+    void TakeDamage(FDamageData& DamageData);
 
     float GetHealth() const;
     float GetMaxHealth() const;

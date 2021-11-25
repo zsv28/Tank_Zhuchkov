@@ -1,6 +1,16 @@
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Development\QuestSystem\Definitions.QuestSystem.h
-C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/CurrentObjectives.cpp
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\CurrentObjectives.h
+C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/InteractableActors.cpp
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\InteractableActors.h
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\InteractableObject.h
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\InteractableObject.generated.h
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\InteractableActors.generated.h
+C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/InteractableObject.cpp
+C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/InteractionComponent.cpp
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\InteractionComponent.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Engine\Classes\Components/BoxComponent.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Engine\Classes\Components/ShapeComponent.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ShapeComponent.generated.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\BoxComponent.generated.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Blueprint/UserWidget.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/SlateWrapperTypes.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\SlateWrapperTypes.generated.h
@@ -124,41 +134,6 @@ C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\In
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\DynamicPropertyPath.generated.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetBlueprintGeneratedClass.generated.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\UserWidget.generated.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/VerticalBox.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/PanelWidget.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/PanelSlot.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\PanelSlot.generated.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\PanelWidget.generated.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\VerticalBox.generated.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\CurrentObjectives.generated.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\Objective.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\Objective.generated.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\Quest.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/WidgetComponent.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetComponent.generated.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\Quest.generated.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\ObjectiveWidget.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/CheckBox.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/ContentWidget.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\ContentWidget.generated.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\CheckBox.generated.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/TextBlock.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/TextWidgetTypes.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\TextWidgetTypes.generated.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\TextBlock.generated.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\ObjectiveWidget.generated.h
-C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/InteractableActors.cpp
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\InteractableActors.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\InteractableObject.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\InteractableObject.generated.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\InteractableActors.generated.h
-C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/InteractableObject.cpp
-C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/InteractionComponent.cpp
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\InteractionComponent.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Engine\Classes\Components/BoxComponent.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Engine\Classes\Components/ShapeComponent.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ShapeComponent.generated.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\BoxComponent.generated.h
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\InteractionComponent.generated.h
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/LocationMarker.cpp
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\LocationMarker.h
@@ -167,14 +142,33 @@ C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/LocationMark
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\LocationMarkerActors.h
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\LocationMarkerActors.generated.h
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/Objective.cpp
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\Objective.h
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\Objective.generated.h
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/ObjectiveWidget.cpp
-C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/Quest.cpp
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\ObjectiveWidget.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/CheckBox.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/ContentWidget.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/PanelWidget.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/PanelSlot.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\PanelSlot.generated.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\PanelWidget.generated.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\ContentWidget.generated.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\CheckBox.generated.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/TextBlock.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/TextWidgetTypes.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\TextWidgetTypes.generated.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\TextBlock.generated.h
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\ObjectiveWidget.generated.h
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/QuestDescription.cpp
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\QuestDescription.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/ScrollBox.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Slate\Public\Widgets/Layout/SScrollBox.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\ScrollBox.generated.h
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\QuestDescription.generated.h
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\Quest.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/WidgetComponent.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetComponent.generated.h
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\Quest.generated.h
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/QuestDialog.cpp
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\QuestDialog.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/Button.h
@@ -215,6 +209,10 @@ C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\QuestListEntry.h
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\QuestListEntry.generated.h
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/QuestListComponent.cpp
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\CurrentObjectives.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/VerticalBox.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\VerticalBox.generated.h
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\CurrentObjectives.generated.h
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/QuestListEntry.cpp
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/Border.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\Border.generated.h
@@ -230,15 +228,6 @@ C:\Program Files\Epic Games\UE_4.26\Engine\Source\Editor\UnrealEd\Public\Tools/U
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Experimental\InteractiveToolsFramework\Public\InputState.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\InteractiveToolsFramework\InputState.generated.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEd\UEdMode.generated.h
-C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/QuestSystemCharacter.cpp
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\QuestSystemCharacter.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Engine\Classes\GameFramework/Character.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Engine\Classes\GameFramework/CharacterMovementReplication.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\CharacterMovementReplication.generated.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Engine\Classes\GameFramework/RootMotionSource.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\RootMotionSource.generated.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\Character.generated.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\QuestSystemCharacter.generated.h
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Source/QuestSystem/Private/QuestSystemEdMode.cpp
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\QuestSystemEdModeToolkit.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Editor\UnrealEd\Public\Toolkits/ToolkitManager.h

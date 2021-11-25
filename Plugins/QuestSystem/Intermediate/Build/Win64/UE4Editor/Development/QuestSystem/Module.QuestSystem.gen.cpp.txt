@@ -166,11 +166,6 @@ C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\TextWidgetTypes.generated.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\TextBlock.generated.h
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\ObjectiveWidget.generated.h
-C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Intermediate/Build/Win64/UE4Editor/Inc/QuestSystem/Quest.gen.cpp
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem/Public/Quest.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/WidgetComponent.h
-C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetComponent.generated.h
-C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\Quest.generated.h
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Intermediate/Build/Win64/UE4Editor/Inc/QuestSystem/QuestDescription.gen.cpp
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem/Public/QuestDescription.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/ScrollBox.h
@@ -195,11 +190,14 @@ C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem/Public/QuestList.h
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\QuestList.generated.h
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Intermediate/Build/Win64/UE4Editor/Inc/QuestSystem/QuestListComponent.gen.cpp
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem/Public/QuestListComponent.h
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem\Public\Quest.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\UMG\Public\Components/WidgetComponent.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetComponent.generated.h
+C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\Quest.generated.h
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\QuestListComponent.generated.h
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Intermediate/Build/Win64/UE4Editor/Inc/QuestSystem/QuestListEntry.gen.cpp
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem/Public/QuestListEntry.h
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Intermediate\Build\Win64\UE4Editor\Inc\QuestSystem\QuestListEntry.generated.h
-C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Intermediate/Build/Win64/UE4Editor/Inc/QuestSystem/QuestSystem.init.gen.cpp
 C:/UE-4/TankZhuchkov/Plugins/QuestSystem/Intermediate/Build/Win64/UE4Editor/Inc/QuestSystem/QuestSystemCharacter.gen.cpp
 C:\UE-4\TankZhuchkov\Plugins\QuestSystem\Source\QuestSystem/Public/QuestSystemCharacter.h
 C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\Engine\Classes\GameFramework/Character.h

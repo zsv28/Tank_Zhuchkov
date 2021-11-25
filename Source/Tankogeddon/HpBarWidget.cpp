@@ -2,12 +2,13 @@
 
 
 #include "HpBarWidget.h"
+#include <Components/ProgressBar.h>
 
-void UHpBarWidget::SetHP(float CurrentHealth, float MaxHealth)
+void UHpBarWidget::SetHP(float CurrentHealth, float MaxHealth) const
 {
 	if (MainBar)
 	{
-		float Percent{ CurrentHealth / MaxHealth };
+		const float Percent{ CurrentHealth / MaxHealth };
 		MainBar->SetPercent(Percent);
 	}
 }
